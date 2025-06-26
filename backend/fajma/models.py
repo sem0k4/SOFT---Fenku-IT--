@@ -1238,4 +1238,7 @@ class SessionsWebSocket(models.Model):
     
     def __str__(self):
         return f"Session {self.session_id} - {self.utilisateur.username}"
+<<<<<<< HEAD
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> 116d16a (Premier commit : initialisation du projet)

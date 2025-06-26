@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 ### As Salamu' Ahleykum ###
 
 #Ce dossier est un dossier de renseignements par rapport aux :
 #Documents du projets de base , 
 #Des futurs améliorations décrites sous forme de  croquis ou pas encore tester 
 #Vous y trouverez des éventuels changements des fichiers spécifique du projet afin des BUG subites
+=======
+### As Salamu' Ahleykum ###
+
+#Ce dossier est un dossier de renseignements par rapport aux :
+#Documents du projets de base , 
+#Des futurs améliorations décrites sous forme de  croquis ou pas encore tester 
+#Vous y trouverez des éventuels changements des fichiers spécifique du projet afin des BUG subites
+>>>>>>> 116d16a (Premier commit : initialisation du projet)
