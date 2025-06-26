@@ -1,0 +1,9 @@
+Django==4.2.7
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.0  # Authentification JWT
+
+python-dotenv==1.0.0                  # Gestion des variables d'environnement
+celery==5.3.6                         # Tâches asynchrones (facultatif)
+bcrypt==4.0.1                         # Chiffrement des mots de passe
+drf-yasg==1.21.7                      # Documentation Swagger (facultatif)
+django-cors-headers

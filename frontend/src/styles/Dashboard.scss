@@ -1,0 +1,374 @@
+// Variables existantes conservées
+$primary-color: #00A3C4;
+$secondary-color: #5EBEC4;
+$text-color: #333;
+$light-text: #666;
+$white: #fff;
+$light-bg: #f7fafc;
+$border-color: #e2e8f0;
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+$success-color: #38A169;
+$danger-color: #E53E3E;
+$sidebar-bg: #000000; // Sidebar reste en noir
+$sidebar-width: 250px;
+$navbar-height: 60px;
+
+// Ajout d'une variable pour le fond du root (modifiée en gris clair bleuté)
+$root-bg: #CFD8DC;
+
+// Ajout des variables pour les couleurs des composants de santé
+$appointment-color: #4299E1; // Couleur pour les rendez-vous
+$consultation-color: #48BB78; // Couleur pour les consultations
+$lab-result-color: #9F7AEA; // Couleur pour les analyses
+$message-color: #ED8936; // Couleur pour les messages
+
+// Style pour le root (racine)
+body, html {
+  background-color: $root-bg;
+  margin: 0;
+  padding: 0;
+}
+
+// Nouveau layout avec navbar en haut
+.dashboard-layout-new {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $root-bg;
+}
+
+// Styles pour la barre de navigation en haut
+.top-navbar {
+  height: $navbar-height;
+  background-color: $sidebar-bg;
+  box-shadow: $shadow;
+  padding: 0;
+  z-index: 1000;
+  
+  .navbar-brand {
+    color: $primary-color;
+    font-weight: 700;
+    font-size: 24px;
+    padding-left: 20px;
+    letter-spacing: 1px;
+  }
+  
+  .main-nav {
+    margin-left: 30px;
+    
+    .nav-link {
+      color: rgba($white, 0.7);
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+      
+      &:hover, &.active {
+        color: $white;
+      }
+    }
+  }
+  
+  .nav-icon {
+    color: rgba($white, 0.7);
+    font-size: 18px;
+    margin: 0 10px;
+    position: relative;
+    
+    &:hover {
+      color: $white;
+    }
+    
+    .notification-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: $danger-color;
+      color: $white;
+      font-size: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(50%, -50%);
+    }
+  }
+  
+  .nav-user-dropdown {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: $white;
+    
+    &::after {
+      display: none;
+    }
+    
+    .avatar-mini {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba($white, 0.3);
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+// Contenu principal avec navbar en haut
+.main-content-new {
+  flex: 1;
+  padding-top: $navbar-height;
+  background-color: $light-bg;
+  
+  .dashboard-container {
+    padding: 20px;
+    min-height: calc(100vh - #{$navbar-height});
+  }
+}
+
+// Conserver les styles existants pour les cartes et autres éléments
+.dashboard-container {
+  padding: 20px;
+  background-color: $light-bg;
+  min-height: calc(100vh - 70px); // Ajusté pour tenir compte du header
+  
+  // Styles existants conservés
+  .profile-card {
+    border-radius: 15px;
+    box-shadow: $shadow;
+    border: none;
+    
+    .avatar-container {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      border: 3px solid $primary-color;
+      
+      .avatar-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .patient-stats {
+      border-top: 1px solid $border-color;
+      padding-top: 15px;
+      
+      .stat-item {
+        text-align: center;
+        
+        h6 {
+          font-size: 12px;
+          color: $light-text;
+          margin-bottom: 5px;
+        }
+        
+        p {
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  
+  .training-card {
+    border-radius: 15px;
+    box-shadow: $shadow;
+    border: none;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+    
+    .training-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background-color: rgba($primary-color, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      color: $primary-color;
+      font-size: 20px;
+    }
+  }
+  
+  .chart-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 250px;
+  }
+  
+  .heart-rate-icon, .water-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .heart-rate-icon {
+    background-color: rgba(#FF6B6B, 0.1);
+  }
+  
+  .water-icon {
+    background-color: rgba($secondary-color, 0.1);
+  }
+  
+  .progress {
+    height: 10px;
+    border-radius: 5px;
+    background-color: rgba($secondary-color, 0.2);
+  }
+  
+  // Nouveaux styles pour les cartes de santé
+  .card {
+    border-radius: 15px;
+    box-shadow: $shadow;
+    border: none;
+    margin-bottom: 20px;
+    
+    .card-header {
+      background-color: $white;
+      border-bottom: 1px solid $border-color;
+      padding: 15px 20px;
+      border-radius: 15px 15px 0 0;
+    }
+  }
+  
+  // Style pour les rendez-vous
+  .appointment-item {
+    &:last-child {
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    .appointment-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba($appointment-color, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $appointment-color;
+    }
+  }
+  
+  // Style pour les consultations
+  .consultation-item {
+    &:last-child {
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
+  
+  // Style pour les analyses biologiques
+  .lab-result-item {
+    &:last-child {
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
+  
+  // Style pour les messages
+  .message-item {
+    &:last-child {
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+    
+    .dot-unread {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: $message-color;
+    }
+  }
+}
+
+// Styles pour les cartes de santé
+.health-card {
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateY(-3px);
+  }
+  
+  .card-header {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+}
+
+// Styles pour les éléments biométriques
+.biometric-item {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.02);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  h4 {
+    margin-top: 5px;
+    font-weight: 600;
+  }
+}
+
+// Styles pour les signes vitaux
+.vital-sign-item {
+  margin-bottom: 10px;
+  
+  .progress {
+    height: 8px;
+    margin-top: 5px;
+  }
+}
+
+// Styles pour les habitudes de vie
+.lifestyle-item {
+  display: flex;
+  align-items: flex-start;
+  
+  h6 {
+    margin-bottom: 5px;
+  }
+}
+
+// Styles pour les allergies et antécédents
+.list-group-item {
+  background-color: transparent;
+  padding: 12px 0;
+  
+  &:first-child {
+    padding-top: 0;
+  }
+  
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
