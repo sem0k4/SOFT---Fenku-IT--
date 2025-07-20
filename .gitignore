@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 # Python
 *.pyc
 *~
@@ -71,6 +74,7 @@ Thumbs.db
 htmlcov/
 .tox/
 .nox/
+<<<<<<< HEAD
 =======
 # Python
 *.pyc
@@ -145,4 +149,6 @@ htmlcov/
 .tox/
 .nox/
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 .hypothesis/

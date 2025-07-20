@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 from django.db import models
 
 class MinistereDeLaSante(models.Model):
@@ -314,6 +317,7 @@ class ServiceAccueil(models.Model):
 
     def __str__(self):
         return f"{self.nom} ({self.hopital})"
+<<<<<<< HEAD
 =======
 from django.db import models
 
@@ -631,3 +635,5 @@ class ServiceAccueil(models.Model):
     def __str__(self):
         return f"{self.nom} ({self.hopital})"
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

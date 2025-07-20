@@ -2,12 +2,17 @@ import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
 
 
+<<<<<<< HEAD
 // Les differents couleurs du theme
+=======
+// Creer les differents couleurs du theme
+>>>>>>> 692b537 (debut conception dashboard patient)
 
 export const tokens = (mode) => ({
     ...(mode === 'dark' 
     ? {
         primary: {  // Couleurs bleu pour le mode sombre
+<<<<<<< HEAD
             100: "#d2d5dc",
             200: "#a4abb9",
             300: "#778195",
@@ -19,6 +24,8 @@ export const tokens = (mode) => ({
             900: "#060910"
         },
         secondary: {
+=======
+>>>>>>> 692b537 (debut conception dashboard patient)
             100: "#cceaef",
             200: "#99d5df",
             300: "#66c0d0",
@@ -29,6 +36,20 @@ export const tokens = (mode) => ({
             800: "#003c46",
             900: "#001e23"
         },
+<<<<<<< HEAD
+=======
+        indigoAccent: {
+            100: "#d7d9dc",
+            200: "#afb3b9",
+            300: "#878d97",
+            400: "#5f6774",
+            500: "#374151",
+            600: "#2c3441",
+            700: "#212731",
+            800: "#161a20",
+            900: "#0b0d10"
+        },
+>>>>>>> 692b537 (debut conception dashboard patient)
         blackAccent: {
             100: "#d4d6d7",
             200: "#a8adaf",
@@ -41,7 +62,10 @@ export const tokens = (mode) => ({
             900: "#080a0b"
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
         redAccent: {
             100: "#ffebee",
             200: "#ffcdd2",
@@ -92,6 +116,11 @@ export const tokens = (mode) => ({
             900: "#d2d5dc",
         },
         secondary: {
+=======
+    } 
+    : {
+        primary: { // Couleurs bleu pour le mode clair
+>>>>>>> 692b537 (debut conception dashboard patient)
             100: "#001e23",
             200: "#003c46",
             300: "#005a6a",
@@ -102,6 +131,20 @@ export const tokens = (mode) => ({
             800: "#99d5df",
             900: "#cceaef",
         },
+<<<<<<< HEAD
+=======
+        indigoAccent: {
+            100: "#0b0d10",
+            200: "#161a20",
+            300: "#212731",
+            400: "#2c3441",
+            500: "#374151",
+            600: "#5f6774",
+            700: "#878d97",
+            800: "#afb3b9",
+            900: "#d7d9dc",
+        },
+>>>>>>> 692b537 (debut conception dashboard patient)
         blackAccent: {
             100: "#080a0b",
             200: "#0f1416",
@@ -114,7 +157,10 @@ export const tokens = (mode) => ({
             900: "#d4d6d7",
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
         redAccent: {
             100: "#b71c1c",
             200: "#c62828",
@@ -148,7 +194,12 @@ export const tokens = (mode) => ({
             800: "#eeeeee",
             900: "#f5f5f5"
         },
+<<<<<<< HEAD
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+=======
+>>>>>>> 692b537 (debut conception dashboard patient)
+>>>>>>> fc99c8a (debut conception dashboard patient)
     })
 
     // Si le mode est 'dark', on utilise les couleurs sombres, 
@@ -171,7 +222,11 @@ export const themeSettings = (mode) => {
                         main: colors.primary[500],
                     },
                     secondary: {
+<<<<<<< HEAD
                         main: colors.secondary[500],
+=======
+                        main: colors.indigoAccent[500],
+>>>>>>> 692b537 (debut conception dashboard patient)
                     }, 
                     neutral: {
                         dark: colors.blackAccent[700],
@@ -179,16 +234,26 @@ export const themeSettings = (mode) => {
                         light: colors.blackAccent[100],
                     },
                     background: {
+<<<<<<< HEAD
                         default: colors.blackAccent[700],
+=======
+                        default: colors.blackAccent[500],
+>>>>>>> 692b537 (debut conception dashboard patient)
                     },
                 } 
                 : {
                    primary: {
                         main: colors.primary[100],
+<<<<<<< HEAD
                         light: '#f8f9fa',
                     },
                     secondary: {
                         main: colors.secondary[500],
+=======
+                    },
+                    secondary: {
+                        main: colors.indigoAccent[500],
+>>>>>>> 692b537 (debut conception dashboard patient)
                     }, 
                     neutral: {
                         dark: colors.blackAccent[700],
@@ -196,8 +261,13 @@ export const themeSettings = (mode) => {
                         light: colors.blackAccent[100],
                     },
                     background: {
+<<<<<<< HEAD
                         default: '#E4E4E480', // Couleur de fond pour le mode clair
                         
+=======
+                        default: "#fcfcfc", // Couleur de fond pour le mode clair
+
+>>>>>>> 692b537 (debut conception dashboard patient)
                     },  
                 } 
             )
@@ -228,7 +298,11 @@ export const themeSettings = (mode) => {
             },
             h6: {
                 ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
+<<<<<<< HEAD
                 fontSize: 14,
+=======
+            fontSize: 14,
+>>>>>>> 692b537 (debut conception dashboard patient)
             }
         
         }

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import { authService } from './api';
 
 // Service d'authentification pour gérer l'état de connexion de l'utilisateur
@@ -109,6 +112,7 @@ const AuthService = {
   },
 };
 
+<<<<<<< HEAD
 =======
 import { authService } from './api';
 
@@ -221,4 +225,6 @@ const AuthService = {
 };
 
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 export default AuthService;

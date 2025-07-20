@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 
 INSERT INTO hopital (nom, rue, ville, code_postal, telephone, email, capacite) VALUES
 ('Clinique Samug', 'Sam Notaire Pres De Chez Malick Gackou Guediawaye', 'Guediawaye', '11000', '338372612', 'contact@cliniquesamug.com', 150),
@@ -81,6 +84,7 @@ INSERT INTO hopital (nom, rue, ville, code_postal, telephone, email, capacite) V
 ('Clinique Du Littoral', 'Saly Route De Ngaparou Route Des Millardaires', 'Mbour', '21000', '777654237', 'contact@cliniquelittoral.com', 160),
 ('Clinique Belle Vue', 'Plateau Corniche Est En Face Terminus Ddd', 'Dakar Sud', '10000', '338210586', 'contact@cliniquebellevue.com', 200),
 ('Clinique Ophtalmologie Nurlu Goz', 'Liberte 6 Extension Cpi N 32 En Face Cimetiere Saint Lazarre Vdn', 'Dakar Centre', '10000', '783062929', 'contact@nurlugoz.com', 180),
+<<<<<<< HEAD
 =======
 
 INSERT INTO hopital (nom, rue, ville, code_postal, telephone, email, capacite) VALUES
@@ -165,4 +169,6 @@ INSERT INTO hopital (nom, rue, ville, code_postal, telephone, email, capacite) V
 ('Clinique Belle Vue', 'Plateau Corniche Est En Face Terminus Ddd', 'Dakar Sud', '10000', '338210586', 'contact@cliniquebellevue.com', 200),
 ('Clinique Ophtalmologie Nurlu Goz', 'Liberte 6 Extension Cpi N 32 En Face Cimetiere Saint Lazarre Vdn', 'Dakar Centre', '10000', '783062929', 'contact@nurlugoz.com', 180),
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 ('Clinique Taysirou Assir', 'Darou Khoudoss Route De Belel', 'Touba', '25000', '773067769', 'contact@taysirouassir.com', 220);

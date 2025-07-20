@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -206,6 +209,7 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
+<<<<<<< HEAD
 =======
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -415,3 +419,5 @@ const ResetPassword = () => {
 
 export default ResetPassword;
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

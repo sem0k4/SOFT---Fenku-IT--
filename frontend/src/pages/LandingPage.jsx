@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React from 'react';
 import Header from '../components/landing/Header';
 import Home from '../components/landing/Home';
@@ -14,6 +17,7 @@ const LandingPage = () => {
   );
 };
 
+<<<<<<< HEAD
 =======
 import React from 'react';
 import Header from '../components/landing/Header';
@@ -31,4 +35,6 @@ const LandingPage = () => {
 };
 
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 export default LandingPage;

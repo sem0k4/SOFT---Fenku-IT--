@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 # Dependencies
 @fortawesome/fontawesome-free==6.7.2
 @fortawesome/fontawesome-svg-core==6.7.2
@@ -28,6 +31,7 @@ eslint==9.25.0
 eslint-plugin-react-hooks==5.2.0
 eslint-plugin-react-refresh==0.4.19
 globals==16.0.0
+<<<<<<< HEAD
 =======
 # Dependencies
 @fortawesome/fontawesome-free==6.7.2
@@ -59,4 +63,6 @@ eslint-plugin-react-hooks==5.2.0
 eslint-plugin-react-refresh==0.4.19
 globals==16.0.0
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 vite==6.3.5

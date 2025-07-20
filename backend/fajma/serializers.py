@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 from rest_framework import serializers
 from .models import (
     TypesAntecedents, Services, Hopital, HopitalServices, Utilisateur, Medecin,
@@ -214,6 +217,7 @@ class AllergieSerializer(serializers.ModelSerializer):
                 f"La sévérité doit être l'une des valeurs suivantes : {', '.join(severites_valides)}"
             )
         return value
+<<<<<<< HEAD
 =======
 from rest_framework import serializers
 from .models import (
@@ -431,3 +435,5 @@ class AllergieSerializer(serializers.ModelSerializer):
             )
         return value
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

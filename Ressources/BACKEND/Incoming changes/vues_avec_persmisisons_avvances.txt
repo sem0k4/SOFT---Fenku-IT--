@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 from rest_framework import viewsets, views, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -296,6 +299,7 @@ class LogsViewSet(viewsets.ModelViewSet):
     queryset = Logs.objects.all()
     serializer_class = LogsSerializer
     permission_classes = [IsAuthenticated, IsMedecin]  # Réservé aux médecins pour audit
+<<<<<<< HEAD
 =======
 from rest_framework import viewsets, views, status
 from rest_framework.permissions import IsAuthenticated
@@ -595,3 +599,5 @@ class LogsViewSet(viewsets.ModelViewSet):
     serializer_class = LogsSerializer
     permission_classes = [IsAuthenticated, IsMedecin]  # Réservé aux médecins pour audit
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 # sante/models.py
 from django.db import models
 from django.contrib.postgres.fields import CIEmailField
@@ -459,6 +462,7 @@ class DocumentsMedicaux(models.Model):
 
     def __str__(self):
         return f"Document {self.document_id} ({self.patient})"
+<<<<<<< HEAD
 =======
 # sante/models.py
 from django.db import models
@@ -921,3 +925,5 @@ class DocumentsMedicaux(models.Model):
     def __str__(self):
         return f"Document {self.document_id} ({self.patient})"
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -59,6 +62,7 @@ const LifestyleCard = ({ habitudesVie }) => {
   );
 };
 
+<<<<<<< HEAD
 =======
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
@@ -121,4 +125,6 @@ const LifestyleCard = ({ habitudesVie }) => {
 };
 
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 export default LifestyleCard;

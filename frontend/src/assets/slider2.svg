@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
   <rect width="400" height="300" fill="none"/>
@@ -37,6 +40,7 @@
   <!-- Patient with device -->
   <circle cx="200" cy="70" r="20" fill="#FFFFFF" stroke="#0987A0" stroke-width="1.5"/>
   <path d="M185,100 L195,90 L205,90 L215,100" fill="none" stroke="#0987A0" stroke-width="1.5"/>
+<<<<<<< HEAD
 =======
 <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
@@ -77,4 +81,6 @@
   <circle cx="200" cy="70" r="20" fill="#FFFFFF" stroke="#0987A0" stroke-width="1.5"/>
   <path d="M185,100 L195,90 L205,90 L215,100" fill="none" stroke="#0987A0" stroke-width="1.5"/>
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 </svg>

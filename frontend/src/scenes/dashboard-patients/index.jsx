@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState } from "react";
 =======
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import { useState, useEffect } from "react";
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 import { Box, Typography } from "@mui/material";
@@ -113,3 +116,20 @@ const DashboardPatient = () => {
 }
 
 export default DashboardPatient;
+=======
+import Sidebar from "../global/Sidebar";
+import Topbar from "../global/Topbar";
+
+
+const Dashboard = () => {
+    return (
+        <div>
+            <Topbar />
+            <h1>Dashboard</h1>
+            <Sidebar />
+        </div>
+    )   
+}
+
+export default Dashboard;
+>>>>>>> 692b537 (debut conception dashboard patient)

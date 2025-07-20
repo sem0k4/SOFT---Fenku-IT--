@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React, { useState } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -75,6 +78,7 @@ const TopNavbar = () => {
   );
 };
 
+<<<<<<< HEAD
 =======
 import React, { useState } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Badge } from 'react-bootstrap';
@@ -153,4 +157,6 @@ const TopNavbar = () => {
 };
 
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 export default TopNavbar;

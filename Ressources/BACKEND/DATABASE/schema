@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 
 CREATE EXTENSION IF NOT EXISTS citext;
 -- Table pour normaliser les types d'antécédents
@@ -313,6 +316,7 @@ CREATE INDEX idx_carnetconsultation_date ON carnetconsultation(date);
 CREATE INDEX idx_facture_date_emission ON facture(date_emission);
 CREATE INDEX idx_declarations_naissance_date ON declarations_naissance(date_declaration);
 CREATE INDEX idx_conseils_sante_date ON conseils_sante(date_publication);ut
+<<<<<<< HEAD
 =======
 
 CREATE EXTENSION IF NOT EXISTS citext;
@@ -629,3 +633,5 @@ CREATE INDEX idx_facture_date_emission ON facture(date_emission);
 CREATE INDEX idx_declarations_naissance_date ON declarations_naissance(date_declaration);
 CREATE INDEX idx_conseils_sante_date ON conseils_sante(date_publication);ut
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

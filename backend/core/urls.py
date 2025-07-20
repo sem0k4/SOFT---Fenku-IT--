@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 """
 URL configuration for core project.
 
@@ -22,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fajma.urls'))
 ]
+<<<<<<< HEAD
 =======
 """
 URL configuration for core project.
@@ -47,3 +51,5 @@ urlpatterns = [
     path('', include('fajma.urls'))
 ]
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

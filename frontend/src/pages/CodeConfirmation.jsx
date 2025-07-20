@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 // Ajouter en haut du fichier avec les autres imports
 import logo from '../assets/Nditou_logo.jpg';
 import React, { useState } from 'react';
@@ -210,6 +213,7 @@ const CodeConfirmation = () => {
 export default CodeConfirmation;
 <div className="logo" style={{ position: 'absolute', top: '30px', left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
   <h1 style={{ color: '#fff', fontSize: '28px', fontWeight: 'bold' }}>E FAJMA</h1>
+<<<<<<< HEAD
 =======
 // Ajouter en haut du fichier avec les autres imports
 import logo from '../assets/Nditou_logo.jpg';
@@ -423,4 +427,6 @@ export default CodeConfirmation;
 <div className="logo" style={{ position: 'absolute', top: '30px', left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
   <h1 style={{ color: '#fff', fontSize: '28px', fontWeight: 'bold' }}>E FAJMA</h1>
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 </div>

@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React from 'react';
 import { Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -33,6 +36,7 @@ export default function Title1({ children }) {
       <TitleUnderline />
     </TitleContainer>
   );
+<<<<<<< HEAD
 =======
 import React from 'react';
 import { Typography, Box } from '@mui/material';
@@ -69,4 +73,6 @@ export default function Title1({ children }) {
     </TitleContainer>
   );
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 }

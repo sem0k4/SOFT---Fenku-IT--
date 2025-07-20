@@ -1,8 +1,15 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Avatar, Box, IconButton, useTheme } from "@mui/material";
 =======
 import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
+=======
+import { Box, IconButton, useTheme } from "@mui/material";
+>>>>>>> 692b537 (debut conception dashboard patient)
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import InputBase from "@mui/material/InputBase";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
@@ -11,17 +18,27 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
 import SidebarMobile from "./SidebarMobile";
 import { Link } from "react-router-dom";
 import Logo1FAJMA from "../../assets/logo-fajma.png";
 =======
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
 import SidebarMobile from "./SidebarMobile";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../services/auth";
+<<<<<<< HEAD
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+=======
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+>>>>>>> 692b537 (debut conception dashboard patient)
+>>>>>>> fc99c8a (debut conception dashboard patient)
 
 
 const Topbar = () => {
@@ -30,8 +47,11 @@ const Topbar = () => {
     const colors = tokens(theme.palette.mode); 
     const colorMode = useContext(ColorModeContext);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -46,12 +66,19 @@ const Topbar = () => {
             }
         }
     };
+<<<<<<< HEAD
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+=======
+
+>>>>>>> 692b537 (debut conception dashboard patient)
+>>>>>>> fc99c8a (debut conception dashboard patient)
 
     // console.log("theme", theme, "colors", colors, "colorMode", colorMode);
     
 
     return (
+<<<<<<< HEAD
         <Box 
             sx={{
 <<<<<<< HEAD
@@ -73,6 +100,12 @@ const Topbar = () => {
                     display: { lg: "flex", md: "none"},
                 }}
                 backgroundColor={theme.palette.mode === 'dark' ? colors.blackAccent[400] : '#e4e4e480'}
+=======
+        <Box display="flex" justifyContent="space-between" p={2}>
+            <Box 
+                display="flex" 
+                backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : colors.blackAccent[900]}
+>>>>>>> 692b537 (debut conception dashboard patient)
                 borderRadius="3px"
             >
                 <InputBase 
@@ -82,6 +115,7 @@ const Topbar = () => {
                 <IconButton type="button" sx={{ p: 1 }}>
                     <SearchIcon />
                 </IconButton>
+<<<<<<< HEAD
             </Box> */}
 <<<<<<< HEAD
             <Box sx={{ display: 'flex' }}>
@@ -132,6 +166,10 @@ const Topbar = () => {
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
                     <AutoAwesomeOutlinedIcon sx={{ fontSize: 'small' }} />
                 </Link>
+=======
+            </Box>
+            <Box display="flex">
+>>>>>>> 692b537 (debut conception dashboard patient)
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {/* Afficher l'icône en fonction du mode de couleur */}
                     {theme.palette.mode === 'dark' ? (
@@ -144,6 +182,7 @@ const Topbar = () => {
                     <NotificationsOutlinedIcon />
                 </IconButton>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <IconButton>
                     <Avatar
                         className="text-black shadow-sm font-semibold bg-transparent border border-black"
@@ -151,6 +190,8 @@ const Topbar = () => {
                         src="/images/exemple_profile.webp"
                         sx={{ width: 30, height: 30 }}
 =======
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
                 <IconButton onClick={handleLogout} sx={{ color: '#f44336' }}>
                      <LogoutOutlinedIcon />
                  </IconButton>
@@ -161,6 +202,13 @@ const Topbar = () => {
                         sx={{ width: 24, height: 24 }}
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
                     />
+=======
+                <IconButton>
+                    <SettingsOutlinedIcon />
+                </IconButton>
+                <IconButton>
+                    <PersonOutlinedIcon />
+>>>>>>> 692b537 (debut conception dashboard patient)
                 </IconButton>
             </Box>
         </Box>

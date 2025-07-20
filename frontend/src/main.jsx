@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -25,6 +28,7 @@ createRoot(document.getElementById('root')).render(
     <App/>
   </StrictMode>
 );
+<<<<<<< HEAD
 =======
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -53,3 +57,5 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>
 );
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

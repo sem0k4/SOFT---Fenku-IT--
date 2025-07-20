@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -272,6 +275,7 @@ const PatientDashboard = () => {
   );
 };
 
+<<<<<<< HEAD
 =======
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
@@ -547,4 +551,6 @@ const PatientDashboard = () => {
 };
 
 >>>>>>> 116d16a (Premier commit : initialisation du projet)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 export default PatientDashboard;

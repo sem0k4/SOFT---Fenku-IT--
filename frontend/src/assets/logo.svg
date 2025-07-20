@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
   <!-- X shape -->
   <path d="M15,10 L25,30 M25,10 L15,30" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
@@ -8,6 +11,7 @@
   
   <!-- Text -->
   <text x="45" y="25" font-family="Arial" font-size="20" font-weight="bold" fill="#FFFFFF">XRay</text>
+<<<<<<< HEAD
 =======
 <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
   <!-- X shape -->
@@ -19,4 +23,6 @@
   <!-- Text -->
   <text x="45" y="25" font-family="Arial" font-size="20" font-weight="bold" fill="#FFFFFF">XRay</text>
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 </svg>

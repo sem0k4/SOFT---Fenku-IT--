@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React, { useEffect, useState } from 'react';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -389,6 +392,7 @@ const Register = () => {
   );
 };
 
+<<<<<<< HEAD
 =======
 import React, { useEffect, useState } from 'react';
 import { Container, Form, Button, Row, Col, Alert } from 'react-bootstrap';
@@ -781,4 +785,6 @@ const Register = () => {
 };
 
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 export default Register;

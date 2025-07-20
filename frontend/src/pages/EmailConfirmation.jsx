@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 import React, { useState } from 'react';
 import { Button, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -103,6 +106,7 @@ const EmailConfirmation = () => {
   );
 };
 
+<<<<<<< HEAD
 =======
 import React, { useState } from 'react';
 import { Button, Alert } from 'react-bootstrap';
@@ -209,4 +213,6 @@ const EmailConfirmation = () => {
 };
 
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 export default EmailConfirmation;

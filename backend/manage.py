@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import os
@@ -21,6 +24,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+<<<<<<< HEAD
 =======
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
@@ -45,3 +49,5 @@ def main():
 if __name__ == '__main__':
     main()
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)

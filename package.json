@@ -1,9 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
 {
   "dependencies": {
     "recharts": "^2.15.3"
   }
 }
+<<<<<<< HEAD
 =======
 {
   "dependencies": {
@@ -11,3 +15,5 @@
   }
 }
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+>>>>>>> fc99c8a (debut conception dashboard patient)
