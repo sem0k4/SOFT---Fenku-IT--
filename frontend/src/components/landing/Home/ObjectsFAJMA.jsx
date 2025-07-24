@@ -14,6 +14,8 @@ const FeatureCard = styled(Card)(({ theme }) => ({
   borderRadius: '12px',
   overflow: 'hidden',
   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+  // backgroundColor: '#005a6a50',
+  backgroundColor: '#fcfcfc',
   transition: 'transform 0.3s ease',
   '&:hover': {
     transform: 'translateY(-8px)',
@@ -68,7 +70,7 @@ const ObjectsFAJMA = () => {
                   <Typography gutterBottom variant="h5" component="h3" sx={{ fontWeight: 600, color: 'var(--bleu-logo)' }}>
                     {feature.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" sx={{ fontWeight: 500 }} color="var(--dark-bleu-logo)">
                     {feature.description}
                   </Typography>
                 </CardContent>

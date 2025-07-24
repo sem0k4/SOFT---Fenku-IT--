@@ -21,10 +21,11 @@ const Topbar = () => {
     
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}>
+        <Box display="flex" width="100%" height="80px" justifyContent="space-between" p={3}>
             <Box 
                 display="flex" 
-                backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : colors.blackAccent[900]}
+                height="40px"
+                backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
                 borderRadius="3px"
             >
                 <InputBase 

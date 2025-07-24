@@ -1,13 +1,12 @@
-import Sidebar from "../global/Sidebar";
+import SidebarDashboard from "../global/Sidebar"; 
 import Topbar from "../global/Topbar";
 
 
 const Dashboard = () => {
     return (
-        <div>
+        <div className="flex flex-row">
+            <SidebarDashboard /> 
             <Topbar />
-            <h1>Dashboard</h1>
-            <Sidebar />
         </div>
     )   
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Button, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
-import logoImage from '../../../assets/Nditou_logosb.png'; // Import du logo
+import logoImage from '../../../assets/logo-fajma.png';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: 'rgba(255, 255, 255, 0.7)',

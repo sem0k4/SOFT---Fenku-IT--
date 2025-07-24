@@ -2,12 +2,23 @@ import { createContext, useState, useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
 
 
-// Creer les differents couleurs du theme
+// Les differents couleurs du theme
 
 export const tokens = (mode) => ({
     ...(mode === 'dark' 
     ? {
         primary: {  // Couleurs bleu pour le mode sombre
+            100: "#d2d5dc",
+            200: "#a4abb9",
+            300: "#778195",
+            400: "#495772",
+            500: "#1c2d4f",
+            600: "#16243f",
+            700: "#111b2f",
+            800: "#0b1220",
+            900: "#060910"
+        },
+        secondary: {
             100: "#cceaef",
             200: "#99d5df",
             300: "#66c0d0",
@@ -17,17 +28,6 @@ export const tokens = (mode) => ({
             700: "#005a6a",
             800: "#003c46",
             900: "#001e23"
-        },
-        indigoAccent: {
-            100: "#d7d9dc",
-            200: "#afb3b9",
-            300: "#878d97",
-            400: "#5f6774",
-            500: "#374151",
-            600: "#2c3441",
-            700: "#212731",
-            800: "#161a20",
-            900: "#0b0d10"
         },
         blackAccent: {
             100: "#d4d6d7",
@@ -43,6 +43,19 @@ export const tokens = (mode) => ({
     } 
     : {
         primary: { // Couleurs bleu pour le mode clair
+            light: "#fcfcfc",
+            main: "#0096b0",
+            100: "#060910",
+            200: "#0b1220",
+            300: "#111b2f",
+            400: "#16243f",
+            500: "#1c2d4f",
+            600: "#495772",
+            700: "#778195",
+            800: "#a4abb9",
+            900: "#d2d5dc",
+        },
+        secondary: {
             100: "#001e23",
             200: "#003c46",
             300: "#005a6a",
@@ -52,17 +65,6 @@ export const tokens = (mode) => ({
             700: "#66c0d0",
             800: "#99d5df",
             900: "#cceaef",
-        },
-        indigoAccent: {
-            100: "#0b0d10",
-            200: "#161a20",
-            300: "#212731",
-            400: "#2c3441",
-            500: "#374151",
-            600: "#5f6774",
-            700: "#878d97",
-            800: "#afb3b9",
-            900: "#d7d9dc",
         },
         blackAccent: {
             100: "#080a0b",
@@ -97,7 +99,7 @@ export const themeSettings = (mode) => {
                         main: colors.primary[500],
                     },
                     secondary: {
-                        main: colors.indigoAccent[500],
+                        main: colors.secondary[500],
                     }, 
                     neutral: {
                         dark: colors.blackAccent[700],
@@ -105,15 +107,16 @@ export const themeSettings = (mode) => {
                         light: colors.blackAccent[100],
                     },
                     background: {
-                        default: colors.blackAccent[500],
+                        default: colors.primary[800],
                     },
                 } 
                 : {
                    primary: {
                         main: colors.primary[100],
+                        light: '#fcfcfc',
                     },
                     secondary: {
-                        main: colors.indigoAccent[500],
+                        main: colors.secondary[500],
                     }, 
                     neutral: {
                         dark: colors.blackAccent[700],
@@ -121,8 +124,8 @@ export const themeSettings = (mode) => {
                         light: colors.blackAccent[100],
                     },
                     background: {
-                        default: "#fcfcfc", // Couleur de fond pour le mode clair
-
+                        default: colors.blackAccent[900], // Couleur de fond pour le mode clair
+                        
                     },  
                 } 
             )
