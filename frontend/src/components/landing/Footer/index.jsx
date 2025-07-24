@@ -214,7 +214,7 @@ import { Box, Container, Grid, Typography, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Email, Facebook, Instagram, MapsHomeWork, Phone, X } from '@mui/icons-material';
 import LogoFenku from '../../../assets/Logo_fenku.png';
-import NditouLogo from '../../../assets/Nditou_logosb.png';
+import NditouLogo from '../../../assets/logo-fajma.png';
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   backgroundColor: 'rgba(255, 255, 255, 0.7)', // Même couleur que le header

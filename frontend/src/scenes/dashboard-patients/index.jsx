@@ -1,9 +1,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState } from "react";
 =======
 =======
 >>>>>>> fc99c8a (debut conception dashboard patient)
+=======
+>>>>>>> de5c7c3 (configuration du sidebar dashboard patients est ok)
 import { useState, useEffect } from "react";
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 import { Box, Typography } from "@mui/material";
@@ -118,15 +121,17 @@ const DashboardPatient = () => {
 export default DashboardPatient;
 =======
 import Sidebar from "../global/Sidebar";
+=======
+import SidebarDashboard from "../global/Sidebar"; 
+>>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
 import Topbar from "../global/Topbar";
 
 
 const Dashboard = () => {
     return (
-        <div>
+        <div className="flex flex-row">
+            <SidebarDashboard /> 
             <Topbar />
-            <h1>Dashboard</h1>
-            <Sidebar />
         </div>
     )   
 }

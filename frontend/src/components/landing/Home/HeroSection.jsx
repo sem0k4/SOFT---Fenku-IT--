@@ -532,14 +532,14 @@ const Sliders = [
         <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB' }}>
           FAJMA votre plateforme de santé
         </Typography>
-        <Typography variant="h5" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
           En quelques clics, accéder à plusieurs services santé
         </Typography>
         <Grid container spacing={3} sx={{ mt: 4, px: { lg: 7 } }}>
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <MedicalServicesIcon sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Consultation médicale
               </Typography>
             </FeatureCard>
@@ -547,7 +547,7 @@ const Sliders = [
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <VideoCameraFrontTwoTone sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Téléconsultation
               </Typography>
             </FeatureCard>
@@ -555,7 +555,7 @@ const Sliders = [
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <CalendarMonthOutlined sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Prise de rendez-vous
               </Typography>
             </FeatureCard>
@@ -571,14 +571,14 @@ const Sliders = [
         <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB' }}>
           Analyse de données médicales
         </Typography>
-        <Typography variant="h5" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
           Suivi personnalisé de vos indicateurs de santé
         </Typography>
         <Grid container spacing={3} sx={{ mt: 4, px: { lg: 7 } }}>
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <MedicalServicesIcon sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Analyse prédictive
               </Typography>
             </FeatureCard>
@@ -586,7 +586,7 @@ const Sliders = [
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <VideoCameraFrontTwoTone sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Suivi en temps réel
               </Typography>
             </FeatureCard>
@@ -594,7 +594,7 @@ const Sliders = [
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <CalendarMonthOutlined sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Historique médical
               </Typography>
             </FeatureCard>
@@ -610,14 +610,14 @@ const Sliders = [
         <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB' }}>
           Intelligence Artificielle médicale
         </Typography>
-        <Typography variant="h5" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
           Des algorithmes avancés au service de votre santé
         </Typography>
         <Grid container spacing={3} sx={{ mt: 4, px: { lg: 7 } }}>
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <MedicalServicesIcon sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Diagnostic assisté
               </Typography>
             </FeatureCard>
@@ -625,7 +625,7 @@ const Sliders = [
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <VideoCameraFrontTwoTone sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Recommandations personnalisées
               </Typography>
             </FeatureCard>
@@ -633,7 +633,7 @@ const Sliders = [
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <CalendarMonthOutlined sx={IconStyle} />
-              <Typography variant="body1" sx={{ color: 'white', fontWeight: 500 }}>
+              <Typography variant="h5" sx={{ color: 'white', fontWeight: 500 }}>
                 Prévention santé
               </Typography>
             </FeatureCard>

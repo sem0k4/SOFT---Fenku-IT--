@@ -227,7 +227,7 @@ function App() {
               {/* <Route path="/iot-fajam" element={<IotFAJAM />} /> */}
 
 
-            <Route path="/patient-dashboard2" element={<Dashboard />} />
+            <Route path="/dashboard-patient" element={<Dashboard />} />
           </Routes>
         </Router>
       </ThemeProvider>

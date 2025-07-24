@@ -79,6 +79,7 @@ const Topbar = () => {
 
     return (
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Box 
             sx={{
 <<<<<<< HEAD
@@ -106,6 +107,13 @@ const Topbar = () => {
                 display="flex" 
                 backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : colors.blackAccent[900]}
 >>>>>>> 692b537 (debut conception dashboard patient)
+=======
+        <Box display="flex" width="100%" height="80px" justifyContent="space-between" p={3}>
+            <Box 
+                display="flex" 
+                height="40px"
+                backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
+>>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
                 borderRadius="3px"
             >
                 <InputBase 
