@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useState } from "react";
 =======
 =======
@@ -9,10 +10,25 @@ import { useState } from "react";
 >>>>>>> de5c7c3 (configuration du sidebar dashboard patients est ok)
 import { useState, useEffect } from "react";
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+import { useState, useEffect } from "react";
+=======
+import { Outlet, Route, Routes } from "react-router-dom";
+import Teleconsultation from "../teleconsultation";
+import Documents from "../documents";
+import Consultation from "../consultation";
+import RDV from "../rdv";
+import Messagerie from "../messagerie";
+import Vaccination from "../vaccination";
+import IotFAJMA from "../iot-fajma";
+import { useState } from "react";
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+>>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
 import { Box, Typography } from "@mui/material";
 import HeaderDashboard from "../../components/shared/HeaderDashboard";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
+<<<<<<< HEAD
 <<<<<<< HEAD
 import { Link } from "react-router-dom";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
@@ -29,6 +45,8 @@ const DashboardPatient = () => {
     return (
         <Box className="flex flex-col">
 =======
+=======
+>>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
 import DatasVitals from "./DatasVitals";
 import RecentsConsultations from "./RecentsConsultations";
 
@@ -125,16 +143,33 @@ import Sidebar from "../global/Sidebar";
 import SidebarDashboard from "../global/Sidebar"; 
 >>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
 import Topbar from "../global/Topbar";
+=======
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
 
 
-const Dashboard = () => {
+const DashboardPatient = () => {
+
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+    // const [isSidebar, setIsSidebar] = useState(true);
+    const colorDivParent = theme.palette.mode === 'dark' ? '#e4e4e4' : '#fcfcfc';
+
     return (
-        <div className="flex flex-row">
-            <SidebarDashboard /> 
-            <Topbar />
+        <div>
+            <HeaderDashboard
+                title="Dalal ak Jamm Fallou"
+                subtitle=""
+            />
+            <Box className={`bg-[${colorDivParent}] rounded-lg p-3 h-64 w-92`}>
+
+            </Box>
         </div>
     )   
 }
 
+<<<<<<< HEAD
 export default Dashboard;
 >>>>>>> 692b537 (debut conception dashboard patient)
+=======
+export default DashboardPatient;
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)

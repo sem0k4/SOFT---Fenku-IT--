@@ -291,19 +291,13 @@ const LogoImage = styled('img')({
 });
 
 // Boutons pour Espace patient et Se connecter
-const PatientButton = styled(Button)(({ theme }) => ({
+const NavLink = styled(Button)(({ theme }) => ({
   color: '#0096b0',
   textTransform: 'none',
   fontWeight: 500,
   fontSize: '0.875rem'
 }));
 
-const ConnectButton = styled(Button)(({ theme }) => ({
-  color: '#0096b0',
-  textTransform: 'none',
-  fontWeight: 500,
-  fontSize: '0.875rem'
-}));
 
 function Header() {
   return (
@@ -324,8 +318,8 @@ function Header() {
         </Box>
         
         <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center', marginLeft: 'auto' }}>
-          <PatientButton>Espace patient</PatientButton>
-          <ConnectButton component={RouterLink} to="/login">Se connecter</ConnectButton>
+          <NavLink component={RouterLink} to="dashboard-patient">Espace patient</NavLink>
+          <NavLink component={RouterLink} to="/login">Se connecter</NavLink>
         </Box>
       </Toolbar>
     </StyledAppBar>

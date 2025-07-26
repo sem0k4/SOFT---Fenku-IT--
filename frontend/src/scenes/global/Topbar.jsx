@@ -1,15 +1,24 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Avatar, Box, IconButton, useTheme } from "@mui/material";
 =======
 import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 =======
+=======
+>>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
 import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
 =======
 import { Box, IconButton, useTheme } from "@mui/material";
 >>>>>>> 692b537 (debut conception dashboard patient)
+<<<<<<< HEAD
 >>>>>>> fc99c8a (debut conception dashboard patient)
+=======
+=======
+import { Avatar, Box, IconButton, useTheme } from "@mui/material";
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+>>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
 import InputBase from "@mui/material/InputBase";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
@@ -36,9 +45,15 @@ import AuthService from "../../services/auth";
 =======
 =======
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+<<<<<<< HEAD
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 >>>>>>> 692b537 (debut conception dashboard patient)
+<<<<<<< HEAD
 >>>>>>> fc99c8a (debut conception dashboard patient)
+=======
+=======
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+>>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
 
 
 const Topbar = () => {
@@ -80,6 +95,7 @@ const Topbar = () => {
     return (
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Box 
             sx={{
 <<<<<<< HEAD
@@ -109,9 +125,19 @@ const Topbar = () => {
 >>>>>>> 692b537 (debut conception dashboard patient)
 =======
         <Box display="flex" width="100%" height="80px" justifyContent="space-between" p={3}>
+=======
+        <Box 
+            display="flex" 
+            width="100%" 
+            height="fit-content" 
+            justifyContent="space-between" 
+            borderColor={theme.palette.mode === 'dark' ? colors.blackAccent[500] : 'colors.blackAccent[800]'}
+            className="flex items-center pb-3 border-b border-gray-200 dark:border-gray-700"    
+        >
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
             <Box 
                 display="flex" 
-                height="40px"
+                height="34px"
                 backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
 >>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
                 borderRadius="3px"
@@ -214,10 +240,26 @@ const Topbar = () => {
                 <IconButton>
                     <SettingsOutlinedIcon />
                 </IconButton>
-                <IconButton>
+                {/* <IconButton>
                     <PersonOutlinedIcon />
+<<<<<<< HEAD
 >>>>>>> 692b537 (debut conception dashboard patient)
                 </IconButton>
+=======
+                </IconButton> */}
+                <Box display="flex" justifyContent="center" alignItems="center">
+                    {/* <img
+                        alt="profile-user"
+                        src={`/images/exemple_profile.webp`}
+                        className="w-6 h-6 ml-3 rounded-full"
+                    /> */}
+                    <Avatar
+                        alt="Prenom nom"
+                        src="/images/exemple_profile.webp"
+                        sx={{ width: 24, height: 24, ml: 1 }}
+                    />
+                </Box>
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
             </Box>
         </Box>
     )

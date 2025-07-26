@@ -259,6 +259,7 @@ export const themeSettings = (mode) => {
                     background: {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                         default: colors.blackAccent[700],
 =======
                         default: colors.blackAccent[500],
@@ -266,11 +267,15 @@ export const themeSettings = (mode) => {
 =======
                         default: colors.primary[800],
 >>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
+=======
+                        default: colors.blackAccent[700],
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
                     },
                 } 
                 : {
                    primary: {
                         main: colors.primary[100],
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                         light: '#f8f9fa',
@@ -284,6 +289,9 @@ export const themeSettings = (mode) => {
 >>>>>>> 692b537 (debut conception dashboard patient)
 =======
                         light: '#fcfcfc',
+=======
+                        light: '#f8f9fa',
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
                     },
                     secondary: {
                         main: colors.secondary[500],
@@ -297,6 +305,7 @@ export const themeSettings = (mode) => {
                     background: {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                         default: '#E4E4E480', // Couleur de fond pour le mode clair
                         
 =======
@@ -305,6 +314,9 @@ export const themeSettings = (mode) => {
 >>>>>>> 692b537 (debut conception dashboard patient)
 =======
                         default: colors.blackAccent[900], // Couleur de fond pour le mode clair
+=======
+                        default: '#E4E4E480', // Couleur de fond pour le mode clair
+>>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
                         
 >>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
                     },  
