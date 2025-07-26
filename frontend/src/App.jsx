@@ -11,23 +11,24 @@ import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
+
 import Dashboard from './scenes/dashboard-patients';
-// import Teleconsultation from './scenes/dashboard-patients/Teleconsultation';
-// import Documents from './scenes/dashboard-patients/Documents';
-// import Consultations from './scenes/dashboard-patients/Consultations';
-// import RDV from './scenes/dashboard-patients/RDV';
-// import Messagerie from './scenes/dashboard-patients/Messagerie';
-// import Calendrier from './scenes/dashboard-patients/Calendrier';
-// import IotFAJAM from './scenes/dashboard-patients/IotFAJAM';
-
-
-
+import Teleconsultation from './scenes/teleconsultation';
+import Documents from './scenes/documents';
+import RDV from './scenes/rdv';
+import Messagerie from './scenes/messagerie';
+import Vaccination from './scenes/vaccination';
+import IotFAJMA from './scenes/iot-fajma';
+import Consultation from './scenes/consultation/';
+import { useState } from 'react';
+import DashboardLayout from './components/Layout/DashboardLayout';
 
 
 
 function App() {
 
   const [ theme, colorMode ] = useMode();
+  const [ isSidebar, setIsSidebar ] = useState(true);
 
   return (
     // Fournir le contexte de mode de couleur à l'ensemble de l'application
@@ -56,17 +57,19 @@ function App() {
                 </ProtectedRoute>
               } 
               />
-                {/* Route protégée pour le tableau de bord des patients */}
-              {/* <Route path="/teleconsultation" element={<Teleconsultation />} /> */}
-              {/* <Route path="/documents" element={<Documents />} />  */}
-              {/* <Route path="/consultations" element={<Consultations />} /> */}
-              {/* <Route path="/rdv" element={<RDV />} /> */}
-              {/* <Route path="/messagerie" element={<Messagerie />} /> */}
-              {/* <Route path="/calendrier" element={<Calendrier />} /> */}
-              {/* <Route path="/iot-fajam" element={<IotFAJAM />} /> */}
 
-
-            <Route path="/dashboard-patient" element={<Dashboard />} />
+            {/* Route protégée pour le tableau de bord des patients */}
+            <Route path="/dashboard-patient" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="/dashboard-patient/teleconsultation" element={<Teleconsultation />} />
+              <Route path="/dashboard-patient/documents" element={<Documents />} />
+              <Route path="/dashboard-patient/consultation" element={<Consultation />} />
+              <Route path="/dashboard-patient/rdv" element={<RDV />} />
+              <Route path="/dashboard-patient/messagerie" element={<Messagerie />} />
+              <Route path="/dashboard-patient/vaccination" element={<Vaccination />} />
+              <Route path="/dashboard-patient/iot-fajma" element={<IotFAJMA />} />
+            </Route>
+              
           </Routes>
         </Router>
       </ThemeProvider>

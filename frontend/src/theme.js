@@ -107,13 +107,13 @@ export const themeSettings = (mode) => {
                         light: colors.blackAccent[100],
                     },
                     background: {
-                        default: colors.primary[800],
+                        default: colors.blackAccent[700],
                     },
                 } 
                 : {
                    primary: {
                         main: colors.primary[100],
-                        light: '#fcfcfc',
+                        light: '#f8f9fa',
                     },
                     secondary: {
                         main: colors.secondary[500],
@@ -124,7 +124,7 @@ export const themeSettings = (mode) => {
                         light: colors.blackAccent[100],
                     },
                     background: {
-                        default: colors.blackAccent[900], // Couleur de fond pour le mode clair
+                        default: '#E4E4E480', // Couleur de fond pour le mode clair
                         
                     },  
                 } 

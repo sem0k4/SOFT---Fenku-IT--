@@ -1,4 +1,4 @@
-import { Box, IconButton, useTheme } from "@mui/material";
+import { Avatar, Box, IconButton, useTheme } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
@@ -7,7 +7,6 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 
 
 const Topbar = () => {
@@ -21,10 +20,17 @@ const Topbar = () => {
     
 
     return (
-        <Box display="flex" width="100%" height="80px" justifyContent="space-between" p={3}>
+        <Box 
+            display="flex" 
+            width="100%" 
+            height="fit-content" 
+            justifyContent="space-between" 
+            borderColor={theme.palette.mode === 'dark' ? colors.blackAccent[500] : 'colors.blackAccent[800]'}
+            className="flex items-center pb-3 border-b border-gray-200 dark:border-gray-700"    
+        >
             <Box 
                 display="flex" 
-                height="40px"
+                height="34px"
                 backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
                 borderRadius="3px"
             >
@@ -51,9 +57,21 @@ const Topbar = () => {
                 <IconButton>
                     <SettingsOutlinedIcon />
                 </IconButton>
-                <IconButton>
+                {/* <IconButton>
                     <PersonOutlinedIcon />
-                </IconButton>
+                </IconButton> */}
+                <Box display="flex" justifyContent="center" alignItems="center">
+                    {/* <img
+                        alt="profile-user"
+                        src={`/images/exemple_profile.webp`}
+                        className="w-6 h-6 ml-3 rounded-full"
+                    /> */}
+                    <Avatar
+                        alt="Prenom nom"
+                        src="/images/exemple_profile.webp"
+                        sx={{ width: 24, height: 24, ml: 1 }}
+                    />
+                </Box>
             </Box>
         </Box>
     )
