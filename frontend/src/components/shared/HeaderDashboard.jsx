@@ -5,10 +5,14 @@ import { tokens } from '../../theme';
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const HeaderDashboard = ({ title, span, subtitle }) => {    
 =======
 const HeaderDashboard = ({ title, subtitle }) => {    
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+=======
+const HeaderDashboard = ({ title, span, subtitle }) => {    
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode)
@@ -16,6 +20,7 @@ const HeaderDashboard = ({ title, subtitle }) => {
     return ( 
         <Box className="flex flex-col items-start w-full">
             <Typography 
+<<<<<<< HEAD
 <<<<<<< HEAD
                 variant='h3' 
                 // color={colors.secondary[500]} 
@@ -26,11 +31,19 @@ const HeaderDashboard = ({ title, subtitle }) => {
 =======
                 variant='h2' 
                 color={colors.secondary[500]} 
+=======
+                variant='h3' 
+                // color={colors.secondary[500]} 
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
                 fontWeight='bold'
                 sx={{ mb: "5px" }}
             >
                 {title}
+<<<<<<< HEAD
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+=======
+                {span && <span style={{ color: colors.secondary[500]}}> {span}</span>}
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
             </Typography>
             <Typography 
                 variant='h5' 

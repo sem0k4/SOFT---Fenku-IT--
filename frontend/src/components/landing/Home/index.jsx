@@ -53,6 +53,7 @@ import HeroSection from './HeroSection';
 import Benefits from './Benefits';
 import IA from './IA';
 import ObjectsFAJMA from './ObjectsFAJMA';
+import Chatbot from './Chatbot';
 
 function Home() {
   return (
@@ -61,6 +62,7 @@ function Home() {
       <Benefits />
       <IA />
       <ObjectsFAJMA />
+      <Chatbot />
     </Box>
   );
 }

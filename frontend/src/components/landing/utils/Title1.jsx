@@ -1,8 +1,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc99c8a (debut conception dashboard patient)
 import React from 'react';
+=======
+  import React from 'react';
+>>>>>>> 4acefeb (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 import { Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 

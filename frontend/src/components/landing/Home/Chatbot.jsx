@@ -18,9 +18,15 @@ export default function Chatbot() {
   return (
     <div>
       <Box 
+<<<<<<< HEAD
         className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 hover:opacity-75 duration-300 shadow`}
         sx={{
             backgroundColor: '#fcfcfc', 
+=======
+        className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 duration-300 shadow`}
+        sx={{
+            backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[300] : '#fcfcfc', 
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
         }}
         onClick={handleOpen}
       >
@@ -58,4 +64,8 @@ export default function Chatbot() {
       </Modal>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)

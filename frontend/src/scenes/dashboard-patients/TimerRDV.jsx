@@ -1,26 +1,45 @@
 import { Box, Typography, useTheme } from '@mui/material';
+<<<<<<< HEAD
 import { useState, useEffect } from 'react';
 import { tokens } from '../../theme';
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
 
 function timerRDV(formattedDate, dateRDV) {
+=======
+import React, { useState, useEffect } from 'react';
+import { tokens } from '../../theme';
+import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined';
+
+function TimerRDV() {
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
   const [month, setMonth] = useState(0);
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
+<<<<<<< HEAD
   const targetDate = new Date('2025-08-15T14:00:00').getTime(); // Définir la date cible ici
 
   formattedDate = new Date(targetDate).toLocaleString('fr-FR', {
     day: '2-digit',
     month: 'short',
+=======
+  const targetDate = new Date('2025-08-05T10:00:00').getTime(); // Définir la date cible ici
+
+  const formattedDate = new Date(targetDate).toLocaleString('fr-FR', {
+    day: '2-digit',
+    month: '2-digit',
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
   });
   // console.log(formattedDate);
+<<<<<<< HEAD
   dateRDV = {month, days, hours, minutes,seconds}
+=======
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
   
 
   const theme = useTheme()
@@ -52,8 +71,64 @@ function timerRDV(formattedDate, dateRDV) {
     return () => clearInterval(interval); // Nettoyage lors du démontage du composant
   }, [targetDate]);
 
+<<<<<<< HEAD
   return { formattedDate, dateRDV };
 
 }
 
 export default timerRDV;
+=======
+  return (
+    <Box
+      className={`flex flex-col items-center justify-center p-3 h-60 gap-4 rounded-lg my-8 w-full`} 
+      sx={{
+        backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
+        display: 'flex',
+        boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,                
+      }}
+    >
+      <Typography 
+        variant='h4'
+        sx={{ 
+          fontWeight: 500,
+        }}
+      >Prochain Rendez-vous</Typography>
+      <Box className="flex flex-row gap-2">
+        <TimerOutlinedIcon
+          sx={{
+            fontSize: "30px",
+            fontWeight: 600,
+            color: colors.secondary[400],
+          }}
+        />
+        <Typography
+          variant='h3'
+          sx={{
+            fontWeight: 600,
+            marginTop: '2px',
+          }}
+        >
+          <span className={`${month === 0 && 'hidden'}`}>{month}M </span>
+          <span>{days}j </span>
+          <span>{hours}h </span>
+          <span>{minutes}m </span>
+          <span className={`${month ==! 0 && 'hidden'}`}>{seconds}s</span>
+        </Typography>
+      </Box>
+      <Typography
+        sx={{
+          fontWeight: 600, 
+          textAlign: "left",
+          display: "flex",
+          gap: '3px',
+        }}
+      >
+        <span>Date : </span>
+        <span style={{ color: colors.secondary[400] }}>{formattedDate}</span>
+      </Typography>
+    </Box>
+  );
+}
+
+export default TimerRDV;
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)

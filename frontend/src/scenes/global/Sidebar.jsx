@@ -14,7 +14,7 @@ import VaccinesOutlinedIcon from '@mui/icons-material/VaccinesOutlined';
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
 import { useState } from "react";
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 
 
 
@@ -27,18 +27,18 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
 
   return (
     <Link 
-      className={`flex flex-row w-full py-3 px-3 mx-2 rounded-xl ${isToggle ? 'gap-14' : 'gap-6'} duration-300 hover:bg-cyan-800 ${selected === title && 'bg-cyan-800'} group font-semibold`}
+      className={`flex flex-row w-full py-3 px-3 rounded-l-xl ${isToggle ? 'gap-14' : 'gap-6'} duration-300 hover:bg-cyan-800 ${selected === title && 'bg-cyan-800'} group font-semibold`}
       to={to}
       onClick={() => setSelected(title)}
       style={{ 
         color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[600]}`,
         textDecoration: "none",
-        fontSize: "15px",
+        fontSize: "14px",
       }}
     >
       {icon}
       <span 
-        className={`translate-x-2 group-hover:text-white ${selected === title && 'text-white'}`}
+        className={`group-hover:text-white ${selected === title && 'text-white'}  ${isToggle ? '-translate-x-2' : 'translate-x-2'}`}
         style={{
           display: `${isToggle ? 'none' : 'block'}`
         }}
@@ -49,6 +49,7 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
   )
 }
 
+
 const SidebarDashboard = () => {
 
 
@@ -56,20 +57,27 @@ const SidebarDashboard = () => {
   const colors = tokens(theme.palette.mode);
   const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
+  
+  const isMobile = window.innerWidth <= 768;
+  console.log(isMobile);
+  
+  // if (isMobile) {
+  //   setIsToggle(true);
+  // }
 
   // console.log(selected);
     
   
   return (
-    <div 
-      className={`sticky z-10 h-screen duration-300 ${isToggle ? 'w-18' : 'md:w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-4`}
-      style={{ 
-        backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc'
-      }}
+    <Box
+      className={`sticky top-0 z-10 h-screen duration-300 ${isToggle ? 'w-18' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-4`}
+      sx={{ 
+        backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc',
+      }} 
     >
       <div 
         className={`flex ${isToggle ? 'flex-col' : 'flex-row'} gap-4 justify-between items-center px-6`}
-        >
+      >
         <Link to="/">
           {isToggle 
           ? 
@@ -84,7 +92,7 @@ const SidebarDashboard = () => {
               src={Logo1FAJMA}
               alt="E-FAJMA votre partenaire de sante"
             />
-        }
+          }
         </Link>
         <IconButton>
           <MenuOutlinedIcon 
@@ -97,7 +105,7 @@ const SidebarDashboard = () => {
           />
         </IconButton>
       </div>
-      <div className={`flex flex-col gap-0 pt-4 items-start`}>
+      <div className={`flex flex-col pt-2 pl-3 items-start`}>
         <Item
           title="Dashboard"
           to="/dashboard-patient"
@@ -155,7 +163,7 @@ const SidebarDashboard = () => {
           setSelected={setSelected}
         />
       </div>
-    </div>
+    </Box>
   )
 }
 

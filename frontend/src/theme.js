@@ -328,30 +328,34 @@ export const themeSettings = (mode) => {
             fontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
             fontSize: 12,
             h1: {
-                ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
+                fontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
             fontSize: 40,
             },
             h2: {
-                ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
+                fontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
             fontSize: 32,
             },
             h3: {
-                ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
+                fontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
             fontSize: 24,
             },
             h4: {
-                ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
+                fontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
             fontSize: 20,
             },
             h5: {
-                ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
+                fontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
             fontSize: 16,
             },
             h6: {
+<<<<<<< HEAD
                 ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
 <<<<<<< HEAD
                 fontSize: 14,
 =======
+=======
+                fontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
             fontSize: 14,
 >>>>>>> 692b537 (debut conception dashboard patient)
             }

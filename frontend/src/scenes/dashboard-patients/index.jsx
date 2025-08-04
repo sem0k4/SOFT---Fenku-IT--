@@ -30,6 +30,7 @@ import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import NavSub from "./components/NavSub";
@@ -47,6 +48,8 @@ const DashboardPatient = () => {
 =======
 =======
 >>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
+=======
+>>>>>>> 4acefeb (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 import DatasVitals from "./DatasVitals";
 import RecentsConsultations from "./RecentsConsultations";
 
@@ -145,25 +148,38 @@ import SidebarDashboard from "../global/Sidebar";
 import Topbar from "../global/Topbar";
 =======
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+=======
+import IdentityPatient from "./IdentityPatient";
+import RecentsConsultations from "./RecentsConsultations";
+import TimerRDV from "./TimerRDV";
+import Card3 from "./ObjectFAJMA";
+>>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 
 
 const DashboardPatient = () => {
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    // const [isSidebar, setIsSidebar] = useState(true);
-    const colorDivParent = theme.palette.mode === 'dark' ? '#e4e4e4' : '#fcfcfc';
 
     return (
-        <div>
+        <Box>
             <HeaderDashboard
-                title="Dalal ak Jamm Fallou"
+                title="Dalal ak Jamm"
+                span="Fallou"
                 subtitle=""
             />
-            <Box className={`bg-[${colorDivParent}] rounded-lg p-3 h-64 w-92`}>
-
+            <Box
+                className="grid grid-cols-1 md:grid-cols-3 items-center gap-y-0 gap-6"
+                sx={{
+                
+                }}
+            >
+                <IdentityPatient />
+                <TimerRDV />
+                <Card3 />
             </Box>
-        </div>
+            <RecentsConsultations />
+        </Box>
     )   
 }
 

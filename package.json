@@ -4,6 +4,7 @@
 >>>>>>> fc99c8a (debut conception dashboard patient)
 {
   "dependencies": {
+    "react-icons": "^5.5.0",
     "recharts": "^2.15.3"
   }
 }
