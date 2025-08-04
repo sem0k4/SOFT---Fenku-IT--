@@ -11,25 +11,36 @@ import { Box, Typography } from "@mui/material";
 import HeaderDashboard from "../../components/shared/HeaderDashboard";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
+import IdentityPatient from "./IdentityPatient";
+import RecentsConsultations from "./RecentsConsultations";
+import TimerRDV from "./TimerRDV";
+import Card3 from "./ObjectFAJMA";
 
 
 const DashboardPatient = () => {
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    // const [isSidebar, setIsSidebar] = useState(true);
-    const colorDivParent = theme.palette.mode === 'dark' ? '#e4e4e4' : '#fcfcfc';
 
     return (
-        <div>
+        <Box>
             <HeaderDashboard
-                title="Dalal ak Jamm Fallou"
+                title="Dalal ak Jamm"
+                span="Fallou"
                 subtitle=""
             />
-            <Box className={`bg-[${colorDivParent}] rounded-lg p-3 h-64 w-92`}>
-
+            <Box
+                className="grid grid-cols-1 md:grid-cols-3 items-center gap-y-0 gap-6"
+                sx={{
+                
+                }}
+            >
+                <IdentityPatient />
+                <TimerRDV />
+                <Card3 />
             </Box>
-        </div>
+            <RecentsConsultations />
+        </Box>
     )   
 }
 
