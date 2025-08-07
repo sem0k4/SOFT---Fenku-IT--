@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 <<<<<<< HEAD
 import SidebarDesktop from "../../scenes/global/SidebarDesktop";
 import Topbar from "../../scenes/global/Topbar";
+<<<<<<< HEAD
 import Chatbot from "../landing/Home/Chatbot";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
@@ -13,6 +14,8 @@ import Topbar from "../../scenes/global/Topbar";
 =======
 import Chatbot from "../landing/Home/Chatbot";
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+>>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
 
 
 const DashboardLayout = () => {
@@ -43,17 +46,20 @@ const DashboardLayout = () => {
     return (
         <div className="flex flex-row">
             <SidebarDashboard /> 
-            <div className="md:relative absolute flex flex-col gap-8 w-full p-4 md:ml-0 ml-20 mr-0 h-full">
+            <div className="md:relative absolute flex flex-col gap-8 w-full p-4 md:ml-0 ml-24">
             <Topbar />
                 <main>
                     <Outlet />
                 </main>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
 =======
             <Chatbot />
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+>>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
         </div>
     )   
 }

@@ -6,6 +6,7 @@ import { tokens } from '../../theme';
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const HeaderDashboard = ({ title, span, subtitle }) => {    
 =======
 const HeaderDashboard = ({ title, subtitle }) => {    
@@ -13,6 +14,9 @@ const HeaderDashboard = ({ title, subtitle }) => {
 =======
 const HeaderDashboard = ({ title, span, subtitle }) => {    
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+const HeaderDashboard = ({ title, subtitle }) => {    
+>>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode)
@@ -22,8 +26,13 @@ const HeaderDashboard = ({ title, span, subtitle }) => {
             <Typography 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 variant='h3' 
                 // color={colors.secondary[500]} 
+=======
+                variant='h2' 
+                color={colors.secondary[500]} 
+>>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
                 fontWeight='bold'
             >
                 {title}
@@ -40,10 +49,13 @@ const HeaderDashboard = ({ title, span, subtitle }) => {
             >
                 {title}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
 =======
                 {span && <span style={{ color: colors.secondary[500]}}> {span}</span>}
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+>>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
             </Typography>
             <Typography 
                 variant='h5' 

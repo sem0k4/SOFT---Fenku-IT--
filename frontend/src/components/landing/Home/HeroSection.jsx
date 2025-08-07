@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -229,6 +230,8 @@ function HeroSection() {
 >>>>>>> fc99c8a (debut conception dashboard patient)
 =======
 >>>>>>> 4acefeb (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+>>>>>>> 5b0b60e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -460,14 +463,17 @@ import React, { useState, useEffect } from 'react';
 =======
 import { useState, useEffect } from 'react';
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+import React, { useState, useEffect } from 'react';
+>>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
 import { Box, Typography, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MedicalServicesIcon from '@mui/icons-material/MedicalServices';
-import { CalendarMonthOutlined, VideoCameraFrontTwoTone } from '@mui/icons-material';
+import { CalendarMonthOutlined, Thermostat, TireRepair, VideoCameraFrontTwoTone } from '@mui/icons-material';
 
 const HeroContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
-  // minHeight: { md: '100vh', xs: '100vh' }, 
+  minHeight: '100vh',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -478,7 +484,6 @@ const HeroContainer = styled(Box)(({ theme }) => ({
   transition: 'background-image 1.2s ease-in-out',
   margin: 0,
   padding: 0,
-  paddingTop: '170px',
   paddingTop: '76px', // Ajout d'un padding-top pour compenser la hauteur du header fixe
   '&::before': {
     content: '""',
@@ -489,8 +494,7 @@ const HeroContainer = styled(Box)(({ theme }) => ({
     height: '100%',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     zIndex: 1
-  },
-
+  }
 }));
 
 const HeroContent = styled(Box)(({ theme, isActive }) => ({
@@ -537,13 +541,13 @@ const Sliders = [
     image: './images/agent-de-sante.png',
     content: (
       <>
-        <Typography className='md:px-4 px-2' variant="h2" component="h1" sx={{ fontSize: { xs: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB', }}>
+        <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB' }}>
           FAJMA votre plateforme de santé
         </Typography>
-        <Typography className='md:px-4 px-2' variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
           En quelques clics, accéder à plusieurs services santé
         </Typography>
-        <Grid container spacing={3} sx={{ mt: 4, px: 7 }}>
+        <Grid container spacing={3} sx={{ mt: 4, px: { lg: 7 } }}>
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <MedicalServicesIcon sx={IconStyle} />
@@ -576,13 +580,13 @@ const Sliders = [
     image: './images/analyse-de-donnee.webp',
     content: (
       <>
-        <Typography className='md:px-4 px-2' variant="h2" component="h1" sx={{ fontSize: { xs: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB', }}>
+        <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB' }}>
           Analyse de données médicales
         </Typography>
-        <Typography className='md:px-4 px-2' variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
           Suivi personnalisé de vos indicateurs de santé
         </Typography>
-        <Grid container spacing={3} sx={{ mt: 4, px: 7 }}>
+        <Grid container spacing={3} sx={{ mt: 4, px: { lg: 7 } }}>
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <MedicalServicesIcon sx={IconStyle} />
@@ -615,13 +619,13 @@ const Sliders = [
     image: './images/ia-analyse-de-donnees-medicales.webp',
     content: (
       <>
-        <Typography className='md:px-4 px-2' variant="h2" component="h1" sx={{ fontSize: { xs: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB', }}>
+        <Typography variant="h2" component="h1" sx={{ fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' }, fontWeight: 'bold', color: '#1BB5FB' }}>
           Intelligence Artificielle médicale
         </Typography>
-        <Typography className='md:px-4 px-2' variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
+        <Typography variant="h3" sx={{ fontWeight: 600, color: 'white', maxWidth: '1000px', mx: 'auto', mt: 1 }}>
           Des algorithmes avancés au service de votre santé
         </Typography>
-        <Grid container spacing={3} sx={{ mt: 4, px: 7 }}>
+        <Grid container spacing={3} sx={{ mt: 4, px: { lg: 7 } }}>
           <Grid item xs={12} md={4}>
             <FeatureCard>
               <MedicalServicesIcon sx={IconStyle} />
@@ -673,11 +677,8 @@ function HeroSection() {
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
-      minHeight: '100vh',
     }}>
-      <HeroContent
-        isActive={!slideTransition} className={slideTransition ? 'slide-transition' : ''}
-      >
+      <HeroContent isActive={!slideTransition} className={slideTransition ? 'slide-transition' : ''}>
         {Sliders[currentImage].content}
       </HeroContent>
     </HeroContainer>
