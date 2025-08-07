@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box, Typography, Grid, Paper } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DevicesIcon from '@mui/icons-material/Devices';
-import { tokens } from '../../../theme';
 
 
 const BenefitCard = styled(Paper)(({ theme }) => ({
@@ -54,10 +53,8 @@ const Benefits = () => {
       description: 'Consultez depuis n\'importe où grâce à notre plateforme disponible sur tous vos appareils.'
     },
   ];
-
-  const theme = useTheme()
-  const colors = tokens(theme.palette.mode); 
-  const backgroundColor = colors.primary[600]
+ 
+  const bgColor = '#16243f'
 
   return (
     <Box sx={{ py: 8, px: { xs: 3, md: 8 }, backgroundColor: '#f8f9fa' }}>
@@ -73,15 +70,10 @@ const Benefits = () => {
         Découvrez pourquoi FAJMA est la solution idéale pour vos besoins de santé
       </Typography>
       
-      <Grid container spacing={4} sx={{ marginTop: '10px' }}>
+      <Box className="grid md:grid-cols-3 grid-cols-1 gap-8 py-12">
         {benefits.map((benefit, index) => (
-          <Grid 
-            item 
-            xs={12} 
-            md={4} 
-            key={index}
-          >
-            <BenefitCard theme={backgroundColor}>
+          <Box key={index}>
+            <BenefitCard>
               <IconWrapper>
                 {benefit.icon}
               </IconWrapper>
@@ -92,9 +84,9 @@ const Benefits = () => {
                 {benefit.description}
               </Typography>
             </BenefitCard>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };

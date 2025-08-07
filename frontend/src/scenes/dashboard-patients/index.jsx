@@ -1,35 +1,61 @@
-import { Outlet, Route, Routes } from "react-router-dom";
-import Teleconsultation from "../teleconsultation";
-import Documents from "../documents";
-import Consultation from "../consultation";
-import RDV from "../rdv";
-import Messagerie from "../messagerie";
-import Vaccination from "../vaccination";
-import IotFAJMA from "../iot-fajma";
 import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import HeaderDashboard from "../../components/shared/HeaderDashboard";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
+import DatasVitals from "./DatasVitals";
+import RecentsConsultations from "./RecentsConsultations";
+// import TimerRDV from "./TimerRDV";
+// import Card3 from "./ObjectFAJMA";
+import { Link } from "react-router-dom";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 
 const DashboardPatient = () => {
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    // const [isSidebar, setIsSidebar] = useState(true);
-    const colorDivParent = theme.palette.mode === 'dark' ? '#e4e4e4' : '#fcfcfc';
+    
 
     return (
-        <div>
-            <HeaderDashboard
-                title="Dalal ak Jamm Fallou"
-                subtitle=""
-            />
-            <Box className={`bg-[${colorDivParent}] rounded-lg p-3 h-64 w-92`}>
-
+        <Box>
+            <Box 
+                sx={{
+                    display: 'flex',
+                    flexDirection: {sm: 'row', xs: 'column'},
+                    gap: '20px',
+                    justifyContent: {sm: 'space-between', xs: 'center'},
+                    alignItems: 'center',
+                    marginTop: '0px',
+                    marginBottom: '0px'
+                }}
+            >
+                <HeaderDashboard
+                    title="Dalal ak Jamm"
+                    span="Fallou"
+                    subtitle=""
+                />
+                <Link 
+                    className="font-semibold p-2 rounded-lg md:w-1/3 xs:w-1/2 w-full flex items-center justify-center"
+                    to="rdv"
+                    style={{
+                        textDecoration: 'none',
+                        padding: 0,
+                        color: theme.palette.mode === 'dark' ? colors.blackAccent[800] : '#fcfcfc',
+                        backgroundColor: colors.secondary[500], 
+                    }}
+                >
+                     <AddOutlinedIcon />
+                    <span >Prendre un rendez-vous</span>
+                </Link>
             </Box>
-        </div>
+            <DatasVitals />
+            <Box className="grid grid-cols-1 md:grid-cols-2 items-center gap-y-0 gap-6">
+                {/* <TimerRDV />
+                <Card3 /> */}
+            </Box>
+            <RecentsConsultations />
+        </Box>
     )   
 }
 

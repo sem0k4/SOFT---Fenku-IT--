@@ -6,7 +6,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 
 const Topbar = () => {
@@ -21,17 +20,21 @@ const Topbar = () => {
 
     return (
         <Box 
-            display="flex" 
-            width="100%" 
-            height="fit-content" 
-            justifyContent="space-between" 
-            borderColor={theme.palette.mode === 'dark' ? colors.blackAccent[500] : 'colors.blackAccent[800]'}
-            className="flex items-center pb-3 border-b border-gray-200 dark:border-gray-700"    
+            sx={{
+                display: "flex",
+                width: "100%",
+                padding: '20px 30px 10px 20px',
+                justifyContent: { md: "space-between", xs: "end" },
+                backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
+                borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
+            }}
+            className="flex items-center border-b border-gray-200 dark:border-gray-700 sticky top-0"    
         >
             <Box 
-                display="flex" 
-                height="34px"
-                backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
+                sx={{
+                    display: { md: "flex", xs: "none"},
+                }}
+                backgroundColor={theme.palette.mode === 'dark' ? colors.blackAccent[400] : '#e4e4e480'}
                 borderRadius="3px"
             >
                 <InputBase 
@@ -42,7 +45,7 @@ const Topbar = () => {
                     <SearchIcon />
                 </IconButton>
             </Box>
-            <Box display="flex">
+            <Box sx={{ display: "flex" }}>
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {/* Afficher l'icône en fonction du mode de couleur */}
                     {theme.palette.mode === 'dark' ? (
@@ -54,18 +57,7 @@ const Topbar = () => {
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>
-                <IconButton>
-                    <SettingsOutlinedIcon />
-                </IconButton>
-                {/* <IconButton>
-                    <PersonOutlinedIcon />
-                </IconButton> */}
                 <Box display="flex" justifyContent="center" alignItems="center">
-                    {/* <img
-                        alt="profile-user"
-                        src={`/images/exemple_profile.webp`}
-                        className="w-6 h-6 ml-3 rounded-full"
-                    /> */}
                     <Avatar
                         alt="Prenom nom"
                         src="/images/exemple_profile.webp"
