@@ -18,9 +18,9 @@ export default function Chatbot() {
   return (
     <div>
       <Box 
-        className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 duration-300 shadow`}
+        className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 hover:opacity-75 duration-300 shadow`}
         sx={{
-            backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[300] : '#fcfcfc', 
+            backgroundColor: '#fcfcfc', 
         }}
         onClick={handleOpen}
       >
