@@ -235,13 +235,13 @@ const ObjectsFAJMA = () => {
           Découvrez les outils innovants qui vous aident à prendre soin de votre santé
         </Typography>
         
-        <Grid container spacing={4}>
+        <Box className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 flex-col gap-4">
           {features.map((feature, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
               <FeatureCard>
                 <CardMedia
                   component="img"
-                  height="180"
+                  sx={{ height: 160 }}
                   image={feature.image}
                   alt={feature.title}
                 />
@@ -256,7 +256,7 @@ const ObjectsFAJMA = () => {
               </FeatureCard>
             </Grid>
           ))}
-        </Grid>
+        </Box>
       </Box>
     </SectionContainer>
   );

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Avatar, Box, Button, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { useMemo } from "react";
@@ -44,6 +45,8 @@ const consultations = [
         type: 'presentielle',
         avatar: '/images/exemple_docteur.webp',
 =======
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 
@@ -60,12 +63,16 @@ const consultations = [
         hour: '12:00',
         doctor: 'Dr Ngom',
         type: 'en ligne',
+<<<<<<< HEAD
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
     },
 ]
 
 export default function RecentsConsultations() {
+<<<<<<< HEAD
 <<<<<<< HEAD
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -150,6 +157,8 @@ export default function RecentsConsultations() {
             className="rounded-lg md:overflow-x-scroll overflow-x-auto mb-8 p-4" 
             sx={containerStyle}
 =======
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -165,13 +174,17 @@ export default function RecentsConsultations() {
                 flexDirection: 'column',
                 gap: '12px',
             }}
+<<<<<<< HEAD
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
         >
             <Typography
                 variant="h5"
                 sx={{
                     fontWeight: 'bold',
                     textAlign: 'left',
+<<<<<<< HEAD
 <<<<<<< HEAD
                     color: colors.secondary[500],
                 }}
@@ -210,6 +223,8 @@ export default function RecentsConsultations() {
                     Voir plus
                 </Link>
 =======
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
                     // marginTop: '20px',
                     color: colors.secondary[500]
                 }}
@@ -281,7 +296,10 @@ export default function RecentsConsultations() {
                     }}
                     to='/dashboard-patient/consultation'
                 >Voir plus</Link>
+<<<<<<< HEAD
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
             </Box>
         </Box>
     );

@@ -30,6 +30,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
 import SidebarMobile from "./SidebarMobile";
 import { Link } from "react-router-dom";
@@ -41,6 +42,8 @@ import Logo1FAJMA from "../../assets/logo-fajma.png";
 >>>>>>> 4acefeb (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 =======
 >>>>>>> 5b0b60e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
+=======
+>>>>>>> e0885ed (changement de quelques elements du dashboard patient)
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
 import SidebarMobile from "./SidebarMobile";
@@ -70,7 +73,12 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 =======
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 >>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
+<<<<<<< HEAD
 >>>>>>> 5b0b60e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
+=======
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
+>>>>>>> e0885ed (changement de quelques elements du dashboard patient)
 
 
 const Topbar = () => {
@@ -144,19 +152,29 @@ const Topbar = () => {
         <Box display="flex" width="100%" height="80px" justifyContent="space-between" p={3}>
 =======
         <Box 
-            display="flex" 
-            width="100%" 
-            height="fit-content" 
-            justifyContent="space-between" 
-            borderColor={theme.palette.mode === 'dark' ? colors.blackAccent[500] : 'colors.blackAccent[800]'}
-            className="flex items-center pb-3 border-b border-gray-200 dark:border-gray-700"    
+            sx={{
+                display: "flex",
+                width: "100%",
+                padding: '20px 30px 10px 20px',
+                justifyContent: { md: "space-between", xs: "end" },
+                backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
+                borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
+            }}
+            className="flex items-center border-b border-gray-200 dark:border-gray-700 sticky top-0"    
         >
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
             <Box 
+<<<<<<< HEAD
                 display="flex" 
                 height="34px"
                 backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
 >>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
+=======
+                sx={{
+                    display: { md: "flex", xs: "none"},
+                }}
+                backgroundColor={theme.palette.mode === 'dark' ? colors.blackAccent[400] : '#e4e4e480'}
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
                 borderRadius="3px"
             >
                 <InputBase 
@@ -228,8 +246,12 @@ const Topbar = () => {
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 =======
             </Box>
+<<<<<<< HEAD
             <Box display="flex">
 >>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
+=======
+            <Box sx={{ display: "flex" }}>
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {/* Afficher l'icône en fonction du mode de couleur */}
                     {theme.palette.mode === 'dark' ? (
@@ -241,6 +263,7 @@ const Topbar = () => {
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -258,6 +281,8 @@ const Topbar = () => {
 >>>>>>> 4acefeb (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 =======
 >>>>>>> 5b0b60e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
+=======
+>>>>>>> e0885ed (changement de quelques elements du dashboard patient)
                 <IconButton onClick={handleLogout} sx={{ color: '#f44336' }}>
                      <LogoutOutlinedIcon />
                  </IconButton>
@@ -287,12 +312,9 @@ const Topbar = () => {
 =======
                 </IconButton> */}
 >>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
+=======
+>>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
                 <Box display="flex" justifyContent="center" alignItems="center">
-                    {/* <img
-                        alt="profile-user"
-                        src={`/images/exemple_profile.webp`}
-                        className="w-6 h-6 ml-3 rounded-full"
-                    /> */}
                     <Avatar
                         alt="Prenom nom"
                         src="/images/exemple_profile.webp"

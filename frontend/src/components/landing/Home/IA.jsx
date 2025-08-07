@@ -171,9 +171,9 @@ const SectionContainer = styled(Box)(({ theme }) => ({
 const IA = () => {
   return (
     <SectionContainer>
-      <Grid container spacing={4} sx={{ px: { xs: 3, md: 8 } }}>
+      <Box className="flex md:flex-row flex-col gap-4 md:px-8 px-4">
         {/* Image à gauche */}
-        <Grid item xs={12} md={6}>
+        <Box className="md:w-1/2">
           <CardMedia
             component="img"
             image="/images/ia.webp"
@@ -186,9 +186,9 @@ const IA = () => {
               borderRadius: '8px'
             }}
           />
-        </Grid>
+        </Box>
         {/* Texte à droite */}
-        <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Box className="md:w-1/2">
           <Typography variant="h3" component="h2" sx={{ mb: 3, fontWeight: 'bold', color: 'var(--dark-bleu-logo)' }}>
             Intelligence artificielle pour l'analyse des données médicaux.
           </Typography>
@@ -226,8 +226,8 @@ const IA = () => {
               En savoir plus
             </Button>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </SectionContainer>
   );
 };
