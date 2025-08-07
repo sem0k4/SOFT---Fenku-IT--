@@ -29,28 +29,28 @@ const IA = () => {
           />
         </Grid>
         {/* Texte à droite */}
-        <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'start' }}>
+        <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <Typography variant="h3" component="h2" sx={{ mb: 3, fontWeight: 'bold', color: 'var(--dark-bleu-logo)' }}>
             Intelligence artificielle pour l'analyse des données médicaux.
           </Typography>
-          <Typography variant="body1" sx={{ mb: 2, fontSize: '1.1rem', color: 'var(--gray)', textAlign: 'left' }}>
-            Nous développons notre propre modèle d'IA pour plusieurs avantages :
+          <Typography variant="body1" sx={{ mb: 2, fontSize: '1.1rem', color: 'var(--gray)' }}>
+            Nous développons notre modèle pour plusieurs avantages que nous peut vous offrir:
           </Typography>
-          <Box sx={{ mb: 2, textAlign: 'left' }}>
-            <Typography variant="body1" sx={{ mb: 1, fontSize: '1rem', color: 'var(--gray)', display: 'flex', alignItems: 'start' }}>
-              <Box component="span" sx={{ color: 'var(--cyan-logo)', mr: 1, mt: -0.5, fontSize: '1.5rem' }}>•</Box>
+          <Box sx={{ mb: 2 }}>
+            <Typography variant="body1" sx={{ mb: 1, fontSize: '1rem', color: 'var(--gray)', display: 'flex', alignItems: 'center' }}>
+              <Box component="span" sx={{ color: 'var(--cyan-logo)', mr: 1, fontSize: '1.2rem' }}>•</Box>
               L'IA peut analyser de grandes quantités de données (imagerie médicale, tests sanguins) en quelques secondes, permettant une détection précoce de maladies comme le cancer, les maladies cardiovasculaires.
             </Typography>
-            <Typography variant="body1" sx={{ mb: 1, fontSize: '1rem', color: 'var(--gray)', display: 'flex', alignItems: 'start' }}>
-              <Box component="span" sx={{ color: 'var(--cyan-logo)', mr: 1, mt: -0.5, fontSize: '1.5rem' }}>•</Box>
+            <Typography variant="body1" sx={{ mb: 1, fontSize: '1rem', color: 'var(--gray)', display: 'flex', alignItems: 'center' }}>
+              <Box component="span" sx={{ color: 'var(--cyan-logo)', mr: 1, fontSize: '1.2rem' }}>•</Box>
               L'IA peut identifier des facteurs de risque et prédire l'apparition de maladies (diabète, Alzheimer, AVC) avant qu'elles ne se déclarent, permettant une intervention préventive.
             </Typography>
-            <Typography variant="body1" sx={{ mb: 1, fontSize: '1rem', color: 'var(--gray)', display: 'flex', alignItems: 'start' }}>
-              <Box component="span" sx={{ color: 'var(--cyan-logo)', mr: 1, mt: -0.5, fontSize: '1.5rem' }}>•</Box>
+            <Typography variant="body1" sx={{ mb: 1, fontSize: '1rem', color: 'var(--gray)', display: 'flex', alignItems: 'center' }}>
+              <Box component="span" sx={{ color: 'var(--cyan-logo)', mr: 1, fontSize: '1.2rem' }}>•</Box>
               Il réduit les erreurs de diagnostic et les interprétations subjectives grâce à une analyse objective des données.
             </Typography>
           </Box>
-          <Typography variant="body1" sx={{ mb: 4, fontSize: '1rem', color: 'var(--gray)', textAlign: 'left' }}>
+          <Typography variant="body1" sx={{ mb: 4, fontSize: '1rem', color: 'var(--gray)' }}>
             Malgré ses avantages, les défis que nous devons nous confronter sont majeures. De ce fait, nous l'imposons le respect conforme aux normes internationales et aux lois sénégalaises en matière de protection de données personnelles (Loi n° 2008-12 du 25 janvier 2008).
           </Typography>
           <Box>

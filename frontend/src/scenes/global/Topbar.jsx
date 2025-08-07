@@ -6,6 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 
 const Topbar = () => {
@@ -20,21 +21,16 @@ const Topbar = () => {
 
     return (
         <Box 
-            sx={{
-                display: "flex",
-                width: "100%",
-                height: "fit-content",
-                justifyContent: { md: "space-between", xs: "end" },
-                borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
-            }}
-            className="flex items-center md:pb-3 pb-1 border-b border-gray-200 dark:border-gray-700"    
+            display="flex" 
+            width="100%" 
+            height="fit-content" 
+            justifyContent="space-between" 
+            borderColor={theme.palette.mode === 'dark' ? colors.blackAccent[500] : 'colors.blackAccent[800]'}
+            className="flex items-center pb-3 border-b border-gray-200 dark:border-gray-700"    
         >
             <Box 
-                sx={{
-                    display: { md: "flex", xs: "none"}
-                }}
+                display="flex" 
                 height="34px"
-                marginBottom="8px"
                 backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
                 borderRadius="3px"
             >
@@ -46,7 +42,7 @@ const Topbar = () => {
                     <SearchIcon />
                 </IconButton>
             </Box>
-            <Box sx={{ display: "flex" }}>
+            <Box display="flex">
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {/* Afficher l'icône en fonction du mode de couleur */}
                     {theme.palette.mode === 'dark' ? (
@@ -58,7 +54,18 @@ const Topbar = () => {
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>
+                <IconButton>
+                    <SettingsOutlinedIcon />
+                </IconButton>
+                {/* <IconButton>
+                    <PersonOutlinedIcon />
+                </IconButton> */}
                 <Box display="flex" justifyContent="center" alignItems="center">
+                    {/* <img
+                        alt="profile-user"
+                        src={`/images/exemple_profile.webp`}
+                        className="w-6 h-6 ml-3 rounded-full"
+                    /> */}
                     <Avatar
                         alt="Prenom nom"
                         src="/images/exemple_profile.webp"
