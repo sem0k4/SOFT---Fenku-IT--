@@ -9,6 +9,7 @@ import RecentsConsultations from "./RecentsConsultations";
 // import Card3 from "./ObjectFAJMA";
 import { Link } from "react-router-dom";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import IntroDashboard from "./IntroDashboard";
 
 
 const DashboardPatient = () => {
@@ -49,12 +50,11 @@ const DashboardPatient = () => {
                     <span >Prendre un rendez-vous</span>
                 </Link>
             </Box>
-            <DatasVitals />
+            <IntroDashboard />
             <Box className="grid grid-cols-1 md:grid-cols-2 items-center gap-y-0 gap-6">
-                {/* <TimerRDV />
-                <Card3 /> */}
+                <RecentsConsultations />
             </Box>
-            <RecentsConsultations />
+            <DatasVitals />
         </Box>
     )   
 }

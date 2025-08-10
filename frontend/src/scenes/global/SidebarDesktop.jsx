@@ -28,13 +28,13 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
 
   return (
     <Link 
-      className={`flex flex-row w-full py-3 px-3 rounded-l-xl ${isToggle ? 'gap-14' : 'gap-6'} duration-300 hover:bg-[#0096b0] ${selected === title && 'bg-[#0096b0]'} group font-semibold`}
+      className={`flex flex-row w-full py-2.5 px-2 rounded-l-xl ${isToggle ? 'gap-14' : 'gap-6'} duration-300 hover:bg-[#0096b0] ${selected === title && 'bg-[#0096b0]'} group font-semibold`}
       to={to}
       onClick={() => setSelected(title)}
       style={{ 
         color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[600]}`,
         textDecoration: "none",
-        fontSize: "14px",
+        fontSize: "13px",
       }}
     >
       {icon}
@@ -51,7 +51,7 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
 }
 
 
-const SidebarDashboard = () => {
+const SidebarDesktop = () => {
 
 
   const theme = useTheme();
@@ -59,8 +59,6 @@ const SidebarDashboard = () => {
   const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
   
-  const isMobile = window.innerWidth <= 768;
-  console.log(isMobile);
   
   // if (isMobile) {
   //   setIsToggle(true);
@@ -71,9 +69,10 @@ const SidebarDashboard = () => {
   
   return (
     <Box
-      className={`sticky top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3`}
+      className={`sticky border-r lg:block hidden top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3`}
       sx={{ 
         backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc',
+        borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
       }} 
     >
       <div 
@@ -106,7 +105,7 @@ const SidebarDashboard = () => {
           />
         </IconButton>
       </div>
-      <div className={`flex flex-col pt-2 pl-3 items-start`}>
+      <div className={`flex flex-col pt-2 pl-5 items-start`}>
         <Item
           title="Dashboard"
           to="/dashboard-patient"
@@ -168,4 +167,4 @@ const SidebarDashboard = () => {
   )
 }
 
-export default SidebarDashboard;
+export default SidebarDesktop;

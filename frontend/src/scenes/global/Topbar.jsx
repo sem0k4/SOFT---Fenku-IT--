@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, useTheme } from "@mui/material";
+import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
@@ -6,6 +6,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
+import SidebarMobile from "./SidebarMobile";
 
 
 const Topbar = () => {
@@ -21,18 +23,15 @@ const Topbar = () => {
     return (
         <Box 
             sx={{
-                display: "flex",
-                width: "100%",
                 padding: '20px 30px 10px 20px',
-                justifyContent: { md: "space-between", xs: "end" },
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
             }}
-            className="flex items-center border-b border-gray-200 dark:border-gray-700 sticky top-0"    
+            className="w-full flex lg:justify-end justify-between items-center border-b border-gray-200 dark:border-gray-700 sticky top-0"    
         >
-            <Box 
+            {/* <Box 
                 sx={{
-                    display: { md: "flex", xs: "none"},
+                    display: { lg: "flex", md: "none"},
                 }}
                 backgroundColor={theme.palette.mode === 'dark' ? colors.blackAccent[400] : '#e4e4e480'}
                 borderRadius="3px"
@@ -44,8 +43,28 @@ const Topbar = () => {
                 <IconButton type="button" sx={{ p: 1 }}>
                     <SearchIcon />
                 </IconButton>
-            </Box>
+            </Box> */}
+            <SidebarMobile />
             <Box sx={{ display: "flex" }}>
+                <Link
+                    className="sm:flex hidden font-semibold cursor-pointer px-3 rounded-lg  w-full gap-2 duration-300 transition-all items-center justify-center"
+                    to="#"
+                    sx={{
+                        textDecoration: 'none',
+                        padding: 0,
+                        mr: 1,
+                        fontWeight: 500,
+                        color: '#fcfcfc',
+                        transition: 'all 0.3s',
+                        background: 'linear-gradient(82deg,rgba(0, 120, 141, 1) 0%, rgba(97, 221, 255, 1) 100%)', 
+                        '&:hover':{
+                            background: 'linear-gradient(82deg,rgba(97, 221, 255, 1) 0%, rgba(0, 120, 141, 1) 100%)'
+                        }
+                    }}
+                >
+                    <span >Assistant IA</span>
+                    <AutoAwesomeOutlinedIcon sx={{ fontSize: 'small' }} />
+                </Link>
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {/* Afficher l'icône en fonction du mode de couleur */}
                     {theme.palette.mode === 'dark' ? (
@@ -57,13 +76,13 @@ const Topbar = () => {
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>
-                <Box display="flex" justifyContent="center" alignItems="center">
+                <IconButton>
                     <Avatar
                         alt="Prenom nom"
                         src="/images/exemple_profile.webp"
-                        sx={{ width: 24, height: 24, ml: 1 }}
+                        sx={{ width: 24, height: 24 }}
                     />
-                </Box>
+                </IconButton>
             </Box>
         </Box>
     )

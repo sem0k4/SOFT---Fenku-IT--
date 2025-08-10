@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, Button, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 
 const consultations = [
@@ -14,23 +14,40 @@ const consultations = [
         date: '01/09/2025',
         hour: '12:00',
         doctor: 'Dr Ngom',
+        type: 'presentielle',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
+    },
+    {
+        date: '01/12/2025',
+        hour: '08:00',
+        doctor: 'Dr Ngom',
         type: 'en ligne',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
+    },
+    {
+        date: '01/10/2025',
+        hour: '10:30',
+        doctor: 'Dr Ngom',
+        type: 'presentielle',
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
     },
 ]
 
 export default function RecentsConsultations() {
 
+    // recentsConsultations pour recuperer les trois dernieres consultations 
+    // que nous devons trier d'abord en fonction de la date de consultation
+    const recentsConsultations = consultations.slice(-3)
+
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     return (
         <Box
-            className={`rounded-lg mb-8 p-6 bg-red-500`} 
+            className={`rounded-lg md:overflow-x-scroll overflow-x-auto mb-8 p-4 bg-red-500`} 
             sx={{ 
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 display: 'flex',
-                // boxShadow: `0px 0px 10px ${theme.palette.mode === 'dark' ? 'rgba(80, 90, 92, 0.4)' : 'rgba(0, 0, 0, 0.1)'} `,
                 boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
                 flexDirection: 'column',
                 gap: '12px',
@@ -41,11 +58,10 @@ export default function RecentsConsultations() {
                 sx={{
                     fontWeight: 'bold',
                     textAlign: 'left',
-                    // marginTop: '20px',
-                    color: colors.secondary[500]
+                    color: colors.secondary[500],
                 }}
             >
-                Vos derniers Consultations
+                Consultations à venir
             </Typography>
             {/* <Typography
                 variant="h6"
@@ -57,58 +73,67 @@ export default function RecentsConsultations() {
             >
                 Aucune consultation récente
             </Typography> */}
-            <Box className="md:p-3 rounded-lg flex flex-col gap-5">
-                {consultations.map((consultation, index) => (
+            <Box className="rounded-lg flex flex-col w-full">
+                {recentsConsultations.map((consultation, index) => (
                     <Box 
                         key={index}
-                        className="flex flex-row gap-4 pb-4 justify-between"
+                        className="flex flex-row w-full justify-between rounded-lg items-center p-3 xs:gap-8 gap-2 duration-300"
                         sx={{
-                            borderBottom: `1px solid ${theme.palette.mode === 'dark' ? colors.blackAccent[400] : colors.blackAccent[900]}`
+                            '&:hover': {
+                                backgroundColor: theme.palette.mode === 'dark' ? colors.secondary[800] : '#e4e4e490',
+                            },
                         }}
                     >
+                        <Box className="flex flex-row gap-2">
+                            <Avatar
+                                alt="Dr Mbengue"
+                                src="/images/exemple_docteur.webp"
+                            />
+                            <Typography
+                                variant="p"
+                                className="flex flex-col text-left gap-0"
+                                fontSize="12px"
+                            >
+                                <span style={{ fontSize: '14px' }} className="font-semibold md:text-lg">{consultation.doctor}</span>
+                                <span className="font-semibold" style={{ color: colors.secondary[500]}}>Cardiologue</span>
+                            </Typography>
+                        </Box>
                         <Typography 
                             className="flex flex-col gap-1 mt-1 justify-start items-start" 
-                            variant="h6"
-                            >
+                            variant="p"
+                            fontSize="12px"
+                        >
                             <span className="font-semibold">{consultation.date}</span>
                             <span>{consultation.hour}</span>
                         </Typography>
-                        <Box className="flex flex-col gap-2">
-                            <Box className=" flex flex-row justify-between items-center">
-                                <Typography className="flex flex-col text-left gap-0">
-                                    <span className="font-semibold md:text-lg">{consultation.doctor}</span>
-                                    {/* <span className="font-semibold" style={{ color: colors.secondary[500]}}>Cardiologue</span> */}
-                                </Typography>
-                                <Typography 
-                                    sx={{
-                                        fontWeight: 500,
-                                        color: colors.secondary[400],
-                                        fontSize: '0.7rem',
-                                        backgroundColor: theme.palette.mode === 'dark' ? colors.primary[500] : '#e4e4e4',
-                                    }}
-                                    className="p-2 rounded-lg"
-                                >
-                                    {consultation.type}
-                                </Typography>
-                            </Box>
-                            <Typography className="text-left line-clamp-1">
-                                {consultation.description}
-                            </Typography>
-                        </Box>
+                        <Typography 
+                            sx={{
+                                fontWeight: 500,
+                                color: theme.palette.mode === 'dark' ? colors.secondary[400] : colors.secondary[500],
+                                fontSize: '0.7rem',
+                                backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[500] : '#e4e4e470',
+                            }}
+                            className="p-2 h-fit w-20 rounded-lg"
+                        >
+                            {consultation.type}
+                        </Typography>
                     </Box>
                 ))}
             </Box>
-            <Box className="flex w-full justify-end">
+            <Box className="flex">
                 <Link
-                    className="font-semibold p-2 px-4 rounded-md hover:bg-red-400"
+                    className="font-semibold p-2 px-4 rounded-md"
                     style={{
                         textDecoration: 'none',
                         width: 'fit-content',
-                        color: theme.palette.mode === 'dark' ? colors.secondary[700] : colors.secondary[400],
-                        backgroundColor: theme.palette.mode === 'dark' ? colors.secondary[400] : '#e4e4e4',
-                        // ":hover": {
+                        color: theme.palette.mode === 'dark' ? colors.blackAccent[800] : '#fcfcfc',
+                        backgroundColor: colors.secondary[500], 
+                        // "&:hover": {
                         //     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[900],
                         // }
+                        '&:hover': {
+                            backgroundColor: theme.palette.mode === 'dark' ? colors.secondary[800] : '#e4e4e490',
+                        },
                     }}
                     to='/dashboard-patient/consultation'
                 >Voir plus</Link>

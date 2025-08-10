@@ -10,7 +10,7 @@ const HeaderDashboard = ({ title, span, subtitle }) => {
     const colors = tokens(theme.palette.mode)
 
     return ( 
-        <Box className="flex flex-col md:items-start w-full">
+        <Box className="flex flex-col items-start w-full">
             <Typography 
                 variant='h3' 
                 // color={colors.secondary[500]} 

@@ -156,7 +156,7 @@ export const themeSettings = (mode) => {
             },
             h6: {
                 ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
-            fontSize: 14,
+                fontSize: 14,
             }
         
         }

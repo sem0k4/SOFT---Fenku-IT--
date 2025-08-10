@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"; 
-import SidebarDashboard from "../../scenes/global/Sidebar";
+import SidebarDesktop from "../../scenes/global/SidebarDesktop";
 import Topbar from "../../scenes/global/Topbar";
 import Chatbot from "../landing/Home/Chatbot";
 import { useTheme } from "@emotion/react";
@@ -13,15 +13,15 @@ const DashboardLayout = () => {
 
     return (
         <div className="flex flex-row">
-            <SidebarDashboard /> 
+            <SidebarDesktop /> 
             <div 
-                className="md:relative absolute flex flex-col w-full h-full"
+                className="md:relative absolute flex flex-col w-full"
                 style={{
                     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[700] : '#fcfcfc80', 
                 }}
             >
                 <Topbar />
-                <main className=" md:ml-0 ml-20 p-4">
+                <main className="p-4">
                     <Outlet />
                 </main>
             </div>
