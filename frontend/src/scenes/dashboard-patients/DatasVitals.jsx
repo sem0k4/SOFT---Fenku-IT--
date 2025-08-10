@@ -147,8 +147,12 @@ export default function DatasVitals() {
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
             }} 
+<<<<<<< HEAD
             className="my-3 p-4 rounded-lg flex flex-col gap-3"
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
+=======
+            className="mb-6 p-4 rounded-lg flex flex-col gap-3"
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         >
             <Typography
                 variant="h5"
@@ -231,15 +235,17 @@ export default function DatasVitals() {
                 >
                     <MonitorWeightTwoToneIcon 
                         sx={{
-                            color: colors.secondary[500],
+                            color: '#fcfcfc',
                             fontSize: 40,
-
+                            borderRadius: '50%',
+                            padding: '5px',
+                            backgroundColor: colors.secondary[500],
                         }} 
                     />
                     <div
                         className="flex flex-col"
                         style={{
-                            color: theme.palette.mode === 'dark' ? colors.blackAccent[300] : colors.blackAccent[700]
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600]
                         }}
                     >
                         <Typography 
@@ -264,15 +270,17 @@ export default function DatasVitals() {
                 >
                     <HeightOutlinedIcon 
                         sx={{
-                            color: colors.secondary[500],
+                            color: '#fcfcfc',
                             fontSize: 40,
-
+                            borderRadius: '50%',
+                            padding: '5px',
+                            backgroundColor: colors.secondary[500],
                         }} 
                     />
                     <div
                         className="flex flex-col"
                         style={{
-                            color: theme.palette.mode === 'dark' ? colors.blackAccent[300] : colors.blackAccent[700]
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600]
                         }}
                     >
                         <Typography 
@@ -297,15 +305,17 @@ export default function DatasVitals() {
                 >
                     <BloodtypeOutlinedIcon 
                         sx={{
-                            color: colors.secondary[500],
+                            color: '#fcfcfc',
                             fontSize: 40,
-
+                            borderRadius: '50%',
+                            padding: '5px',
+                            backgroundColor: colors.secondary[500],
                         }} 
                     />
                     <div
                         className="flex flex-col"
                         style={{
-                            color: theme.palette.mode === 'dark' ? colors.blackAccent[300] : colors.blackAccent[700]
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600]
                         }}
                     >
                         <Typography 
@@ -336,15 +346,17 @@ export default function DatasVitals() {
                 >
                     <BloodtypeOutlinedIcon 
                         sx={{
-                            color: colors.secondary[500],
+                            color: '#fcfcfc',
                             fontSize: 40,
-
+                            borderRadius: '50%',
+                            padding: '5px',
+                            backgroundColor: colors.secondary[500],
                         }} 
                     />
                     <div
                         className="flex flex-col"
                         style={{
-                            color: theme.palette.mode === 'dark' ? colors.blackAccent[300] : colors.blackAccent[700]
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600]
                         }}
                     >
                         <Typography 

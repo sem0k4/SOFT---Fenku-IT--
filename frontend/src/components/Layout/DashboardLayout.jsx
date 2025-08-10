@@ -1,5 +1,8 @@
 import { Outlet } from "react-router-dom"; 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 import SidebarDesktop from "../../scenes/global/SidebarDesktop";
 import Topbar from "../../scenes/global/Topbar";
 <<<<<<< HEAD
@@ -34,6 +37,7 @@ const DashboardLayout = () => {
     return (
         <div className="flex flex-row">
             <SidebarDesktop /> 
+<<<<<<< HEAD
             <div 
                 className="md:relative absolute flex flex-col w-full"
                 style={{
@@ -57,14 +61,16 @@ const DashboardLayout = () => {
     return (
         <div className="flex flex-row">
             <SidebarDashboard /> 
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
             <div 
-                className="md:relative absolute flex flex-col w-full h-full"
+                className="md:relative absolute flex flex-col w-full"
                 style={{
                     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[700] : '#fcfcfc80', 
                 }}
             >
                 <Topbar />
-                <main className=" md:ml-0 ml-20 p-4">
+                <main className="p-4">
                     <Outlet />
                 </main>
             </div>

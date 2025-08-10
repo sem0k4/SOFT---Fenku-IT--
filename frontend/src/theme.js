@@ -352,6 +352,7 @@ export const themeSettings = (mode) => {
 <<<<<<< HEAD
                 ontFamily: ["system-ui", "Avenir", "Helvetica", "Arial", "sans-serif"].join(","),
 <<<<<<< HEAD
+<<<<<<< HEAD
                 fontSize: 14,
 =======
 =======
@@ -362,6 +363,9 @@ export const themeSettings = (mode) => {
 >>>>>>> 4df3e6e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
             fontSize: 14,
 >>>>>>> 692b537 (debut conception dashboard patient)
+=======
+                fontSize: 14,
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
             }
         
         }

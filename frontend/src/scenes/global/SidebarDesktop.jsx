@@ -1,8 +1,15 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 =======
 import { Link, useNavigate } from "react-router-dom";
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+import { Link, useNavigate } from "react-router-dom";
+=======
+import { Link } from "react-router-dom";
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 import Logo1FAJMA from "../../assets/logo-fajma.png";
 import Logo2FAJMA from "../../assets/mini-logo-fajma.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -16,17 +23,29 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
 import VaccinesOutlinedIcon from '@mui/icons-material/VaccinesOutlined';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import LogoutIcon from '@mui/icons-material/Logout';
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+import LogoutIcon from '@mui/icons-material/Logout';
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
 import { useState } from "react";
 import { Box, IconButton } from "@mui/material";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import AuthService from "../../services/auth";
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+import AuthService from "../../services/auth";
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 
 
 
@@ -75,6 +94,7 @@ const SidebarDesktop = () => {
   const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
 <<<<<<< HEAD
+<<<<<<< HEAD
   
   // window.location.href.endsWith('consultation') && setSelected('consultation')
   
@@ -83,6 +103,8 @@ const SidebarDesktop = () => {
     <Box
       className={`sticky border-r lg:block hidden top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3`}
 =======
+=======
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
   const navigate = useNavigate();
   
   const handleLogout = async () => {
@@ -97,6 +119,9 @@ const SidebarDesktop = () => {
       }
     }
   };
+=======
+  
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
   
   // if (isMobile) {
   //   setIsToggle(true);
@@ -107,8 +132,15 @@ const SidebarDesktop = () => {
   
   return (
     <Box
+<<<<<<< HEAD
       className={`sticky border-r lg:block hidden top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3 flex flex-col`}
+<<<<<<< HEAD
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+=======
+      className={`sticky border-r lg:block hidden top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3`}
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
       sx={{ 
         backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc',
         borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
@@ -140,6 +172,7 @@ const SidebarDesktop = () => {
 =======
         className={`flex ${isToggle ? 'flex-col' : 'flex-row'} gap-4 justify-between items-center px-6`}
       >
+<<<<<<< HEAD
         <div 
           onClick={() => navigate('/dashboard-patient')} 
           className="flex items-center transition-all duration-300 hover:opacity-80 hover:scale-105" 
@@ -166,7 +199,28 @@ const SidebarDesktop = () => {
             </div>
           }
         </div>
+<<<<<<< HEAD
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+=======
+        <Link to="/">
+          {isToggle 
+          ? 
+            <img
+              className="w-28 h-fit"
+              src={Logo2FAJMA}
+              alt="E-FAJMA votre partenaire de sante"
+            />
+          :
+            <img
+              className="w-28 h-fit"
+              src={Logo1FAJMA}
+              alt="E-FAJMA votre partenaire de sante"
+            />
+          }
+        </Link>
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         <IconButton>
           <MenuOutlinedIcon 
             onClick={() => setIsToggle(!isToggle)}
@@ -179,17 +233,26 @@ const SidebarDesktop = () => {
         </IconButton>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <div className={`flex flex-col pt-2 pl-5 items-start`}>
 =======
       {/* Section supérieure - Menu principal */}
       <div className={`flex flex-col pt-2 pl-5 items-start flex-1`}>
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+      {/* Section supérieure - Menu principal */}
+      <div className={`flex flex-col pt-2 pl-5 items-start flex-1`}>
+=======
+      <div className={`flex flex-col pt-2 pl-5 items-start`}>
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         <Item
           title="Dashboard"
           to="/dashboard-patient"
           icon={<HomeOutlinedIcon className={`group-hover:text-white ${selected === 'Dashboard' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
 <<<<<<< HEAD
         />
         <Item
@@ -201,6 +264,18 @@ const SidebarDesktop = () => {
 =======
           isToggle={isToggle}
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+          isToggle={isToggle}
+=======
+        />
+        <Item
+          title="Téléconsultation"
+          to="/dashboard-patient/teleconsultation"
+          icon={<VideoCameraFrontOutlinedIcon className={`group-hover:text-white ${selected === 'Téléconsultation' && 'text-white'}`} />}
+          selected={selected}
+          setSelected={setSelected}
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         />
         <Item
           title="Consultation"
@@ -209,9 +284,15 @@ const SidebarDesktop = () => {
           selected={selected}
           setSelected={setSelected}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           isToggle={isToggle}
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+          isToggle={isToggle}
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         />
         <Item
           title="Prendre RDV"
@@ -220,9 +301,15 @@ const SidebarDesktop = () => {
           selected={selected}
           setSelected={setSelected}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           isToggle={isToggle}
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+          isToggle={isToggle}
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         />
         <Item
           title="Messagerie"
@@ -231,9 +318,15 @@ const SidebarDesktop = () => {
           selected={selected}
           setSelected={setSelected}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           isToggle={isToggle}
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+          isToggle={isToggle}
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         />
         <Item
           title="Vaccination"
@@ -242,9 +335,15 @@ const SidebarDesktop = () => {
           selected={selected}
           setSelected={setSelected}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           isToggle={isToggle}
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+          isToggle={isToggle}
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         />
         <Item
           title="Documents"
@@ -253,7 +352,10 @@ const SidebarDesktop = () => {
           selected={selected}
           setSelected={setSelected}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
           isToggle={isToggle}
         />
       </div>
@@ -269,7 +371,12 @@ const SidebarDesktop = () => {
           selected={selected}
           setSelected={setSelected}
           isToggle={isToggle}
+<<<<<<< HEAD
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         />
         <Item
           title="FAJMA +"
@@ -278,9 +385,15 @@ const SidebarDesktop = () => {
           selected={selected}
           setSelected={setSelected}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           isToggle={isToggle}
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+          isToggle={isToggle}
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
         />
       </div>
     </Box>

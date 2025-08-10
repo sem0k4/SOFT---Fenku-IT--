@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Avatar, Box, IconButton, useTheme } from "@mui/material";
 =======
 import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
@@ -8,6 +9,8 @@ import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
 =======
 =======
 >>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
+=======
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
 =======
 import { Box, IconButton, useTheme } from "@mui/material";
@@ -18,7 +21,13 @@ import { Box, IconButton, useTheme } from "@mui/material";
 =======
 import { Avatar, Box, IconButton, useTheme } from "@mui/material";
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+<<<<<<< HEAD
 >>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
+=======
+=======
+import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 import InputBase from "@mui/material/InputBase";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
@@ -26,6 +35,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -44,6 +54,8 @@ import Logo1FAJMA from "../../assets/logo-fajma.png";
 >>>>>>> 5b0b60e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
 =======
 >>>>>>> e0885ed (changement de quelques elements du dashboard patient)
+=======
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
 import SidebarMobile from "./SidebarMobile";
@@ -78,7 +90,14 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 =======
 =======
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
+<<<<<<< HEAD
 >>>>>>> e0885ed (changement de quelques elements du dashboard patient)
+=======
+=======
+import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
+import SidebarMobile from "./SidebarMobile";
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 
 
 const Topbar = () => {
@@ -153,15 +172,13 @@ const Topbar = () => {
 =======
         <Box 
             sx={{
-                display: "flex",
-                width: "100%",
                 padding: '20px 30px 10px 20px',
-                justifyContent: { md: "space-between", xs: "end" },
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
             }}
-            className="flex items-center border-b border-gray-200 dark:border-gray-700 sticky top-0"    
+            className="w-full flex lg:justify-end justify-between items-center border-b border-gray-200 dark:border-gray-700 sticky top-0"    
         >
+<<<<<<< HEAD
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
             <Box 
 <<<<<<< HEAD
@@ -170,8 +187,11 @@ const Topbar = () => {
                 backgroundColor={theme.palette.mode === 'dark' ? colors.primary[400] : '#fcfcfc'}
 >>>>>>> e45aa1b (configuration du sidebar dashboard patients est ok)
 =======
+=======
+            {/* <Box 
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
                 sx={{
-                    display: { md: "flex", xs: "none"},
+                    display: { lg: "flex", md: "none"},
                 }}
                 backgroundColor={theme.palette.mode === 'dark' ? colors.blackAccent[400] : '#e4e4e480'}
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
@@ -186,6 +206,9 @@ const Topbar = () => {
                 </IconButton>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
             </Box> */}
 <<<<<<< HEAD
             <Box sx={{ display: 'flex' }}>
@@ -236,6 +259,7 @@ const Topbar = () => {
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
                     <AutoAwesomeOutlinedIcon sx={{ fontSize: 'small' }} />
                 </Link>
+<<<<<<< HEAD
 =======
             </Box>
 <<<<<<< HEAD
@@ -252,6 +276,8 @@ const Topbar = () => {
 =======
             <Box sx={{ display: "flex" }}>
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
+=======
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {/* Afficher l'icône en fonction du mode de couleur */}
                     {theme.palette.mode === 'dark' ? (
@@ -263,6 +289,7 @@ const Topbar = () => {
                 <IconButton>
                     <NotificationsOutlinedIcon />
                 </IconButton>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -283,6 +310,8 @@ const Topbar = () => {
 >>>>>>> 5b0b60e (Revert "ajout de l'icone du chatbot et quelque modif dans le dashboard patient")
 =======
 >>>>>>> e0885ed (changement de quelques elements du dashboard patient)
+=======
+>>>>>>> bc820d7 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
                 <IconButton onClick={handleLogout} sx={{ color: '#f44336' }}>
                      <LogoutOutlinedIcon />
                  </IconButton>
@@ -315,13 +344,20 @@ const Topbar = () => {
 =======
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
                 <Box display="flex" justifyContent="center" alignItems="center">
+=======
+                <IconButton>
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
                     <Avatar
                         alt="Prenom nom"
                         src="/images/exemple_profile.webp"
-                        sx={{ width: 24, height: 24, ml: 1 }}
+                        sx={{ width: 24, height: 24 }}
                     />
+<<<<<<< HEAD
                 </Box>
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+=======
+                </IconButton>
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
             </Box>
         </Box>
     )

@@ -6,6 +6,7 @@ module.exports = {
   ],
   theme: {
 <<<<<<< HEAD
+<<<<<<< HEAD
     extend: {},
 =======
     extend: {
@@ -59,6 +60,9 @@ module.exports = {
       },
     },
 >>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
+=======
+    extend: {},
+>>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
   },
   plugins: [],
 <<<<<<< HEAD
