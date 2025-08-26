@@ -6,15 +6,20 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
 >>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import VideoCameraFrontOutlinedIcon from '@mui/icons-material/VideoCameraFrontOutlined';
+import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
 import ScheduleOutlinedIcon from '@mui/icons-material/ScheduleOutlined';
+import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined'
 import { tokens } from "../../theme";
 import timerRDV from "./TimerRDV";
+<<<<<<< HEAD
 <<<<<<< HEAD
 import { useDashboardStats } from "../../hooks";
 import { Alert } from "@mui/material";
 =======
 >>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+=======
+import { Link } from "react-router-dom";
+>>>>>>> ea6b6d1 (accueil du dashboard patient en se referant sur le prototype figma)
 
 const IntroDashboard = () => {
 
@@ -56,134 +61,150 @@ const IntroDashboard = () => {
 
 
     return (
-        <Box className="mt-6 mb-4 gap-7 grid 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+        <Box className="mt-6 mb-4 gap-3 grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1">
             <Box 
-                className="flex flex-col gap-2 p-4 rounded-lg justify-start items-start"
+                className="flex flex-col gap-2 p-3 rounded-lg justify-start items-start"
                 sx={{
                     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                     boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
                 }}    
             >
-                <Box className="flex flex-row gap-3 items-center">
-                    <CalendarMonthOutlinedIcon
-                        sx={{
-                            color: '#fcfcfc',
-                            fontSize: 40,
-                            borderRadius: '50%',
-                            padding: '6px',
-                            backgroundColor: colors.secondary[500],
-                        }}
-                    />
-                    <Box className="flex flex-col items-start">
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontWeight: 400,
-                                color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600],
-                            }}
-                        >
-                            Total consultations
-                        </Typography>
-                        <Typography
-                            variant="h3"
-                            sx={{
-                                fontWeight: 800,
-                                color: colors.blackAccent[100],
-                            }}
-                        >06</Typography>
-                    </Box>
-                </Box>
-                <Typography 
-                    variant="p"
-                    sx={{
-                        color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600],
+               <Box 
+                    sx={{ 
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        gap: '30px',
                     }}
-                >sur les 30 derniers jours</Typography>
+               >
+                    <Typography 
+                        variant="h6" 
+                        className="mt-1 text-left" 
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >
+                        Prochain rendez-vous
+                    </Typography>
+                    <CalendarMonthOutlinedIcon 
+                        sx={{ 
+                            padding: '4px',
+                            fontSize: '30px',
+                            borderRadius: '50%',
+                            color: colors.secondary[500], 
+                            backgroundColor: colors.secondary[900]
+                        }} 
+                    />
+               </Box>
+               <Box>
+                    <Typography 
+                        variant="h2" 
+                        sx={{ 
+                            fontWeight: 'bold', 
+                            textAlign: 'left', 
+                            marginBottom: '-4px',
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[100] : colors.blackAccent[500],
+                        }}
+                    >
+                        24 Août
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        className="text-left"
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >10:30 avec Dr Mbengue</Typography>
+               </Box>
+               <span className="w-full border-b mt-2" style={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800] }}></span>
+               <Link
+                    className="group transition-all duration-300"
+                    style={{ 
+                        color: colors.secondary[500],
+                        textDecoration: 'none',
+                        fontWeight: 600,
+                    }}
+                    to='rdv'
+               >
+                    <span>Voir plus de détail</span>
+                    <ChevronRightOutlinedIcon className="group-hover:translate-x-1 duration-300" sx={{ marginBottom: '1px' }} />
+               </Link>
             </Box>
             <Box 
-                className="flex flex-col gap-2 p-4 rounded-lg justify-start items-start"
+                className="flex flex-col gap-2 p-3 rounded-lg justify-start items-start"
                 sx={{
                     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                     boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
                 }}    
             >
-                <Box className="flex flex-row gap-3 items-center">
-                    <VideoCameraFrontOutlinedIcon
-                        sx={{
-                            color: '#fcfcfc',
-                            fontSize: 40,
-                            borderRadius: '50%',
-                            padding: '6px',
-                            backgroundColor: colors.secondary[500],
-                        }}
-                    />
-                    <Box className="flex flex-col items-start">
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontWeight: 400,
-                                color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600],
-                            }}
-                        >
-                            Total téléconsultations
-                        </Typography>
-                        <Typography
-                            variant="h3"
-                            sx={{
-                                fontWeight: 800,
-                                color: colors.blackAccent[100],
-                            }}
-                        >21</Typography>
-                    </Box>
-                </Box>
-                <Typography 
-                    variant="p"
-                    sx={{
-                        color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600],
+               <Box 
+                    sx={{ 
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        gap: '30px',
                     }}
-                >sur les 30 derniers jours</Typography>
+               >
+                    <Typography 
+                        variant="h6" 
+                        className="mt-1 text-left" 
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >
+                        Médicaments
+                    </Typography>
+                    <CalendarMonthOutlinedIcon 
+                        sx={{ 
+                            padding: '4px',
+                            fontSize: '30px',
+                            borderRadius: '50%',
+                            color: colors.secondary[500], 
+                            backgroundColor: colors.secondary[900]
+                        }} 
+                    />
+               </Box>
+               <Box>
+                    <Typography 
+                        variant="h2" 
+                        sx={{ 
+                            fontWeight: 'bold', 
+                            textAlign: 'left', 
+                            marginBottom: '-4px',
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[100] : colors.blackAccent[500]
+                        }}
+                    >
+                        4 actives
+                    </Typography>
+                    <Typography
+                        className="text-left"
+                        variant="h6"
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >prochain dans 6 heures</Typography>
+               </Box>
+               <span className="w-full border-b mt-2" style={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800] }}></span>
+               <Link
+                    className="group transition-all duration-300"
+                    style={{ 
+                        color: colors.secondary[500],
+                        textDecoration: 'none',
+                        fontWeight: 600,
+                    }}
+                    to='#'
+               >
+                    <span>Voir les prescriptions</span>
+                    <ChevronRightOutlinedIcon className="group-hover:translate-x-1 duration-300" sx={{ marginBottom: '1px' }} />
+               </Link>
             </Box>
-             <Box 
-                className="flex flex-col gap-2 p-4 rounded-lg justify-start items-start"
+            <Box 
+                className="flex flex-col gap-2 p-3 rounded-lg justify-start items-start"
                 sx={{
                     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                     boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
                 }}    
             >
-                <Box className="flex flex-row gap-3 items-center">
-                    <ScheduleOutlinedIcon
-                        sx={{
-                            color: '#fcfcfc',
-                            fontSize: 40,
-                            borderRadius: '50%',
-                            padding: '6px',
-                            backgroundColor: colors.secondary[500],
-                        }}
-                    />
-                    <Box className="flex flex-col items-start">
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontWeight: 400,
-                                color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600],
-                            }}
-                        >
-                            Prochain rendez-vous
-                        </Typography>
-                        <Typography
-                            variant="h5"
-                            sx={{
-                                fontWeight: 800,
-                                color: colors.blackAccent[100],
-                            }}
-                        >{formattedDate} </Typography>
-                    </Box>
-                </Box>
-                <Typography 
-                    variant="p"
-                    sx={{
-                        color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[600],
+               <Box 
+                    sx={{ 
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        gap: '30px',
                     }}
+<<<<<<< HEAD
                 >
 >>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
                     dans
@@ -312,6 +333,121 @@ const IntroDashboard = () => {
     )
 =======
                 </Typography>
+=======
+               >
+                    <Typography 
+                        variant="h6" 
+                        className="mt-1 text-left" 
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >
+                        Total consultations
+                    </Typography>
+                    <ContactsOutlinedIcon 
+                        sx={{ 
+                            padding: '4px',
+                            fontSize: '30px',
+                            borderRadius: '50%',
+                            color: colors.secondary[500], 
+                            backgroundColor: colors.secondary[900]
+                        }} 
+                    />
+               </Box>
+               <Box>
+                    <Typography 
+                        variant="h2" 
+                        sx={{ 
+                            fontWeight: 'bold', 
+                            textAlign: 'left', 
+                            marginBottom: '-4px',
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[100] : colors.blackAccent[500], 
+                        }}
+                    >
+                        13
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        className="text-left"
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >sur les 30 derniers jours</Typography>
+               </Box>
+               <span className="w-full border-b mt-2" style={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800] }}></span>
+               <Link
+                    className="group transition-all duration-300"
+                    style={{ 
+                        color: colors.secondary[500],
+                        textDecoration: 'none',
+                        fontWeight: 600,
+                    }}
+                    to='consultation'
+               >
+                    <span>Voir les consultations</span>
+                    <ChevronRightOutlinedIcon className="group-hover:translate-x-1 duration-300" sx={{ marginBottom: '1px' }} />
+               </Link>
+            </Box>
+            <Box 
+                className="flex flex-col gap-2 p-3 rounded-lg justify-start items-start"
+                sx={{
+                    backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
+                    boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
+                }}    
+            >
+               <Box 
+                    sx={{ 
+                        width: '100%',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        gap: '30px',
+                    }}
+               >
+                    <Typography 
+                        variant="h6" 
+                        className="mt-1 text-left" 
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >
+                        Résultats test
+                    </Typography>
+                    <CalendarMonthOutlinedIcon 
+                        sx={{ 
+                            padding: '4px',
+                            fontSize: '30px',
+                            borderRadius: '50%',
+                            color: colors.secondary[500], 
+                            backgroundColor: colors.secondary[900]
+                        }} 
+                    />
+               </Box>
+               <Box>
+                    <Typography 
+                        variant="h2" 
+                        sx={{ 
+                            fontWeight: 'bold', 
+                            textAlign: 'left', 
+                            marginBottom: '-4px',
+                            color: theme.palette.mode === 'dark' ? colors.blackAccent[100] : colors.blackAccent[500], 
+                        }}
+                    >
+                        2 nouveaux
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        className="text-left"
+                        sx={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],}}
+                    >analyse sanguine du 12 Aout</Typography>
+               </Box>
+               <span className="w-full border-b mt-2" style={{ color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800] }}></span>
+               <Link
+                    className="group transition-all duration-300"
+                    style={{ 
+                        color: colors.secondary[500],
+                        textDecoration: 'none',
+                        fontWeight: 600,
+                    }}
+                    to='#'
+               >
+                    <span>Voir les détail</span>
+                    <ChevronRightOutlinedIcon className="group-hover:translate-x-1 duration-300" sx={{ marginBottom: '1px' }} />
+               </Link>
+>>>>>>> ea6b6d1 (accueil du dashboard patient en se referant sur le prototype figma)
             </Box>
         </Box>
     )

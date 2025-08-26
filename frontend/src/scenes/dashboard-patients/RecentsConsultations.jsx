@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Avatar, Box, Button, Typography, useTheme } from "@mui/material";
+=======
+import { Avatar, Box, Typography, useTheme } from "@mui/material";
+>>>>>>> ea6b6d1 (accueil du dashboard patient en se referant sur le prototype figma)
 import { tokens } from "../../theme";
 import { useMemo } from "react";
 
@@ -187,7 +191,7 @@ export default function RecentsConsultations() {
 
     return (
         <Box
-            className={`rounded-lg md:overflow-x-scroll overflow-x-auto mb-8 p-4 bg-red-500`} 
+            className={`rounded-lg md:overflow-x-scroll overflow-x-auto mb-8 p-4`} 
             sx={{ 
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 display: 'flex',
@@ -201,18 +205,24 @@ export default function RecentsConsultations() {
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
         >
             <Typography
-                variant="h5"
+                variant="h4"
                 sx={{
                     fontWeight: 'bold',
                     textAlign: 'left',
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     color: colors.secondary[500],
+=======
+                    marginBottom: '12px',
+                    color: theme.palette.mode === 'dark' ? colors.blackAccent[100] : colors.blackAccent[500],
+>>>>>>> ea6b6d1 (accueil du dashboard patient en se referant sur le prototype figma)
                 }}
             >
-                Consultations à venir
+                Rendez-vous à venir
             </Typography>
+<<<<<<< HEAD
             
             {recentsConsultations.length === 0 ? (
                 <Typography
@@ -256,6 +266,9 @@ export default function RecentsConsultations() {
             >
                 Consultations à venir
             </Typography>
+=======
+            {/* Cas où le patients n'a pas de rendez-vous à venir */}
+>>>>>>> ea6b6d1 (accueil du dashboard patient en se referant sur le prototype figma)
             {/* <Typography
                 variant="h6"
                 className="py-10"
@@ -264,14 +277,16 @@ export default function RecentsConsultations() {
                     color: colors.blackAccent[100]
                 }}
             >
-                Aucune consultation récente
+                Aucune rendez-vous pour le moment
             </Typography> */}
-            <Box className="rounded-lg flex flex-col w-full">
+            <Box className="rounded-lg flex flex-col gap-2 w-full">
                 {recentsConsultations.map((consultation, index) => (
                     <Box 
                         key={index}
                         className="flex flex-row w-full justify-between rounded-lg items-center p-3 xs:gap-8 gap-2 duration-300"
                         sx={{
+                            border: '1px solid',
+                            borderColor: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800],
                             '&:hover': {
                                 backgroundColor: theme.palette.mode === 'dark' ? colors.secondary[800] : '#e4e4e490',
                             },
@@ -279,6 +294,7 @@ export default function RecentsConsultations() {
                     >
                         <Box className="flex flex-row gap-2">
                             <Avatar
+                                className="text-black shadow-sm font-semibold bg-transparent border border-black"
                                 alt="Dr Mbengue"
                                 src="/images/exemple_docteur.webp"
                             />
@@ -288,17 +304,14 @@ export default function RecentsConsultations() {
                                 fontSize="12px"
                             >
                                 <span style={{ fontSize: '14px' }} className="font-semibold md:text-lg">{consultation.doctor}</span>
-                                <span className="font-semibold" style={{ color: colors.secondary[500]}}>Cardiologue</span>
+                                <span 
+                                    className="font-semibold" 
+                                    style={{ 
+                                        color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],
+                                    }}
+                                >{consultation.date} - {consultation.hour}</span>
                             </Typography>
                         </Box>
-                        <Typography 
-                            className="flex flex-col gap-1 mt-1 justify-start items-start" 
-                            variant="p"
-                            fontSize="12px"
-                        >
-                            <span className="font-semibold">{consultation.date}</span>
-                            <span>{consultation.hour}</span>
-                        </Typography>
                         <Typography 
                             sx={{
                                 fontWeight: 500,
@@ -318,7 +331,7 @@ export default function RecentsConsultations() {
                     className="font-semibold p-2 px-4 rounded-md"
                     style={{
                         textDecoration: 'none',
-                        width: 'fit-content',
+                        width: '100%',
                         color: theme.palette.mode === 'dark' ? colors.blackAccent[800] : '#fcfcfc',
                         backgroundColor: colors.secondary[500], 
                         // "&:hover": {
@@ -329,11 +342,15 @@ export default function RecentsConsultations() {
                         },
                     }}
                     to='/dashboard-patient/consultation'
+<<<<<<< HEAD
                 >Voir plus</Link>
 <<<<<<< HEAD
 >>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
 =======
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
+=======
+                >Voir plus de détail</Link>
+>>>>>>> ea6b6d1 (accueil du dashboard patient en se referant sur le prototype figma)
             </Box>
         </Box>
     );

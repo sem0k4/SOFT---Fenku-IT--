@@ -170,15 +170,17 @@ import Card3 from "./ObjectFAJMA";
 =======
 import DatasVitals from "./DatasVitals";
 import RecentsConsultations from "./RecentsConsultations";
-// import TimerRDV from "./TimerRDV";
-// import Card3 from "./ObjectFAJMA";
 import { Link } from "react-router-dom";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 <<<<<<< HEAD
 >>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
 =======
 import IntroDashboard from "./IntroDashboard";
+<<<<<<< HEAD
 >>>>>>> 2f76659 (ajout de donnees vitales et d'autres cartes dans le dashboard patient)
+=======
+import ParamsHealth from "./ParamsHealth";
+>>>>>>> ea6b6d1 (accueil du dashboard patient en se referant sur le prototype figma)
 
 
 const DashboardPatient = () => {
@@ -220,8 +222,9 @@ const DashboardPatient = () => {
                 </Link>
             </Box>
             <IntroDashboard />
-            <Box className="grid grid-cols-1 md:grid-cols-2 items-center gap-y-0 gap-6">
+            <Box className="grid grid-cols-1 md:grid-cols-2 items-start gap-y-0 gap-4">
                 <RecentsConsultations />
+                <ParamsHealth />
             </Box>
             <DatasVitals />
         </Box>

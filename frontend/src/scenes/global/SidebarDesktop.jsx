@@ -64,10 +64,14 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
       onClick={() => setSelected(title)}
       style={{ 
 <<<<<<< HEAD
+<<<<<<< HEAD
         color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[500]}`,
 =======
         color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[600]}`,
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+        color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[500]}`,
+>>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
         textDecoration: "none",
         fontSize: "13px",
       }}
@@ -148,10 +152,14 @@ const SidebarDesktop = () => {
     >
       <div 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
         className={`flex ${isToggle ? 'flex-col' : 'flex-row'} border-b pb-2 gap-4 justify-between items-center px-6`}
         style={{
           borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
         }}
+<<<<<<< HEAD
       >
         <Link to="/">
           {isToggle 
@@ -171,6 +179,8 @@ const SidebarDesktop = () => {
         </Link>
 =======
         className={`flex ${isToggle ? 'flex-col' : 'flex-row'} gap-4 justify-between items-center px-6`}
+=======
+>>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
       >
 <<<<<<< HEAD
         <div 

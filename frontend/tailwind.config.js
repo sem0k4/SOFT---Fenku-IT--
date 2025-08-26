@@ -66,9 +66,15 @@ module.exports = {
   },
   plugins: [],
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
 
 // #0096b0
 =======
 }
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+}
+
+// #0096b0
+>>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)

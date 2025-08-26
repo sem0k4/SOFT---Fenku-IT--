@@ -382,10 +382,14 @@ export const ColorModeContext = createContext({
 //  https://fr.react.dev/reference/react/useMemo
 export const useMode = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     const [ mode, setMode ] = useState("light");
 =======
     const [ mode, setMode ] = useState("dark");
 >>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
+=======
+    const [ mode, setMode ] = useState("light");
+>>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
 
     const colorMode = useMemo (
         () => ({
