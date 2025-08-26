@@ -172,7 +172,7 @@ export const ColorModeContext = createContext({
 // useMemo est un Hook React qui vous permet de mettre en cache le résultat d’un calcul d’un rendu à l’autre.
 //  https://fr.react.dev/reference/react/useMemo
 export const useMode = () => {
-    const [ mode, setMode ] = useState("dark");
+    const [ mode, setMode ] = useState("light");
 
     const colorMode = useMemo (
         () => ({

@@ -32,7 +32,7 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
       to={to}
       onClick={() => setSelected(title)}
       style={{ 
-        color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[600]}`,
+        color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[500]}`,
         textDecoration: "none",
         fontSize: "13px",
       }}
@@ -76,7 +76,10 @@ const SidebarDesktop = () => {
       }} 
     >
       <div 
-        className={`flex ${isToggle ? 'flex-col' : 'flex-row'} gap-4 justify-between items-center px-6`}
+        className={`flex ${isToggle ? 'flex-col' : 'flex-row'} border-b pb-2 gap-4 justify-between items-center px-6`}
+        style={{
+          borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
+        }}
       >
         <Link to="/">
           {isToggle 

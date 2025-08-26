@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Link, useTheme } from "@mui/material";
+import { Avatar, Box, IconButton, useTheme } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import { ColorModeContext, tokens } from "../../theme";
 import { useContext } from "react";
@@ -8,6 +8,8 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import AutoAwesomeOutlinedIcon from '@mui/icons-material/AutoAwesomeOutlined';
 import SidebarMobile from "./SidebarMobile";
+import { Link } from "react-router-dom";
+import Logo1FAJMA from "../../assets/logo-fajma.png";
 
 
 const Topbar = () => {
@@ -23,7 +25,7 @@ const Topbar = () => {
     return (
         <Box 
             sx={{
-                padding: '20px 30px 10px 20px',
+                padding: '12px 30px 10px 12px',
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
             }}
@@ -44,25 +46,31 @@ const Topbar = () => {
                     <SearchIcon />
                 </IconButton>
             </Box> */}
-            <SidebarMobile />
+            <Box sx={{ display: 'flex' }}>
+                <SidebarMobile />
+                <Link className="mt-1" to="/">
+                    <img
+                    className="w-28 h-fit"
+                    src={Logo1FAJMA}
+                    alt="E-FAJMA votre partenaire de sante"
+                    />
+                </Link>
+            </Box>
             <Box sx={{ display: "flex" }}>
                 <Link
-                    className="sm:flex hidden font-semibold cursor-pointer px-3 rounded-lg  w-full gap-2 duration-300 transition-all items-center justify-center"
+                    className="sm:flex hidden bg-gradient-to-r from-cyan-700/80 from-50% to-cyan-200 font-semibold cursor-pointer px-3 rounded-lg  w-full gap-2 duration-300 transition-all items-center justify-center"
                     to="#"
-                    sx={{
+                    style={{
                         textDecoration: 'none',
                         padding: 0,
                         mr: 1,
+                        fontSize: '15px',
                         fontWeight: 500,
                         color: '#fcfcfc',
                         transition: 'all 0.3s',
-                        background: 'linear-gradient(82deg,rgba(0, 120, 141, 1) 0%, rgba(97, 221, 255, 1) 100%)', 
-                        '&:hover':{
-                            background: 'linear-gradient(82deg,rgba(97, 221, 255, 1) 0%, rgba(0, 120, 141, 1) 100%)'
-                        }
                     }}
                 >
-                    <span >Assistant IA</span>
+                    <span className="font-semibold">Assistant IA</span>
                     <AutoAwesomeOutlinedIcon sx={{ fontSize: 'small' }} />
                 </Link>
                 <IconButton onClick={colorMode.toggleColorMode}>
@@ -78,9 +86,10 @@ const Topbar = () => {
                 </IconButton>
                 <IconButton>
                     <Avatar
+                        className="text-black shadow-sm font-semibold bg-transparent border border-black"
                         alt="Prenom nom"
                         src="/images/exemple_profile.webp"
-                        sx={{ width: 24, height: 24 }}
+                        sx={{ width: 30, height: 30 }}
                     />
                 </IconButton>
             </Box>
