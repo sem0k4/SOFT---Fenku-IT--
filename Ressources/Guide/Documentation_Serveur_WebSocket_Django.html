@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Serveur WebSocket Django - FAJMA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 5px solid #3498db;
+            font-size: 1.8em;
+        }
+        
+        h3 {
+            color: #2980b9;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        h4 {
+            color: #8e44ad;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+        
+        pre code {
+            background: none;
+            color: #ecf0f1;
+            padding: 0;
+        }
+        
+        .codehilite {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .toc {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #2ecc71;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            margin-left: 0;
+        }
+        
+        .toc a {
+            color: #2980b9;
+            text-decoration: none;
+            padding: 5px 0;
+            display: block;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #3498db;
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .header-info {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            pre, .codehilite {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-info">
+            <h1>🚀 Documentation Serveur WebSocket Django</h1>
+            <p><strong>Projet FAJMA - Communication Temps Réel IoT</strong></p>
+            <p>Généré le 29/08/2025 à 19:03</p>
+        </div>
+        
+        <h1 id="documentation-du-serveur-websocket-django-projet-fajma">Documentation du Serveur WebSocket Django - Projet FAJMA</h1>
+<h2 id="vue-densemble">📋 Vue d'ensemble</h2>
+<p>Cette documentation détaille l'implémentation complète du serveur WebSocket Django pour le projet FAJMA, permettant la communication temps réel entre les dispositifs IoT (ESP32), le backend Django et le frontend React.</p>
+<h2 id="architecture-du-systeme">🏗️ Architecture du Système</h2>
+<h3 id="composants-principaux">Composants Principaux</h3>
+<ol>
+<li><strong>Django Channels</strong> : Framework pour WebSocket et communication asynchrone</li>
+<li><strong>Redis</strong> : Serveur de cache pour la gestion des canaux WebSocket</li>
+<li><strong>PostgreSQL</strong> : Base de données principale avec nouveaux modèles IoT</li>
+<li><strong>API REST</strong> : Endpoints pour la gestion des données IoT</li>
+<li><strong>Consommateurs WebSocket</strong> : Gestionnaires de connexions temps réel</li>
+</ol>
+<h3 id="flux-de-donnees">Flux de Données</h3>
+<div class="codehilite"><pre><span></span><code>ESP32 Dispositifs → WebSocket → Django Consumers → Base de Données
+                                      ↓
+Frontend React ← WebSocket ← Notifications/Alertes
+</code></pre></div>
+
+<h2 id="configuration-du-projet">🔧 Configuration du Projet</h2>
+<h3 id="1-dependances-installees">1. Dépendances Installées</h3>
+<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>channels<span class="w"> </span>channels-redis
+</code></pre></div>
+
+<h3 id="2-configuration-django-settingspy">2. Configuration Django (settings.py)</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;channels&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rest_framework&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rest_framework.authtoken&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rest_framework_simplejwt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rest_framework_simplejwt.token_blacklist&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;corsheaders&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fajma&#39;</span><span class="p">,</span>
+    <span class="c1"># ... autres apps</span>
+<span class="p">]</span>
+
+<span class="c1"># Configuration ASGI</span>
+<span class="n">ASGI_APPLICATION</span> <span class="o">=</span> <span class="s1">&#39;core.asgi.application&#39;</span>
+
+<span class="c1"># Configuration Channels avec Redis</span>
+<span class="n">CHANNEL_LAYERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;BACKEND&#39;</span><span class="p">:</span> <span class="s1">&#39;channels_redis.core.RedisChannelLayer&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;CONFIG&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;hosts&quot;</span><span class="p">:</span> <span class="p">[(</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span> <span class="mi">6379</span><span class="p">)],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+
+<span class="c1"># Paramètres WebSocket</span>
+<span class="n">WEBSOCKET_URL</span> <span class="o">=</span> <span class="s1">&#39;ws://localhost:8000/ws/&#39;</span>
+<span class="n">WEBSOCKET_HEARTBEAT_INTERVAL</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">WEBSOCKET_TIMEOUT</span> <span class="o">=</span> <span class="mi">60</span>
+</code></pre></div>
+
+<h3 id="3-configuration-asgi-asgipy">3. Configuration ASGI (asgi.py)</h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">channels.routing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProtocolTypeRouter</span><span class="p">,</span> <span class="n">URLRouter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">channels.auth</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthMiddlewareStack</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">channels.security.websocket</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllowedHostsOriginValidator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fajma.routing</span><span class="w"> </span><span class="kn">import</span> <span class="n">websocket_urlpatterns</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">ProtocolTypeRouter</span><span class="p">({</span>
+    <span class="s2">&quot;http&quot;</span><span class="p">:</span> <span class="n">get_asgi_application</span><span class="p">(),</span>
+    <span class="s2">&quot;websocket&quot;</span><span class="p">:</span> <span class="n">AllowedHostsOriginValidator</span><span class="p">(</span>
+        <span class="n">AuthMiddlewareStack</span><span class="p">(</span>
+            <span class="n">URLRouter</span><span class="p">(</span><span class="n">websocket_urlpatterns</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">),</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<h2 id="modeles-de-donnees">📊 Modèles de Données</h2>
+<h3 id="1-dispositivesiot">1. DispositivesIoT</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DispositivesIoT</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">TYPES_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;capteur_cardiaque&#39;</span><span class="p">,</span> <span class="s1">&#39;Capteur Cardiaque&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;capteur_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Capteur Température&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;capteur_pression&#39;</span><span class="p">,</span> <span class="s1">&#39;Capteur Pression Artérielle&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;capteur_oxygene&#39;</span><span class="p">,</span> <span class="s1">&#39;Capteur Oxygène&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;capteur_glycemie&#39;</span><span class="p">,</span> <span class="s1">&#39;Capteur Glycémie&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">STATUS_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;actif&#39;</span><span class="p">,</span> <span class="s1">&#39;Actif&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;inactif&#39;</span><span class="p">,</span> <span class="s1">&#39;Inactif&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;maintenance&#39;</span><span class="p">,</span> <span class="s1">&#39;En Maintenance&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;erreur&#39;</span><span class="p">,</span> <span class="s1">&#39;Erreur&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">nom</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">type_dispositif</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">TYPES_CHOICES</span><span class="p">)</span>
+    <span class="n">adresse_mac</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">adresse_ip</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GenericIPAddressField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">patient</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;Patient&#39;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">STATUS_CHOICES</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;inactif&#39;</span><span class="p">)</span>
+    <span class="n">derniere_connexion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">version_firmware</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">niveau_batterie</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">qualite_signal</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">date_creation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">date_modification</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="2-donneescapteursiot">2. DonneesCapteursIoT</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">DonneesCapteursIoT</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">dispositif</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">DispositivesIoT</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">type_donnee</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">valeur</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">unite</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">qualite_donnee</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">JSONField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="3-alertesiot">3. AlertesIoT</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AlertesIoT</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">NIVEAU_CHOICES</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;Information&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;warning&#39;</span><span class="p">,</span> <span class="s1">&#39;Avertissement&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;critical&#39;</span><span class="p">,</span> <span class="s1">&#39;Critique&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;emergency&#39;</span><span class="p">,</span> <span class="s1">&#39;Urgence&#39;</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">dispositif</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">DispositivesIoT</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">patient</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;Patient&#39;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">niveau</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">NIVEAU_CHOICES</span><span class="p">)</span>
+    <span class="n">titre</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">donnee_declencheur</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">DonneesCapteursIoT</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">acquittee</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">acquittee_par</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;Utilisateur&#39;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">SET_NULL</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">date_acquittement</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">date_creation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="4-sessionswebsocket">4. SessionsWebSocket</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">SessionsWebSocket</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">utilisateur</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;Utilisateur&#39;</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">channel_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">room_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+    <span class="n">type_connexion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">adresse_ip</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">GenericIPAddressField</span><span class="p">()</span>
+    <span class="n">user_agent</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">date_connexion</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">derniere_activite</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">active</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="routage-websocket">🔌 Routage WebSocket</h2>
+<h3 id="configuration-des-routes-routingpy">Configuration des Routes (routing.py)</h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">re_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">consumers</span>
+
+<span class="n">websocket_urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">re_path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ws/iot/(?P&lt;patient_id&gt;\w+)/$&#39;</span><span class="p">,</span> <span class="n">consumers</span><span class="o">.</span><span class="n">IoTConsumer</span><span class="o">.</span><span class="n">as_asgi</span><span class="p">()),</span>
+    <span class="n">re_path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ws/monitoring/(?P&lt;room_name&gt;\w+)/$&#39;</span><span class="p">,</span> <span class="n">consumers</span><span class="o">.</span><span class="n">MonitoringConsumer</span><span class="o">.</span><span class="n">as_asgi</span><span class="p">()),</span>
+    <span class="n">re_path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ws/alerts/$&#39;</span><span class="p">,</span> <span class="n">consumers</span><span class="o">.</span><span class="n">AlertConsumer</span><span class="o">.</span><span class="n">as_asgi</span><span class="p">()),</span>
+    <span class="n">re_path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ws/chat/(?P&lt;room_name&gt;\w+)/$&#39;</span><span class="p">,</span> <span class="n">consumers</span><span class="o">.</span><span class="n">ChatConsumer</span><span class="o">.</span><span class="n">as_asgi</span><span class="p">()),</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<h3 id="endpoints-websocket-disponibles">Endpoints WebSocket Disponibles</h3>
+<ol>
+<li><strong><code>ws/iot/&lt;patient_id&gt;/</code></strong> : Données IoT temps réel par patient</li>
+<li><strong><code>ws/monitoring/&lt;room_name&gt;/</code></strong> : Monitoring des salles</li>
+<li><strong><code>ws/alerts/</code></strong> : Système d'alertes global</li>
+<li><strong><code>ws/chat/&lt;room_name&gt;/</code></strong> : Chat temps réel</li>
+</ol>
+<h2 id="consommateurs-websocket">🎯 Consommateurs WebSocket</h2>
+<h3 id="1-iotconsumer">1. IoTConsumer</h3>
+<p><strong>Fonctionnalités :</strong>
+- Réception des données des dispositifs ESP32
+- Validation et stockage des données
+- Génération d'alertes automatiques
+- Diffusion temps réel aux clients connectés</p>
+<p><strong>Messages supportés :</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sensor_data&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device_mac&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AA:BB:CC:DD:EE:FF&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;temperature&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">36.5</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;heart_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-20T10:30:00Z&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="2-monitoringconsumer">2. MonitoringConsumer</h3>
+<p><strong>Fonctionnalités :</strong>
+- Monitoring des salles d'hôpital
+- Suivi des dispositifs actifs
+- Statistiques temps réel</p>
+<h3 id="3-alertconsumer">3. AlertConsumer</h3>
+<p><strong>Fonctionnalités :</strong>
+- Diffusion des alertes critiques
+- Gestion des accusés de réception
+- Escalade automatique</p>
+<h3 id="4-chatconsumer">4. ChatConsumer</h3>
+<p><strong>Fonctionnalités :</strong>
+- Chat temps réel entre utilisateurs
+- Historique des messages
+- Notifications de présence</p>
+<h2 id="api-rest">🔗 API REST</h2>
+<h3 id="endpoints-principaux">Endpoints Principaux</h3>
+<h4 id="dispositifs-iot">Dispositifs IoT</h4>
+<div class="codehilite"><pre><span></span><code><span class="nv">GET</span><span class="w">    </span><span class="o">/</span><span class="nv">api</span><span class="o">/</span><span class="nv">iot</span><span class="o">/</span><span class="nv">dispositifs</span><span class="o">/</span><span class="w">              </span>#<span class="w"> </span><span class="nv">Liste</span><span class="w"> </span><span class="nv">des</span><span class="w"> </span><span class="nv">dispositifs</span>
+<span class="nv">POST</span><span class="w">   </span><span class="o">/</span><span class="nv">api</span><span class="o">/</span><span class="nv">iot</span><span class="o">/</span><span class="nv">dispositifs</span><span class="o">/</span><span class="w">              </span>#<span class="w"> </span><span class="nv">Cr</span>é<span class="nv">er</span><span class="w"> </span><span class="nv">un</span><span class="w"> </span><span class="nv">dispositif</span>
+<span class="nv">GET</span><span class="w">    </span><span class="o">/</span><span class="nv">api</span><span class="o">/</span><span class="nv">iot</span><span class="o">/</span><span class="nv">dispositifs</span><span class="o">/</span>{<span class="nv">id</span>}<span class="o">/</span><span class="w">         </span>#<span class="w"> </span><span class="nv">D</span>é<span class="nv">tails</span><span class="w"> </span><span class="nv">d</span><span class="err">&#39;un dispositif</span>
+<span class="err">PUT    /api/iot/dispositifs/{id}/         # Modifier un dispositif</span>
+<span class="err">DELETE /api/iot/dispositifs/{id}/         # Supprimer un dispositif</span>
+
+<span class="err"># Actions spéciales</span>
+<span class="err">POST   /api/iot/dispositifs/{id}/status/        # Mettre à jour le statut</span>
+<span class="err">GET    /api/iot/dispositifs/{id}/latest-data/   # Dernières données</span>
+<span class="err">POST   /api/iot/dispositifs/{id}/send-command/  # Envoyer une commande</span>
+</code></pre></div>
+
+<h4 id="donnees-des-capteurs">Données des Capteurs</h4>
+<div class="codehilite"><pre><span></span><code>GET    /api/iot/donnees/                 # Liste des données
+POST   /api/iot/donnees/                 # Ajouter des données
+GET    /api/iot/donnees/statistics/      # Statistiques
+GET    /api/iot/donnees/real-time/       # Données temps réel
+</code></pre></div>
+
+<h4 id="alertes">Alertes</h4>
+<div class="codehilite"><pre><span></span><code>GET    /api/iot/alertes/                 # Liste des alertes
+POST   /api/iot/alertes/                 # Créer une alerte
+POST   /api/iot/alertes/{id}/acknowledge/ # Acquitter une alerte
+GET    /api/iot/alertes/active/          # Alertes actives
+GET    /api/iot/alertes/critical/        # Alertes critiques
+</code></pre></div>
+
+<h4 id="sessions-websocket">Sessions WebSocket</h4>
+<div class="codehilite"><pre><span></span><code>GET    /api/iot/sessions/                # Sessions actives
+GET    /api/iot/sessions/active/         # Sessions en cours
+</code></pre></div>
+
+<h2 id="demarrage-du-serveur">🚀 Démarrage du Serveur</h2>
+<h3 id="prerequis">Prérequis</h3>
+<ol>
+<li><strong>Redis Server</strong> : Doit être démarré</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>redis-server
+</code></pre></div>
+
+<ol>
+<li><strong>Base de données</strong> : Migrations appliquées</li>
+</ol>
+<div class="codehilite"><pre><span></span><code>python<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
+python<span class="w"> </span>manage.py<span class="w"> </span>migrate
+</code></pre></div>
+
+<h3 id="lancement">Lancement</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>backend
+python<span class="w"> </span>manage.py<span class="w"> </span>runserver
+</code></pre></div>
+
+<p>Le serveur sera accessible sur : <strong>http://127.0.0.1:8000/</strong></p>
+<h2 id="securite">🔒 Sécurité</h2>
+<h3 id="authentification">Authentification</h3>
+<ul>
+<li>JWT tokens pour l'API REST</li>
+<li>Authentification WebSocket via middleware</li>
+<li>Validation des permissions par endpoint</li>
+</ul>
+<h3 id="validation-des-donnees">Validation des Données</h3>
+<ul>
+<li>Validation des adresses MAC</li>
+<li>Contrôle des plages de valeurs des capteurs</li>
+<li>Sanitisation des données JSON</li>
+</ul>
+<h2 id="integration-frontend">📱 Intégration Frontend</h2>
+<h3 id="connexion-websocket-javascript">Connexion WebSocket (JavaScript)</h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">WebSocket</span><span class="p">(</span><span class="s1">&#39;ws://localhost:8000/ws/iot/patient123/&#39;</span><span class="p">);</span>
+
+<span class="nx">socket</span><span class="p">.</span><span class="nx">onopen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Connexion WebSocket établie&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">socket</span><span class="p">.</span><span class="nx">onmessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Données reçues:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">socket</span><span class="p">.</span><span class="nx">onerror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Erreur WebSocket:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h3 id="envoi-de-donnees">Envoi de Données</h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">sensorData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sensor_data&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">device_mac</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;AA:BB:CC:DD:EE:FF&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">temperature</span><span class="o">:</span><span class="w"> </span><span class="mf">36.5</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">heart_rate</span><span class="o">:</span><span class="w"> </span><span class="mf">75</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">sensorData</span><span class="p">));</span>
+</code></pre></div>
+
+<h2 id="configuration-esp32">🔧 Configuration ESP32</h2>
+<h3 id="exemple-de-code-arduino">Exemple de Code Arduino</h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;WiFi.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;WebSocketsClient.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;ArduinoJson.h&gt;</span>
+
+<span class="n">WebSocketsClient</span><span class="w"> </span><span class="n">webSocket</span><span class="p">;</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Configuration WiFi</span>
+<span class="w">    </span><span class="n">WiFi</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="s">&quot;SSID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PASSWORD&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Configuration WebSocket</span>
+<span class="w">    </span><span class="n">webSocket</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="s">&quot;192.168.1.100&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">8000</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/ws/iot/patient123/&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">webSocket</span><span class="p">.</span><span class="n">onEvent</span><span class="p">(</span><span class="n">webSocketEvent</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">webSocket</span><span class="p">.</span><span class="n">loop</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Lecture des capteurs</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readTemperature</span><span class="p">();</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">heartRate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">readHeartRate</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Envoi des données</span>
+<span class="w">    </span><span class="n">sendSensorData</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span><span class="w"> </span><span class="n">heartRate</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span><span class="w"> </span><span class="c1">// Envoi toutes les 5 secondes</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">sendSensorData</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">hr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">DynamicJsonDocument</span><span class="w"> </span><span class="n">doc</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+<span class="w">    </span><span class="n">doc</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sensor_data&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">doc</span><span class="p">[</span><span class="s">&quot;device_mac&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WiFi</span><span class="p">.</span><span class="n">macAddress</span><span class="p">();</span>
+<span class="w">    </span><span class="n">doc</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">][</span><span class="s">&quot;temperature&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp</span><span class="p">;</span>
+<span class="w">    </span><span class="n">doc</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">][</span><span class="s">&quot;heart_rate&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">doc</span><span class="p">[</span><span class="s">&quot;data&quot;</span><span class="p">][</span><span class="s">&quot;timestamp&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">millis</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">payload</span><span class="p">;</span>
+<span class="w">    </span><span class="n">serializeJson</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">);</span>
+<span class="w">    </span><span class="n">webSocket</span><span class="p">.</span><span class="n">sendTXT</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="monitoring-et-logs">📊 Monitoring et Logs</h2>
+<h3 id="logs-django">Logs Django</h3>
+<ul>
+<li>Connexions/déconnexions WebSocket</li>
+<li>Erreurs de validation des données</li>
+<li>Alertes générées</li>
+</ul>
+<h3 id="metriques-disponibles">Métriques Disponibles</h3>
+<ul>
+<li>Nombre de dispositifs connectés</li>
+<li>Fréquence des données reçues</li>
+<li>Temps de réponse des API</li>
+<li>Alertes par niveau de criticité</li>
+</ul>
+<h2 id="depannage">🐛 Dépannage</h2>
+<h3 id="problemes-courants">Problèmes Courants</h3>
+<ol>
+<li><strong>Redis non démarré</strong></li>
+<li>Erreur : <code>Connection refused</code></li>
+<li>
+<p>Solution : Démarrer Redis avec <code>redis-server</code></p>
+</li>
+<li>
+<p><strong>Migrations non appliquées</strong></p>
+</li>
+<li>Erreur : <code>Table doesn't exist</code></li>
+<li>
+<p>Solution : <code>python manage.py migrate</code></p>
+</li>
+<li>
+<p><strong>WebSocket ne se connecte pas</strong></p>
+</li>
+<li>Vérifier l'URL et le port</li>
+<li>Contrôler les paramètres CORS</li>
+<li>Vérifier l'authentification</li>
+</ol>
+<h3 id="commandes-de-debug">Commandes de Debug</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Vérifier les migrations</span>
+python<span class="w"> </span>manage.py<span class="w"> </span>showmigrations
+
+<span class="c1"># Tester la connexion Redis</span>
+redis-cli<span class="w"> </span>ping
+
+<span class="c1"># Logs en temps réel</span>
+python<span class="w"> </span>manage.py<span class="w"> </span>runserver<span class="w"> </span>--verbosity<span class="o">=</span><span class="m">2</span>
+</code></pre></div>
+
+<h2 id="evolutions-futures">📈 Évolutions Futures</h2>
+<h3 id="fonctionnalites-prevues">Fonctionnalités Prévues</h3>
+<ol>
+<li><strong>Clustering Redis</strong> pour la haute disponibilité</li>
+<li><strong>Compression des données</strong> WebSocket</li>
+<li><strong>Authentification par certificats</strong> pour ESP32</li>
+<li><strong>Dashboard de monitoring</strong> avancé</li>
+<li><strong>API GraphQL</strong> pour les requêtes complexes</li>
+</ol>
+<h3 id="optimisations">Optimisations</h3>
+<ol>
+<li><strong>Cache des données</strong> fréquemment accédées</li>
+<li><strong>Pagination</strong> des listes d'alertes</li>
+<li><strong>Archivage automatique</strong> des anciennes données</li>
+<li><strong>Load balancing</strong> pour multiple serveurs</li>
+</ol>
+<hr />
+<h2 id="support">📞 Support</h2>
+<p>Pour toute question ou problème :
+1. Consulter les logs Django
+2. Vérifier la configuration Redis
+3. Tester les endpoints API avec Postman
+4. Contrôler les connexions WebSocket avec les outils de développement du navigateur</p>
+<p><strong>Date de création :</strong> 29 Août 2025<br />
+<strong>Version :</strong> 1.0<br />
+<strong>Auteur :</strong> Assistant IA - Projet FAJMA</p>
+        
+        <hr style="margin: 40px 0; border: none; height: 2px; background: linear-gradient(to right, #3498db, #2ecc71);">
+        
+        <div class="alert alert-success">
+            <strong>✅ Documentation générée avec succès !</strong><br>
+            Cette documentation détaille l'implémentation complète du serveur WebSocket Django pour le projet FAJMA.
+            Pour toute question, consultez les sections de dépannage ou les logs du serveur.
+        </div>
+    </div>
+    
+    <button class="back-to-top" onclick="scrollToTop()" title="Retour en haut">
+        ↑
+    </button>
+    
+    <script>
+        // Bouton retour en haut
+        window.onscroll = function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        };
+        
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+        
+        // Smooth scrolling pour les liens d'ancrage
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Highlight du code
+        document.querySelectorAll('pre code').forEach((block) => {
+            // Ajouter des numéros de ligne pour les blocs de code longs
+            const lines = block.textContent.split('
+');
+            if (lines.length > 5) {
+                block.style.counterReset = 'line';
+                block.style.paddingLeft = '3em';
+            }
+        });
+        
+        console.log('📚 Documentation WebSocket Django chargée avec succès!');
+        console.log('🔗 Serveur disponible sur: http://127.0.0.1:8000/');
+    </script>
+</body>
+</html>
+        

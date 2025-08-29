@@ -1,0 +1,56 @@
+J'ai effectué plusieurs modifications pour connecter l'interface utilisateur au backend Django et afficher des données réelles. Voici le détail des travaux réalisés :
+
+## 1. Création des services API
+J'ai créé un fichier index.js dans le dossier services qui exporte tous les services API nécessaires :
+
+- api : service de base pour les requêtes HTTP
+- authService : gestion de l'authentification
+- patientService : accès aux données des patients
+- medecinService : accès aux données des médecins
+- iotService : accès aux données des capteurs IoT
+- hopitalService : accès aux données des hôpitaux
+Cette organisation facilite l'importation des services dans les composants.
+
+## 2. Création des hooks personnalisés
+J'ai créé un dossier hooks contenant plusieurs hooks personnalisés :
+
+- useVitalSigns.js : récupère les signes vitaux du patient
+- useDashboardStats.js : récupère les statistiques du tableau de bord
+- useConsultations.js : récupère les consultations (récentes ou toutes)
+- useIoTData.js : récupère les données des capteurs IoT
+Chaque hook gère :
+
+- L'état des données (chargement, erreur, données)
+- Les fonctions pour récupérer les données
+- Une option autoFetch pour charger automatiquement les données
+J'ai également créé un fichier index.js dans le dossier hooks pour faciliter l'importation des hooks.
+
+## 3. Mise à jour des composants
+J'ai modifié plusieurs composants pour utiliser les données réelles :
+
+### IntroDashboard.jsx
+- Intégration du hook useDashboardStats
+- Ajout d'indicateurs de chargement et d'erreur
+- Mise à jour des cartes avec les données réelles
+### DatasVitals.jsx
+- Intégration du hook useVitalSigns
+- Ajout d'indicateurs de chargement et d'erreur
+- Affichage des signes vitaux réels
+### RecentsConsultations.jsx
+- Intégration du hook useConsultations
+- Conservation des données statiques comme fallback
+- Transformation des données du backend au format attendu par le composant
+- Ajout d'indicateurs de chargement et d'erreur
+### TimerRDV.jsx
+- Intégration du hook useConsultations
+- Récupération de la prochaine consultation
+- Calcul du temps restant jusqu'au prochain rendez-vous
+Chaque composant a été conçu pour gérer les trois états possibles :
+
+1. 1.
+   Chargement des données (affichage d'un indicateur CircularProgress)
+2. 2.
+   Erreur lors du chargement (affichage d'une alerte)
+3. 3.
+   Affichage des données réelles
+L'application est maintenant prête à afficher les données réelles du backend tout en offrant une expérience utilisateur fluide pendant le chargement des données.
