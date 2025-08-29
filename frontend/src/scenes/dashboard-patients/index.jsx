@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+import { useState, useEffect } from "react";
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 import { Box, Typography } from "@mui/material";
 import HeaderDashboard from "../../components/shared/HeaderDashboard";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import NavSub from "./components/NavSub";
@@ -17,6 +22,42 @@ const DashboardPatient = () => {
 
     return (
         <Box className="flex flex-col">
+=======
+import DatasVitals from "./DatasVitals";
+import RecentsConsultations from "./RecentsConsultations";
+
+import TimerRDV from "./TimerRDV";
+// import Card3 from "./ObjectFAJMA";
+import { Link } from "react-router-dom";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import AuthService from "../../services/auth";
+
+
+const DashboardPatient = () => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+    
+    // État pour stocker les informations du patient
+    const [patientInfo, setPatientInfo] = useState({
+        salutation: "Bienvenue",
+        nom: "Patient"
+    });
+    
+    // Récupérer les informations du patient connecté au chargement du composant
+    useEffect(() => {
+        const userInfo = AuthService.getUserInfo();
+        if (userInfo) {
+            setPatientInfo({
+                salutation: "Bienvenue", // Salutation fixe
+                nom: userInfo.prenom || "Patient" // Utiliser le prénom de l'utilisateur ou "Patient" par défaut
+            });
+        }
+    }, []);
+    
+
+    return (
+        <Box>
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
             <Box 
                 sx={{
                     display: 'flex',
@@ -29,8 +70,13 @@ const DashboardPatient = () => {
                 }}
             >
                 <HeaderDashboard
+<<<<<<< HEAD
                     title="Dalal ak Jamm"
                     span="Fallou"
+=======
+                    title={patientInfo.salutation}
+                    span={patientInfo.nom}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
                     subtitle=""
                 />
                 <Link 
@@ -43,12 +89,25 @@ const DashboardPatient = () => {
                         backgroundColor: colors.secondary[500], 
                     }}
                 >
+<<<<<<< HEAD
                      <AddOutlinedIcon />
                     <span >Prendre un rendez-vous</span>
                 </Link>
             </Box>
             <IntroDashboard />
             <NavSub />
+=======
+                    <AddOutlinedIcon />
+                    <span>Prendre un rendez-vous</span>
+                </Link>
+            </Box>
+            <Box className="grid grid-cols-1 md:grid-cols-2 items-center gap-y-0 gap-6">
+                <RecentsConsultations />
+            </Box>
+            
+            {/* Données vitales */}
+            <DatasVitals />
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         </Box>
     )   
 }

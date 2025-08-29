@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 {
   "dependencies": {
     "recharts": "^2.15.3"
   }
 }
+=======
+{
+  "dependencies": {
+    "recharts": "^2.15.3"
+  }
+}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)

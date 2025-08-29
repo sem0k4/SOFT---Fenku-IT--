@@ -40,6 +40,42 @@ export const tokens = (mode) => ({
             800: "#0f1416",
             900: "#080a0b"
         },
+<<<<<<< HEAD
+=======
+        redAccent: {
+            100: "#ffebee",
+            200: "#ffcdd2",
+            300: "#ef9a9a",
+            400: "#e57373",
+            500: "#f44336",
+            600: "#e53935",
+            700: "#d32f2f",
+            800: "#c62828",
+            900: "#b71c1c"
+        },
+        greenAccent: {
+            100: "#e8f5e8",
+            200: "#c8e6c9",
+            300: "#a5d6a7",
+            400: "#81c784",
+            500: "#66bb6a",
+            600: "#4caf50",
+            700: "#43a047",
+            800: "#388e3c",
+            900: "#2e7d32"
+        },
+        grey: {
+            100: "#f5f5f5",
+            200: "#eeeeee",
+            300: "#e0e0e0",
+            400: "#bdbdbd",
+            500: "#9e9e9e",
+            600: "#757575",
+            700: "#616161",
+            800: "#424242",
+            900: "#212121"
+        },
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
     } 
     : {
         primary: { // Couleurs bleu pour le mode clair
@@ -77,6 +113,42 @@ export const tokens = (mode) => ({
             800: "#a8adaf",
             900: "#d4d6d7",
         },
+<<<<<<< HEAD
+=======
+        redAccent: {
+            100: "#b71c1c",
+            200: "#c62828",
+            300: "#d32f2f",
+            400: "#e53935",
+            500: "#f44336",
+            600: "#e57373",
+            700: "#ef9a9a",
+            800: "#ffcdd2",
+            900: "#ffebee"
+        },
+        greenAccent: {
+            100: "#2e7d32",
+            200: "#388e3c",
+            300: "#43a047",
+            400: "#4caf50",
+            500: "#66bb6a",
+            600: "#81c784",
+            700: "#a5d6a7",
+            800: "#c8e6c9",
+            900: "#e8f5e8"
+        },
+        grey: {
+            100: "#212121",
+            200: "#424242",
+            300: "#616161",
+            400: "#757575",
+            500: "#9e9e9e",
+            600: "#bdbdbd",
+            700: "#e0e0e0",
+            800: "#eeeeee",
+            900: "#f5f5f5"
+        },
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
     })
 
     // Si le mode est 'dark', on utilise les couleurs sombres, 
@@ -172,7 +244,11 @@ export const ColorModeContext = createContext({
 // useMemo est un Hook React qui vous permet de mettre en cache le résultat d’un calcul d’un rendu à l’autre.
 //  https://fr.react.dev/reference/react/useMemo
 export const useMode = () => {
+<<<<<<< HEAD
     const [ mode, setMode ] = useState("light");
+=======
+    const [ mode, setMode ] = useState("dark");
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 
     const colorMode = useMemo (
         () => ({

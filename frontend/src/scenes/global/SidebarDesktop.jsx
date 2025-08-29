@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+import { Link, useNavigate } from "react-router-dom";
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 import Logo1FAJMA from "../../assets/logo-fajma.png";
 import Logo2FAJMA from "../../assets/mini-logo-fajma.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -11,10 +15,18 @@ import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
 import VaccinesOutlinedIcon from '@mui/icons-material/VaccinesOutlined';
+<<<<<<< HEAD
+=======
+import LogoutIcon from '@mui/icons-material/Logout';
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
 import { useState } from "react";
 import { Box, IconButton } from "@mui/material";
+<<<<<<< HEAD
+=======
+import AuthService from "../../services/auth";
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
 
 
 
@@ -32,7 +44,11 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
       to={to}
       onClick={() => setSelected(title)}
       style={{ 
+<<<<<<< HEAD
         color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[500]}`,
+=======
+        color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[600]}`,
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         textDecoration: "none",
         fontSize: "13px",
       }}
@@ -58,6 +74,7 @@ const SidebarDesktop = () => {
   const colors = tokens(theme.palette.mode);
   const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
+<<<<<<< HEAD
   
   // window.location.href.endsWith('consultation') && setSelected('consultation')
   
@@ -65,12 +82,40 @@ const SidebarDesktop = () => {
   return (
     <Box
       className={`sticky border-r lg:block hidden top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3`}
+=======
+  const navigate = useNavigate();
+  
+  const handleLogout = async () => {
+    if (window.confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+      try {
+        await AuthService.logout();
+        navigate('/login');
+      } catch (error) {
+        console.error('Erreur lors de la déconnexion:', error);
+        // Même en cas d'erreur, on déconnecte localement
+        navigate('/login');
+      }
+    }
+  };
+  
+  // if (isMobile) {
+  //   setIsToggle(true);
+  // }
+
+  // console.log(selected);
+    
+  
+  return (
+    <Box
+      className={`sticky border-r lg:block hidden top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3 flex flex-col`}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
       sx={{ 
         backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc',
         borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
       }} 
     >
       <div 
+<<<<<<< HEAD
         className={`flex ${isToggle ? 'flex-col' : 'flex-row'} border-b pb-2 gap-4 justify-between items-center px-6`}
         style={{
           borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
@@ -92,6 +137,36 @@ const SidebarDesktop = () => {
             />
           }
         </Link>
+=======
+        className={`flex ${isToggle ? 'flex-col' : 'flex-row'} gap-4 justify-between items-center px-6`}
+      >
+        <div 
+          onClick={() => navigate('/dashboard-patient')} 
+          className="flex items-center transition-all duration-300 hover:opacity-80 hover:scale-105" 
+          style={{ cursor: 'pointer' }} 
+          title="Retour à l'accueil du tableau de bord"
+        >
+          {isToggle 
+          ? 
+            <div className="relative">
+              <img
+                className="w-28 h-fit"
+                src={Logo2FAJMA}
+                alt="E-FAJMA votre partenaire de sante"
+              />
+
+            </div>
+          :
+            <div className="relative">
+              <img
+                className="w-28 h-fit"
+                src={Logo1FAJMA}
+                alt="E-FAJMA votre partenaire de sante"
+              />
+            </div>
+          }
+        </div>
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         <IconButton>
           <MenuOutlinedIcon 
             onClick={() => setIsToggle(!isToggle)}
@@ -103,13 +178,19 @@ const SidebarDesktop = () => {
           />
         </IconButton>
       </div>
+<<<<<<< HEAD
       <div className={`flex flex-col pt-2 pl-5 items-start`}>
+=======
+      {/* Section supérieure - Menu principal */}
+      <div className={`flex flex-col pt-2 pl-5 items-start flex-1`}>
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         <Item
           title="Dashboard"
           to="/dashboard-patient"
           icon={<HomeOutlinedIcon className={`group-hover:text-white ${selected === 'Dashboard' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
         />
         <Item
           title="Téléconsultation"
@@ -117,6 +198,9 @@ const SidebarDesktop = () => {
           icon={<VideoCameraFrontOutlinedIcon className={`group-hover:text-white ${selected === 'Téléconsultation' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+=======
+          isToggle={isToggle}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         />
         <Item
           title="Consultation"
@@ -124,6 +208,10 @@ const SidebarDesktop = () => {
           icon={<ContactsOutlinedIcon className={`group-hover:text-white ${selected === 'Consultation' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
+=======
+          isToggle={isToggle}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         />
         <Item
           title="Prendre RDV"
@@ -131,6 +219,10 @@ const SidebarDesktop = () => {
           icon={<EditCalendarOutlinedIcon className={`group-hover:text-white ${selected === 'Prendre RDV' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
+=======
+          isToggle={isToggle}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         />
         <Item
           title="Messagerie"
@@ -138,6 +230,10 @@ const SidebarDesktop = () => {
           icon={<ForumOutlinedIcon className={`group-hover:text-white ${selected === 'Messagerie' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
+=======
+          isToggle={isToggle}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         />
         <Item
           title="Vaccination"
@@ -145,6 +241,10 @@ const SidebarDesktop = () => {
           icon={<VaccinesOutlinedIcon className={`group-hover:text-white ${selected === 'Vaccination' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
+=======
+          isToggle={isToggle}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         />
         <Item
           title="Documents"
@@ -152,6 +252,24 @@ const SidebarDesktop = () => {
           icon={<FolderSharedOutlinedIcon className={`group-hover:text-white ${selected === 'Documents' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
+=======
+          isToggle={isToggle}
+        />
+      </div>
+      
+      {/* Section inférieure - Services spécialisés */}
+      <div className={`flex flex-col pb-4 pl-5 items-start border-t border-opacity-20 mt-auto`}
+           style={{ borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}` }}>
+        <div className="py-2"></div>
+        <Item
+          title="Video Consultation"
+          to="/dashboard-patient/teleconsultation"
+          icon={<VideoCameraFrontOutlinedIcon className={`group-hover:text-white ${selected === 'Video Consultation' && 'text-white'}`} />}
+          selected={selected}
+          setSelected={setSelected}
+          isToggle={isToggle}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         />
         <Item
           title="FAJMA +"
@@ -159,6 +277,10 @@ const SidebarDesktop = () => {
           icon={<MedicalInformationOutlinedIcon className={`group-hover:text-white ${selected === 'FAJMA +' && 'text-white'}`} />}
           selected={selected}
           setSelected={setSelected}
+<<<<<<< HEAD
+=======
+          isToggle={isToggle}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         />
       </div>
     </Box>

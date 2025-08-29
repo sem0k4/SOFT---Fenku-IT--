@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 /* Variables globales */
 :root {
@@ -120,3 +121,127 @@ body, html {
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
 }
 
+=======
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+/* Variables globales */
+:root {
+  --bleu-logo: #0096b0;  /* Mise à jour avec la nouvelle couleur */
+  --light-bleu-logo: #86d8fe;
+  --dark-bleu-logo: #263238;  /* Mise à jour avec la nouvelle couleur */
+  /* --vert-logo: #1FBB61;
+  --vert-transparent: #edfef4;
+  --dark-vert-logo: #1A8F4C; */
+  --cyan-logo: #35D8CD;
+  --violet-logo: #6E248C;
+  --gray: #374151;
+  --white: #FFFFFF;
+  --black: #000000;
+  --light-gray: #CFD8DC;  /* Ajout de la nouvelle couleur */
+  
+  /* Styles de base */
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--gray);
+  background-color: var(--white);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@import "tailwindcss";
+
+@theme {  --font-roboto: "Roboto", sans-serif; }
+
+
+/* Réinitialisation des marges et padding pour toute la page */
+/* Styles pour assurer que le contenu s'adapte correctement */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style pour le slider plein écran */
+.slide-transition {
+  opacity: 0 !important;
+  transition: opacity 0.8s ease-in-out !important;
+}
+
+/* Ajustement pour les images de fond */
+.MuiBox-root.css-1h5pnne {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden;
+}
+
+/* Styles pour centrer les éléments dans le grid */
+.MuiGrid-root.MuiGrid-container.MuiGrid-direction-xs-row.MuiGrid-spacing-xs-3.css-11fnsb1-MuiGrid-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* Amélioration des animations pour les cartes (excluant le header) */
+.MuiPaper-root:not(.MuiAppBar-root) {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.MuiPaper-root:not(.MuiAppBar-root):hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustement pour le header transparent */
+.MuiAppBar-root {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(5px);
+}
+
+/* Centrage des éléments dans le hero section */
+.MuiTypography-h2, .MuiTypography-h5 {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ajouter à la fin du fichier */
+
+/* Style pour le composant IA - Utilise maintenant CardMedia au lieu de background-image */
+
+/* Styles pour les puces dans la section IA */
+.ia-bullet-point {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.ia-bullet-point .bullet {
+  color: var(--cyan-logo);
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+
+/* Amélioration des cartes pour les objets connectés */
+.object-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.object-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)

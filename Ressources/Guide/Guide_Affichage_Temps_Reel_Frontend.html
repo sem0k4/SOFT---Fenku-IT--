@@ -1,0 +1,1391 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide d'Affichage des Données IoT en Temps Réel - Frontend React</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            font-size: 1.8em;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+        
+        h4 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            color: #e74c3c;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            font-size: 0.9em;
+        }
+        
+        blockquote {
+            background: #ecf0f1;
+            border-left: 5px solid #3498db;
+            margin: 20px 0;
+            padding: 15px 20px;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+        }
+        
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .header-info {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+        }
+        
+        .generation-date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+                border-radius: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            pre {
+                padding: 15px;
+                font-size: 0.8em;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 8px 10px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .container {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* Syntax highlighting pour les blocs de code */
+        .codehilite {
+            background: #2c3e50 !important;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .codehilite pre {
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header-info">
+            <h1>Guide d'Affichage des Données IoT en Temps Réel</h1>
+            <p><strong>Frontend React pour le Projet FAJMA</strong></p>
+            <div class="generation-date">
+                Document généré le 29/08/2025 à 18:16
+            </div>
+        </div>
+        
+        <h1 id="guide-daffichage-des-donnees-iot-en-temps-reel-frontend-react">Guide d'Affichage des Données IoT en Temps Réel - Frontend React</h1>
+<h2 id="vue-densemble">Vue d'Ensemble</h2>
+<p>Ce guide explique comment intégrer et afficher les données ESP32 en temps réel dans le frontend React du projet FAJMA, une fois la communication établie.</p>
+<h2 id="1-architecture-de-communication-temps-reel">1. Architecture de Communication Temps Réel</h2>
+<h3 id="11-flux-de-donnees">1.1 Flux de Données</h3>
+<div class="codehilite"><pre><span></span><code>ESP32 → Serveur Django → WebSocket → Frontend React → Interface Utilisateur
+</code></pre></div>
+
+<h3 id="12-technologies-utilisees">1.2 Technologies Utilisées</h3>
+<ul>
+<li><strong>Backend</strong>: Django Channels (WebSocket)</li>
+<li><strong>Frontend</strong>: React + WebSocket API</li>
+<li><strong>Visualisation</strong>: Chart.js / Recharts</li>
+<li><strong>État</strong>: React Context / Redux</li>
+</ul>
+<h2 id="2-configuration-websocket-frontend">2. Configuration WebSocket Frontend</h2>
+<h3 id="21-service-websocket-react">2.1 Service WebSocket React</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/services/websocketService.js</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectAttempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">maxReconnectAttempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectInterval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3000</span><span class="p">;</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Map</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">connect</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">wsUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`ws://localhost:8000/ws/iot/</span><span class="si">${</span><span class="nx">deviceId</span><span class="si">}</span><span class="sb">/?token=</span><span class="si">${</span><span class="nx">token</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">WebSocket</span><span class="p">(</span><span class="nx">wsUrl</span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">onopen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;WebSocket connecté:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">);</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectAttempts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">notifyListeners</span><span class="p">(</span><span class="s1">&#39;connected&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;connected&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">            </span><span class="p">};</span>
+
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">onmessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">handleMessage</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Erreur parsing WebSocket:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">};</span>
+
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">onclose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;WebSocket fermé:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">event</span><span class="p">);</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">notifyListeners</span><span class="p">(</span><span class="s1">&#39;disconnected&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;disconnected&#39;</span><span class="w"> </span><span class="p">});</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">handleReconnect</span><span class="p">();</span>
+<span class="w">            </span><span class="p">};</span>
+
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">onerror</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Erreur WebSocket:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">notifyListeners</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="p">});</span>
+<span class="w">            </span><span class="p">};</span>
+
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Erreur connexion WebSocket:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">handleMessage</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;sensor_data&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">notifyListeners</span><span class="p">(</span><span class="s1">&#39;sensorData&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;alert&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">notifyListeners</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;heartbeat&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">notifyListeners</span><span class="p">(</span><span class="s1">&#39;heartbeat&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;diagnostics&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">notifyListeners</span><span class="p">(</span><span class="s1">&#39;diagnostics&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">default</span><span class="o">:</span>
+<span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Message WebSocket non géré:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">event</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="p">[]);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">event</span><span class="p">).</span><span class="nx">push</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+
+<span class="w">        </span><span class="c1">// Retourner une fonction de désabonnement</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">callbacks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">callbacks</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">index</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="w"> </span><span class="mf">1</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">notifyListeners</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">callbacks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">listeners</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">callbacks</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">callbacks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">callback</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">callback</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">handleReconnect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectAttempts</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">maxReconnectAttempts</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectAttempts</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Tentative de reconnexion </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectAttempts</span><span class="si">}</span><span class="sb">/</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">maxReconnectAttempts</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+
+<span class="w">            </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">this</span><span class="p">.</span><span class="nx">connect</span><span class="p">();</span>
+<span class="w">            </span><span class="p">},</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectInterval</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">reconnectAttempts</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">sendMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">readyState</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">WebSocket</span><span class="p">.</span><span class="nx">OPEN</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">message</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;WebSocket non connecté&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nx">disconnect</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="w">            </span><span class="k">this</span><span class="p">.</span><span class="nx">socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="p">();</span>
+</code></pre></div>
+
+<h3 id="22-hook-react-pour-websocket">2.2 Hook React pour WebSocket</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/hooks/useWebSocket.js</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="p">,</span><span class="w"> </span><span class="nx">useCallback</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../services/websocketService&#39;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">useWebSocket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">deviceId</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">connectionStatus</span><span class="p">,</span><span class="w"> </span><span class="nx">setConnectionStatus</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s1">&#39;disconnected&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">lastMessage</span><span class="p">,</span><span class="w"> </span><span class="nx">setLastMessage</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">sensorData</span><span class="p">,</span><span class="w"> </span><span class="nx">setSensorData</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">temperature</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">humidity</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">heartRate</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">spO2</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">alerts</span><span class="p">,</span><span class="w"> </span><span class="nx">setAlerts</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">([]);</span>
+
+<span class="w">    </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">deviceId</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">token</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Connexion WebSocket</span>
+<span class="w">            </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// Abonnements aux événements</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">unsubscribeConnected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;connected&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">setConnectionStatus</span><span class="p">(</span><span class="s1">&#39;connected&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">unsubscribeDisconnected</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;disconnected&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">setConnectionStatus</span><span class="p">(</span><span class="s1">&#39;disconnected&#39;</span><span class="p">);</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">unsubscribeError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">setConnectionStatus</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Erreur WebSocket:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">unsubscribeSensorData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;sensorData&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">setSensorData</span><span class="p">({</span>
+<span class="w">                    </span><span class="nx">temperature</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">temperature</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">humidity</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">humidity</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">heartRate</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">heart_rate</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">spO2</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">spo2</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span>
+<span class="w">                </span><span class="p">});</span>
+<span class="w">                </span><span class="nx">setLastMessage</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">unsubscribeAlert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;alert&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nx">alert</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">setAlerts</span><span class="p">(</span><span class="nx">prev</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">                    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+<span class="w">                    </span><span class="p">...</span><span class="nx">alert</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">()</span>
+<span class="w">                </span><span class="p">},</span><span class="w"> </span><span class="p">...</span><span class="nx">prev</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">)]);</span><span class="w"> </span><span class="c1">// Garder seulement les 10 dernières alertes</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">            </span><span class="c1">// Nettoyage</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">unsubscribeConnected</span><span class="p">();</span>
+<span class="w">                </span><span class="nx">unsubscribeDisconnected</span><span class="p">();</span>
+<span class="w">                </span><span class="nx">unsubscribeError</span><span class="p">();</span>
+<span class="w">                </span><span class="nx">unsubscribeSensorData</span><span class="p">();</span>
+<span class="w">                </span><span class="nx">unsubscribeAlert</span><span class="p">();</span>
+<span class="w">                </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+<span class="w">            </span><span class="p">};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">deviceId</span><span class="p">,</span><span class="w"> </span><span class="nx">token</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sendCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useCallback</span><span class="p">((</span><span class="nx">command</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">WebSocketService</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;command&#39;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="nx">command</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">[]);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">connectionStatus</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">sensorData</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">alerts</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">lastMessage</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">sendCommand</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h2 id="3-composants-daffichage-temps-reel">3. Composants d'Affichage Temps Réel</h2>
+<h3 id="31-composant-principal-de-monitoring">3.1 Composant Principal de Monitoring</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/components/IoTMonitoring.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useWebSocket</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../hooks/useWebSocket&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">SensorCard</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./SensorCard&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">RealTimeChart</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./RealTimeChart&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">AlertPanel</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./AlertPanel&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">ConnectionStatus</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./ConnectionStatus&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">IoTMonitoring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">deviceId</span><span class="p">,</span><span class="w"> </span><span class="nx">patientId</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">authToken</span><span class="p">,</span><span class="w"> </span><span class="nx">setAuthToken</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">connectionStatus</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">,</span><span class="w"> </span><span class="nx">alerts</span><span class="p">,</span><span class="w"> </span><span class="nx">sendCommand</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useWebSocket</span><span class="p">(</span><span class="nx">deviceId</span><span class="p">,</span><span class="w"> </span><span class="nx">authToken</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">historicalData</span><span class="p">,</span><span class="w"> </span><span class="nx">setHistoricalData</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">({</span>
+<span class="w">        </span><span class="nx">temperature</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nx">heartRate</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nx">spO2</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">        </span><span class="nx">timestamps</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="c1">// Récupérer le token d&#39;authentification</span>
+<span class="w">    </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;authToken&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">setAuthToken</span><span class="p">(</span><span class="nx">token</span><span class="p">);</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">[]);</span>
+
+<span class="w">    </span><span class="c1">// Mettre à jour les données historiques</span>
+<span class="w">    </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">setHistoricalData</span><span class="p">(</span><span class="nx">prev</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">newData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">temperature</span><span class="o">:</span><span class="w"> </span><span class="p">[...</span><span class="nx">prev</span><span class="p">.</span><span class="nx">temperature</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">temperature</span><span class="p">].</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">50</span><span class="p">),</span>
+<span class="w">                    </span><span class="nx">heartRate</span><span class="o">:</span><span class="w"> </span><span class="p">[...</span><span class="nx">prev</span><span class="p">.</span><span class="nx">heartRate</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">heartRate</span><span class="p">].</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">50</span><span class="p">),</span>
+<span class="w">                    </span><span class="nx">spO2</span><span class="o">:</span><span class="w"> </span><span class="p">[...</span><span class="nx">prev</span><span class="p">.</span><span class="nx">spO2</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">spO2</span><span class="p">].</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">50</span><span class="p">),</span>
+<span class="w">                    </span><span class="nx">timestamps</span><span class="o">:</span><span class="w"> </span><span class="p">[...</span><span class="nx">prev</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">].</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mf">50</span><span class="p">)</span>
+<span class="w">                </span><span class="p">};</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="nx">newData</span><span class="p">;</span>
+<span class="w">            </span><span class="p">});</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">sensorData</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSendCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">command</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">sendCommand</span><span class="p">({</span>
+<span class="w">            </span><span class="nx">device_id</span><span class="o">:</span><span class="w"> </span><span class="nx">deviceId</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">command</span><span class="o">:</span><span class="w"> </span><span class="nx">command</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">toISOString</span><span class="p">()</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;iot-monitoring&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;monitoring-header&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Monitoring</span><span class="w"> </span><span class="nx">IoT</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Patient</span><span class="w"> </span><span class="p">{</span><span class="nx">patientId</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h2&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">ConnectionStatus</span><span class="w"> </span><span class="nx">status</span><span class="o">=</span><span class="p">{</span><span class="nx">connectionStatus</span><span class="p">}</span><span class="w"> </span><span class="nx">deviceId</span><span class="o">=</span><span class="p">{</span><span class="nx">deviceId</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-grid&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">SensorCard</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Température&quot;</span>
+<span class="w">                    </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">temperature</span><span class="p">}</span>
+<span class="w">                    </span><span class="nx">unit</span><span class="o">=</span><span class="s2">&quot;°C&quot;</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">=</span><span class="s2">&quot;🌡️&quot;</span>
+<span class="w">                    </span><span class="nx">status</span><span class="o">=</span><span class="p">{</span><span class="nx">getSensorStatus</span><span class="p">(</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">temperature</span><span class="p">)}</span>
+<span class="w">                    </span><span class="nx">lastUpdate</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">}</span>
+<span class="w">                </span><span class="o">/&gt;</span>
+
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">SensorCard</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Rythme Cardiaque&quot;</span>
+<span class="w">                    </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">heartRate</span><span class="p">}</span>
+<span class="w">                    </span><span class="nx">unit</span><span class="o">=</span><span class="s2">&quot;bpm&quot;</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">=</span><span class="s2">&quot;❤️&quot;</span>
+<span class="w">                    </span><span class="nx">status</span><span class="o">=</span><span class="p">{</span><span class="nx">getSensorStatus</span><span class="p">(</span><span class="s1">&#39;heartRate&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">heartRate</span><span class="p">)}</span>
+<span class="w">                    </span><span class="nx">lastUpdate</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">}</span>
+<span class="w">                </span><span class="o">/&gt;</span>
+
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">SensorCard</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Saturation O2&quot;</span>
+<span class="w">                    </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">spO2</span><span class="p">}</span>
+<span class="w">                    </span><span class="nx">unit</span><span class="o">=</span><span class="s2">&quot;%&quot;</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">=</span><span class="s2">&quot;🫁&quot;</span>
+<span class="w">                    </span><span class="nx">status</span><span class="o">=</span><span class="p">{</span><span class="nx">getSensorStatus</span><span class="p">(</span><span class="s1">&#39;spO2&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">spO2</span><span class="p">)}</span>
+<span class="w">                    </span><span class="nx">lastUpdate</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">}</span>
+<span class="w">                </span><span class="o">/&gt;</span>
+
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">SensorCard</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Humidité&quot;</span>
+<span class="w">                    </span><span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">humidity</span><span class="p">}</span>
+<span class="w">                    </span><span class="nx">unit</span><span class="o">=</span><span class="s2">&quot;%&quot;</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">=</span><span class="s2">&quot;💧&quot;</span>
+<span class="w">                    </span><span class="nx">status</span><span class="o">=</span><span class="p">{</span><span class="nx">getSensorStatus</span><span class="p">(</span><span class="s1">&#39;humidity&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">humidity</span><span class="p">)}</span>
+<span class="w">                    </span><span class="nx">lastUpdate</span><span class="o">=</span><span class="p">{</span><span class="nx">sensorData</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">}</span>
+<span class="w">                </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;charts-section&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">RealTimeChart</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Évolution Temps Réel&quot;</span>
+<span class="w">                    </span><span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">historicalData</span><span class="p">}</span>
+<span class="w">                    </span><span class="nx">height</span><span class="o">=</span><span class="p">{</span><span class="mf">400</span><span class="p">}</span>
+<span class="w">                </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alerts-section&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">AlertPanel</span><span class="w"> </span><span class="nx">alerts</span><span class="o">=</span><span class="p">{</span><span class="nx">alerts</span><span class="p">}</span><span class="w"> </span><span class="nx">onDismiss</span><span class="o">=</span><span class="p">{(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="c1">// Gérer la suppression d&#39;alerte</span>
+<span class="w">                </span><span class="p">}}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;controls-section&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span>
+<span class="w">                    </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleSendCommand</span><span class="p">(</span><span class="s1">&#39;calibrate&#39;</span><span class="p">)}</span>
+<span class="w">                    </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-primary&quot;</span>
+<span class="w">                </span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="nx">Calibrer</span><span class="w"> </span><span class="nx">Capteurs</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span>
+<span class="w">                    </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">handleSendCommand</span><span class="p">(</span><span class="s1">&#39;reset&#39;</span><span class="p">)}</span>
+<span class="w">                    </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-secondary&quot;</span>
+<span class="w">                </span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="nx">Redémarrer</span><span class="w"> </span><span class="nx">ESP32</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Fonction utilitaire pour déterminer le statut du capteur</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">getSensorStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">type</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;offline&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;temperature&#39;</span><span class="o">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">35</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">39</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">34</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">40</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;critical&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;heartRate&#39;</span><span class="o">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">60</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">40</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">120</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;critical&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;spO2&#39;</span><span class="o">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">95</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">90</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;critical&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">IoTMonitoring</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="32-composant-carte-de-capteur">3.2 Composant Carte de Capteur</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/components/SensorCard.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;./SensorCard.css&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">SensorCard</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">unit</span><span class="p">,</span><span class="w"> </span><span class="nx">icon</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">lastUpdate</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">formatValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">val</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;--&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">val</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">val</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">val</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">formatLastUpdate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">timestamp</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">timestamp</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;Jamais&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">now</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">60000</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;À l\&#39;instant&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">diff</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">3600000</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">diff</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">60000</span><span class="p">)</span><span class="si">}</span><span class="sb"> min`</span><span class="p">;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">toLocaleTimeString</span><span class="p">();</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`sensor-card sensor-card--</span><span class="si">${</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__header&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__icon&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">icon</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">h3</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__title&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h3&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__value&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__number&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">formatValue</span><span class="p">(</span><span class="nx">value</span><span class="p">)}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__unit&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">unit</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__footer&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`sensor-card__status sensor-card__status--</span><span class="si">${</span><span class="nx">status</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">{</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s1">&#39;✅ Normal&#39;</span><span class="p">}</span>
+<span class="w">                    </span><span class="p">{</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s1">&#39;⚠️ Attention&#39;</span><span class="p">}</span>
+<span class="w">                    </span><span class="p">{</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;critical&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s1">&#39;🚨 Critique&#39;</span><span class="p">}</span>
+<span class="w">                    </span><span class="p">{</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;offline&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s1">&#39;❌ Hors ligne&#39;</span><span class="p">}</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;sensor-card__timestamp&quot;</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">{</span><span class="nx">formatLastUpdate</span><span class="p">(</span><span class="nx">lastUpdate</span><span class="p">)}</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">SensorCard</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="33-graphique-temps-reel">3.3 Graphique Temps Réel</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/components/RealTimeChart.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">LineChart</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Line</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">XAxis</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">YAxis</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">CartesianGrid</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Tooltip</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">Legend</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">ResponsiveContainer</span>
+<span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;recharts&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">RealTimeChart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">title</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">,</span><span class="w"> </span><span class="nx">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">300</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Transformer les données pour Recharts</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">chartData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">timestamp</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">        </span><span class="nx">time</span><span class="o">:</span><span class="w"> </span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">toLocaleTimeString</span><span class="p">(),</span>
+<span class="w">        </span><span class="nx">temperature</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">temperature</span><span class="p">[</span><span class="nx">index</span><span class="p">],</span>
+<span class="w">        </span><span class="nx">heartRate</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">heartRate</span><span class="p">[</span><span class="nx">index</span><span class="p">],</span>
+<span class="w">        </span><span class="nx">spO2</span><span class="o">:</span><span class="w"> </span><span class="nx">data</span><span class="p">.</span><span class="nx">spO2</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}));</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">CustomTooltip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">active</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">active</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;custom-tooltip&quot;</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">p</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;tooltip-label&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="sb">`Heure: </span><span class="si">${</span><span class="nx">label</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+<span class="w">                    </span><span class="p">{</span><span class="nx">payload</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">entry</span><span class="p">,</span><span class="w"> </span><span class="nx">index</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="nx">p</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span><span class="w"> </span><span class="nx">style</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="nx">entry</span><span class="p">.</span><span class="nx">color</span><span class="w"> </span><span class="p">}}</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="p">{</span><span class="sb">`</span><span class="si">${</span><span class="nx">entry</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">: </span><span class="si">${</span><span class="nx">entry</span><span class="p">.</span><span class="nx">value</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">entry</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;--&#39;</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span>
+<span class="w">                            </span><span class="p">{</span><span class="nx">entry</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;temperature&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s1">&#39;°C&#39;</span><span class="p">}</span>
+<span class="w">                            </span><span class="p">{</span><span class="nx">entry</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;heartRate&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s1">&#39; bpm&#39;</span><span class="p">}</span>
+<span class="w">                            </span><span class="p">{</span><span class="nx">entry</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;spO2&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s1">&#39;%&#39;</span><span class="p">}</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+<span class="w">                    </span><span class="p">))}</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;realtime-chart&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">h3</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;chart-title&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/h3&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">ResponsiveContainer</span><span class="w"> </span><span class="nx">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="w"> </span><span class="nx">height</span><span class="o">=</span><span class="p">{</span><span class="nx">height</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">LineChart</span><span class="w"> </span><span class="nx">data</span><span class="o">=</span><span class="p">{</span><span class="nx">chartData</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">CartesianGrid</span><span class="w"> </span><span class="nx">strokeDasharray</span><span class="o">=</span><span class="s2">&quot;3 3&quot;</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">XAxis</span><span class="w"> </span>
+<span class="w">                        </span><span class="nx">dataKey</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="w"> </span>
+<span class="w">                        </span><span class="nx">tick</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="mf">12</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                        </span><span class="nx">interval</span><span class="o">=</span><span class="s2">&quot;preserveStartEnd&quot;</span>
+<span class="w">                    </span><span class="o">/&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">YAxis</span><span class="w"> </span><span class="nx">tick</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">fontSize</span><span class="o">:</span><span class="w"> </span><span class="mf">12</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">Tooltip</span><span class="w"> </span><span class="nx">content</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">CustomTooltip</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">Legend</span><span class="w"> </span><span class="o">/&gt;</span>
+
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">Line</span>
+<span class="w">                        </span><span class="nx">type</span><span class="o">=</span><span class="s2">&quot;monotone&quot;</span>
+<span class="w">                        </span><span class="nx">dataKey</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span>
+<span class="w">                        </span><span class="nx">stroke</span><span class="o">=</span><span class="s2">&quot;#ff6b6b&quot;</span>
+<span class="w">                        </span><span class="nx">strokeWidth</span><span class="o">=</span><span class="p">{</span><span class="mf">2</span><span class="p">}</span>
+<span class="w">                        </span><span class="nx">dot</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#ff6b6b&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                        </span><span class="nx">name</span><span class="o">=</span><span class="s2">&quot;Température&quot;</span>
+<span class="w">                        </span><span class="nx">connectNulls</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span>
+<span class="w">                    </span><span class="o">/&gt;</span>
+
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">Line</span>
+<span class="w">                        </span><span class="nx">type</span><span class="o">=</span><span class="s2">&quot;monotone&quot;</span>
+<span class="w">                        </span><span class="nx">dataKey</span><span class="o">=</span><span class="s2">&quot;heartRate&quot;</span>
+<span class="w">                        </span><span class="nx">stroke</span><span class="o">=</span><span class="s2">&quot;#4ecdc4&quot;</span>
+<span class="w">                        </span><span class="nx">strokeWidth</span><span class="o">=</span><span class="p">{</span><span class="mf">2</span><span class="p">}</span>
+<span class="w">                        </span><span class="nx">dot</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#4ecdc4&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                        </span><span class="nx">name</span><span class="o">=</span><span class="s2">&quot;Rythme Cardiaque&quot;</span>
+<span class="w">                        </span><span class="nx">connectNulls</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span>
+<span class="w">                    </span><span class="o">/&gt;</span>
+
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">Line</span>
+<span class="w">                        </span><span class="nx">type</span><span class="o">=</span><span class="s2">&quot;monotone&quot;</span>
+<span class="w">                        </span><span class="nx">dataKey</span><span class="o">=</span><span class="s2">&quot;spO2&quot;</span>
+<span class="w">                        </span><span class="nx">stroke</span><span class="o">=</span><span class="s2">&quot;#45b7d1&quot;</span>
+<span class="w">                        </span><span class="nx">strokeWidth</span><span class="o">=</span><span class="p">{</span><span class="mf">2</span><span class="p">}</span>
+<span class="w">                        </span><span class="nx">dot</span><span class="o">=</span><span class="p">{{</span><span class="w"> </span><span class="nx">fill</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;#45b7d1&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">strokeWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">r</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                        </span><span class="nx">name</span><span class="o">=</span><span class="s2">&quot;SpO2&quot;</span>
+<span class="w">                        </span><span class="nx">connectNulls</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span>
+<span class="w">                    </span><span class="o">/&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/LineChart&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/ResponsiveContainer&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">RealTimeChart</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="34-panneau-dalertes">3.4 Panneau d'Alertes</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/components/AlertPanel.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;./AlertPanel.css&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">AlertPanel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">alerts</span><span class="p">,</span><span class="w"> </span><span class="nx">onDismiss</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">getAlertIcon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;critical&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;🚨&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;⚠️&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;info&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;ℹ️&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;📢&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">getAlertClass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;critical&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;alert--critical&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;alert--warning&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;info&#39;</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;alert--info&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;alert--default&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">alerts</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert-panel&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="nx">Alertes</span><span class="o">&lt;</span><span class="err">/h3&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;no-alerts&quot;</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;no-alerts__icon&quot;</span><span class="o">&gt;</span><span class="err">✅</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Aucune</span><span class="w"> </span><span class="nx">alerte</span><span class="w"> </span><span class="nx">active</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert-panel&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="nx">Alertes</span><span class="w"> </span><span class="p">({</span><span class="nx">alerts</span><span class="p">.</span><span class="nx">length</span><span class="p">})</span><span class="o">&lt;</span><span class="err">/h3&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alerts-list&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">{</span><span class="nx">alerts</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">alert</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">alert</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`alert </span><span class="si">${</span><span class="nx">getAlertClass</span><span class="p">(</span><span class="nx">alert</span><span class="p">.</span><span class="nx">alert_type</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert__header&quot;</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert__icon&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">getAlertIcon</span><span class="p">(</span><span class="nx">alert</span><span class="p">.</span><span class="nx">alert_type</span><span class="p">)}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert__type&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">alert</span><span class="p">.</span><span class="nx">alert_type</span><span class="o">?</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert__time&quot;</span><span class="o">&gt;</span>
+<span class="w">                                </span><span class="p">{</span><span class="nx">alert</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">.</span><span class="nx">toLocaleTimeString</span><span class="p">()}</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">                        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert__message&quot;</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="p">{</span><span class="nx">alert</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">                        </span><span class="p">{</span><span class="nx">alert</span><span class="p">.</span><span class="nx">device_id</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert__device&quot;</span><span class="o">&gt;</span>
+<span class="w">                                </span><span class="nx">Dispositif</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">alert</span><span class="p">.</span><span class="nx">device_id</span><span class="p">}</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">                        </span><span class="p">)}</span>
+
+<span class="w">                        </span><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span>
+<span class="w">                            </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;alert__dismiss&quot;</span>
+<span class="w">                            </span><span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">onDismiss</span><span class="p">(</span><span class="nx">alert</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span>
+<span class="w">                            </span><span class="nx">title</span><span class="o">=</span><span class="s2">&quot;Ignorer cette alerte&quot;</span>
+<span class="w">                        </span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="err">✕</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">                </span><span class="p">))}</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">AlertPanel</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="35-statut-de-connexion">3.5 Statut de Connexion</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/components/ConnectionStatus.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="s1">&#39;./ConnectionStatus.css&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">ConnectionStatus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">({</span><span class="w"> </span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="nx">deviceId</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">getStatusInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">status</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;connected&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;🟢&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Connecté&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="kd">class</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;status--connected&#39;</span>
+<span class="w">                </span><span class="p">};</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;disconnected&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;🔴&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Déconnecté&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="kd">class</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;status--disconnected&#39;</span>
+<span class="w">                </span><span class="p">};</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;connecting&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;🟡&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Connexion...&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="kd">class</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;status--connecting&#39;</span>
+<span class="w">                </span><span class="p">};</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s1">&#39;error&#39;</span><span class="o">:</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;❌&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Erreur&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="kd">class</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;status--error&#39;</span>
+<span class="w">                </span><span class="p">};</span>
+<span class="w">            </span><span class="k">default</span><span class="o">:</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">icon</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;⚪&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Inconnu&#39;</span><span class="p">,</span>
+<span class="w">                    </span><span class="kd">class</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;status--unknown&#39;</span>
+<span class="w">                </span><span class="p">};</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">statusInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getStatusInfo</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="sb">`connection-status </span><span class="si">${</span><span class="nx">statusInfo</span><span class="p">.</span><span class="kd">class</span><span class="si">}</span><span class="sb">`</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;status__icon&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">statusInfo</span><span class="p">.</span><span class="nx">icon</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;status__info&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;status__text&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">statusInfo</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">span</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;status__device&quot;</span><span class="o">&gt;</span><span class="nx">ESP32</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">deviceId</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/span&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">ConnectionStatus</span><span class="p">;</span>
+</code></pre></div>
+
+<h2 id="4-styles-css">4. Styles CSS</h2>
+<h3 id="41-sensorcardcss">4.1 SensorCard.css</h3>
+<div class="codehilite"><pre><span></span><code><span class="c">/* src/components/SensorCard.css */</span>
+<span class="p">.</span><span class="nc">sensor-card</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="w">    </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">all</span><span class="w"> </span><span class="mf">0.3</span><span class="kt">s</span><span class="w"> </span><span class="kc">ease</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border-left</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#e0e0e0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card--normal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">border-left-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#4caf50</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card--warning</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">border-left-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ff9800</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff8e1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card--critical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">border-left-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#f44336</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffebee</span><span class="p">;</span>
+<span class="w">    </span><span class="k">animation</span><span class="p">:</span><span class="w"> </span><span class="n">pulse</span><span class="w"> </span><span class="mi">2</span><span class="kt">s</span><span class="w"> </span><span class="kc">infinite</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card--offline</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">border-left-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#9e9e9e</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#f5f5f5</span><span class="p">;</span>
+<span class="w">    </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="k">keyframes</span><span class="w"> </span><span class="nt">pulse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">0</span><span class="o">%</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">244</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">50</span><span class="o">%</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">244</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="nt">100</span><span class="o">%</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">244</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__header</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">    </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__icon</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__title</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#333</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__value</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">    </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">baseline</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__number</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">700</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#2c3e50</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__unit</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#7f8c8d</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__footer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">    </span><span class="k">justify-content</span><span class="p">:</span><span class="w"> </span><span class="kc">space-between</span><span class="p">;</span>
+<span class="w">    </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__status</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__status--normal</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#e8f5e8</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#4caf50</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__status--warning</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff3e0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ff9800</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__status--critical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffebee</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#f44336</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__status--offline</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#f5f5f5</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#9e9e9e</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">sensor-card__timestamp</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#95a5a6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="42-alertpanelcss">4.2 AlertPanel.css</h3>
+<div class="codehilite"><pre><span></span><code><span class="c">/* src/components/AlertPanel.css */</span>
+<span class="p">.</span><span class="nc">alert-panel</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert-panel</span><span class="w"> </span><span class="nt">h3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">15</span><span class="kt">px</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#2c3e50</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">no-alerts</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="w"> </span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#7f8c8d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">no-alerts__icon</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">48</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alerts-list</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">max-height</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">overflow-y</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="kc">white</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#e0e0e0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border-left</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#e0e0e0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert--critical</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">border-left-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#f44336</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffebee</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert--warning</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">border-left-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ff9800</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff8e1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert--info</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">border-left-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#2196f3</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#e3f2fd</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__header</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">flex</span><span class="p">;</span>
+<span class="w">    </span><span class="k">align-items</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__icon</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__type</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-right</span><span class="p">:</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__time</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#7f8c8d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__message</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#2c3e50</span><span class="p">;</span>
+<span class="w">    </span><span class="k">margin-bottom</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__device</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#7f8c8d</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__dismiss</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span>
+<span class="w">    </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">right</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">    </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+<span class="w">    </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#bdc3c7</span><span class="p">;</span>
+<span class="w">    </span><span class="k">transition</span><span class="p">:</span><span class="w"> </span><span class="kc">color</span><span class="w"> </span><span class="mf">0.2</span><span class="kt">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">.</span><span class="nc">alert__dismiss</span><span class="p">:</span><span class="nd">hover</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#e74c3c</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="5-integration-dans-lapplication">5. Intégration dans l'Application</h2>
+<h3 id="51-page-de-monitoring-patient">5.1 Page de Monitoring Patient</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/pages/PatientMonitoring.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useParams</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-router-dom&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">IoTMonitoring</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../components/IoTMonitoring&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">PatientInfo</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../components/PatientInfo&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">getPatientById</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../services/patientService&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">PatientMonitoring</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">patientId</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useParams</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">patient</span><span class="p">,</span><span class="w"> </span><span class="nx">setPatient</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">loading</span><span class="p">,</span><span class="w"> </span><span class="nx">setLoading</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">fetchPatient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">patientData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">getPatientById</span><span class="p">(</span><span class="nx">patientId</span><span class="p">);</span>
+<span class="w">                </span><span class="nx">setPatient</span><span class="p">(</span><span class="nx">patientData</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Erreur chargement patient:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="nx">fetchPatient</span><span class="p">();</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">patientId</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">loading</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;loading&quot;</span><span class="o">&gt;</span><span class="nx">Chargement</span><span class="p">...</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">patient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="o">&gt;</span><span class="nx">Patient</span><span class="w"> </span><span class="nx">non</span><span class="w"> </span><span class="nx">trouvé</span><span class="o">&lt;</span><span class="err">/div&gt;;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;patient-monitoring-page&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">div</span><span class="w"> </span><span class="nx">className</span><span class="o">=</span><span class="s2">&quot;page-header&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Monitoring</span><span class="w"> </span><span class="nx">Patient</span><span class="o">&lt;</span><span class="err">/h1&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">PatientInfo</span><span class="w"> </span><span class="nx">patient</span><span class="o">=</span><span class="p">{</span><span class="nx">patient</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">IoTMonitoring</span><span class="w"> </span>
+<span class="w">                </span><span class="nx">deviceId</span><span class="o">=</span><span class="p">{</span><span class="nx">patient</span><span class="p">.</span><span class="nx">device_id</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;ESP32_001&#39;</span><span class="p">}</span><span class="w"> </span>
+<span class="w">                </span><span class="nx">patientId</span><span class="o">=</span><span class="p">{</span><span class="nx">patientId</span><span class="p">}</span>
+<span class="w">            </span><span class="o">/&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">PatientMonitoring</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="52-configuration-des-routes">5.2 Configuration des Routes</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// src/App.jsx</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">BrowserRouter</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">Router</span><span class="p">,</span><span class="w"> </span><span class="nx">Routes</span><span class="p">,</span><span class="w"> </span><span class="nx">Route</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-router-dom&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">PatientMonitoring</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./pages/PatientMonitoring&#39;</span><span class="p">;</span>
+
+<span class="kd">function</span><span class="w"> </span><span class="nx">App</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="nx">Router</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="nx">Routes</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="nx">Route</span><span class="w"> </span><span class="nx">path</span><span class="o">=</span><span class="s2">&quot;/patient/:patientId/monitoring&quot;</span><span class="w"> </span><span class="nx">element</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">PatientMonitoring</span><span class="w"> </span><span class="o">/&gt;</span><span class="p">}</span><span class="w"> </span><span class="o">/&gt;</span>
+<span class="w">                </span><span class="p">{</span><span class="cm">/* Autres routes */</span><span class="p">}</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="err">/Routes&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="err">/Router&gt;</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">App</span><span class="p">;</span>
+</code></pre></div>
+
+<h2 id="6-installation-des-dependances">6. Installation des Dépendances</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Installer les dépendances nécessaires</span>
+npm<span class="w"> </span>install<span class="w"> </span>recharts
+npm<span class="w"> </span>install<span class="w"> </span>react-router-dom
+</code></pre></div>
+
+<h2 id="7-configuration-backend-django">7. Configuration Backend Django</h2>
+<h3 id="71-consumer-websocket">7.1 Consumer WebSocket</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># backend/fajma/consumers.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">channels.generic.websocket</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncWebsocketConsumer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">channels.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">database_sync_to_async</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AnonymousUser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">SensorData</span><span class="p">,</span> <span class="n">Patient</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">IoTConsumer</span><span class="p">(</span><span class="n">AsyncWebsocketConsumer</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">[</span><span class="s1">&#39;url_route&#39;</span><span class="p">][</span><span class="s1">&#39;kwargs&#39;</span><span class="p">][</span><span class="s1">&#39;device_id&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">room_group_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;iot_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">device_id</span><span class="si">}</span><span class="s1">&#39;</span>
+
+        <span class="c1"># Rejoindre le groupe</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_layer</span><span class="o">.</span><span class="n">group_add</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">room_group_name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">channel_name</span>
+        <span class="p">)</span>
+
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+
+        <span class="c1"># Envoyer un message de confirmation</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">text_data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;connection_established&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;device_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_id</span>
+        <span class="p">}))</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">close_code</span><span class="p">):</span>
+        <span class="c1"># Quitter le groupe</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel_layer</span><span class="o">.</span><span class="n">group_discard</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">room_group_name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">channel_name</span>
+        <span class="p">)</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">receive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_data</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">text_data</span><span class="p">)</span>
+            <span class="n">message_type</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">message_type</span> <span class="o">==</span> <span class="s1">&#39;command&#39;</span><span class="p">:</span>
+                <span class="c1"># Traiter les commandes envoyées au dispositif</span>
+                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_device_command</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">))</span>
+
+        <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">text_data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Format JSON invalide&#39;</span>
+            <span class="p">}))</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">handle_device_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command_data</span><span class="p">):</span>
+        <span class="c1"># Ici vous pouvez traiter les commandes envoyées au dispositif</span>
+        <span class="c1"># Par exemple, envoyer via MQTT au dispositif ESP32</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># Méthodes pour recevoir des messages du groupe</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">sensor_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="c1"># Envoyer les données de capteur au WebSocket</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">text_data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;sensor_data&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+        <span class="p">}))</span>
+
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">alert_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="c1"># Envoyer une alerte au WebSocket</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">text_data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;alert&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+        <span class="p">}))</span>
+</code></pre></div>
+
+<h3 id="72-routing-websocket">7.2 Routing WebSocket</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># backend/core/routing.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">re_path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fajma</span><span class="w"> </span><span class="kn">import</span> <span class="n">consumers</span>
+
+<span class="n">websocket_urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">re_path</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;ws/iot/(?P&lt;device_id&gt;\w+)/$&#39;</span><span class="p">,</span> <span class="n">consumers</span><span class="o">.</span><span class="n">IoTConsumer</span><span class="o">.</span><span class="n">as_asgi</span><span class="p">()),</span>
+<span class="p">]</span>
+</code></pre></div>
+
+<p>Ce guide complet vous permet d'afficher les données ESP32 en temps réel dans votre frontend React avec une interface moderne et réactive.</p>
+    </div>
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Bouton retour en haut
+            const backToTopButton = document.createElement('button');
+            backToTopButton.innerHTML = '↑';
+            backToTopButton.className = 'back-to-top';
+            backToTopButton.onclick = function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+            document.body.appendChild(backToTopButton);
+            
+            // Afficher/masquer le bouton selon le scroll
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+            
+            // Smooth scrolling pour les liens d'ancrage
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Ajouter des classes CSS aux éléments spéciaux
+            document.querySelectorAll('blockquote').forEach(quote => {
+                if (quote.textContent.includes('Note') || quote.textContent.includes('INFO')) {
+                    quote.classList.add('info-box');
+                } else if (quote.textContent.includes('Attention') || quote.textContent.includes('WARNING')) {
+                    quote.classList.add('warning-box');
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
+    

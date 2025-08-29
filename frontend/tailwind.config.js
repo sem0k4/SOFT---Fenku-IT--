@@ -8,6 +8,10 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+<<<<<<< HEAD
 }
 
 // #0096b0
+=======
+}
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)

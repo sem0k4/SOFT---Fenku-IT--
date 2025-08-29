@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Django==4.2.7
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0  # Authentification JWT
@@ -7,3 +8,58 @@ celery==5.3.6                         # Tâches asynchrones (facultatif)
 bcrypt==4.0.1                         # Chiffrement des mots de passe
 drf-yasg==1.21.7                      # Documentation Swagger (facultatif)
 django-cors-headers
+=======
+# Core Django
+Django==4.2.7
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.3.0  # Authentification JWT
+django-cors-headers==4.3.1
+
+# Communication Temps Réel
+channels==4.0.0                       # WebSocket support pour Django
+channels-redis==4.1.0                 # Redis backend pour Channels
+django-channels-presence==1.0.1       # Présence utilisateur temps réel
+aiortc==1.6.0                         # WebRTC pour Python
+websockets==12.0                      # WebSocket client/server
+
+# IoT et MQTT
+paho-mqtt==1.6.1                     # Client MQTT
+mqtt-client==1.0.0                    # Client MQTT avancé
+pyserial==3.5                         # Communication série (ESP32)
+bleak==0.21.1                         # Bluetooth Low Energy
+
+# Sécurité IoT
+cryptography==41.0.8                  # Chiffrement avancé
+PyJWT==2.8.0                          # JSON Web Tokens
+certifi==2023.11.17                   # Certificats SSL/TLS
+
+# Base de données et cache
+psycopg2-binary==2.9.9               # PostgreSQL adapter
+redis==5.0.1                          # Cache et message broker
+django-redis==5.4.0                   # Redis cache backend
+
+# Traitement données temps réel
+numpy==1.24.4                         # Calculs numériques
+pandas==2.0.3                         # Analyse de données
+scipy==1.11.4                         # Traitement signal biométrique
+
+# Monitoring et logging
+django-health-check==3.17.0          # Health checks
+django-prometheus==2.3.1              # Métriques Prometheus
+sentry-sdk==1.38.0                    # Monitoring erreurs
+
+# Utilitaires
+python-dotenv==1.0.0                  # Variables d'environnement
+celery==5.3.6                         # Tâches asynchrones
+bcrypt==4.0.1                         # Chiffrement mots de passe
+drf-yasg==1.21.7                      # Documentation Swagger
+requests==2.31.0                      # HTTP requests
+pillow==10.1.0                        # Traitement images
+django-extensions==3.2.3              # Extensions Django
+
+# Tests
+pytest==7.4.3
+pytest-django==4.7.0
+pytest-asyncio==0.21.1
+factory-boy==3.3.0
+>>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
