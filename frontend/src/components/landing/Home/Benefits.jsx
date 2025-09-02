@@ -5,6 +5,7 @@ import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DevicesIcon from '@mui/icons-material/Devices';
 
+
 const BenefitCard = styled(Paper)(({ theme }) => ({
   padding: '30px 20px',
   borderRadius: '12px',
@@ -18,6 +19,9 @@ const BenefitCard = styled(Paper)(({ theme }) => ({
   '&:hover': {
     transform: 'translateY(-8px)',
   },
+  // backgroundColor: '#005a6a50',
+  backgroundColor: '#fff',
+
 }));
 
 const IconWrapper = styled(Box)(({ theme }) => ({
@@ -49,33 +53,40 @@ const Benefits = () => {
       description: 'Consultez depuis n\'importe où grâce à notre plateforme disponible sur tous vos appareils.'
     },
   ];
+ 
+  const bgColor = '#16243f'
 
   return (
     <Box sx={{ py: 8, px: { xs: 3, md: 8 }, backgroundColor: '#f8f9fa' }}>
-      <Typography variant="h3" component="h2" align="center" sx={{ mb: 2, fontWeight: 'bold', color: 'var(--dark-bleu-logo)' }}>
+      <Typography variant="h2" component="h2" align="center" sx={{ mb: 2, fontWeight: 'bold', color: 'var(--dark-bleu-logo)' }}>
         Nos avantages
       </Typography>
-      <Typography variant="h6" align="center" sx={{ mb: 6, maxWidth: '800px', mx: 'auto', color: 'var(--gray)' }}>
+      <Typography 
+        className='text-lg mb-10'
+        variant="p" 
+        align="center" 
+        sx={{ mb: 6, maxWidth: '800px', mx: 'auto', color: 'var(--gray)' }}
+      >
         Découvrez pourquoi FAJMA est la solution idéale pour vos besoins de santé
       </Typography>
       
-      <Grid container spacing={4}>
+      <Box className="grid md:grid-cols-3 grid-cols-1 gap-8 py-12">
         {benefits.map((benefit, index) => (
-          <Grid item xs={12} md={4} key={index}>
+          <Box key={index}>
             <BenefitCard>
               <IconWrapper>
                 {benefit.icon}
               </IconWrapper>
-              <Typography variant="h5" component="h3" sx={{ mb: 2, fontWeight: 600, color: 'var(--dark-bleu-logo)' }}>
+              <Typography variant="h4" component="h3" sx={{ mb: 2, fontWeight: 600, color: 'var(--bleu-logo)' }}>
                 {benefit.title}
               </Typography>
-              <Typography variant="body1" color="text.secondary">
+              <Typography variant="body1" color="var(--dark-bleu-logo)" sx= {{ fontSize: '15px', fontWeight: 500 }}>
                 {benefit.description}
               </Typography>
             </BenefitCard>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };
