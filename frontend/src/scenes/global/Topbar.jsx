@@ -29,7 +29,7 @@ const Topbar = () => {
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
             }}
-            className="w-full flex lg:justify-end justify-between items-center border-b border-gray-200 dark:border-gray-700 sticky top-0"    
+            className="w-full flex lg:justify-end justify-between items-center border-b border-gray-200 dark:border-gray-700 sticky z-10 top-0"    
         >
             {/* <Box 
                 sx={{
@@ -48,7 +48,7 @@ const Topbar = () => {
             </Box> */}
             <Box sx={{ display: 'flex' }}>
                 <SidebarMobile />
-                <Link className="mt-1" to="/">
+                <Link className="mt-1 lg:hidden block" to="/">
                     <img
                     className="w-28 h-fit"
                     src={Logo1FAJMA}

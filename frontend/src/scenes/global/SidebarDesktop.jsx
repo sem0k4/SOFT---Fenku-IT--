@@ -59,13 +59,8 @@ const SidebarDesktop = () => {
   const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
   
+  // window.location.href.endsWith('consultation') && setSelected('consultation')
   
-  // if (isMobile) {
-  //   setIsToggle(true);
-  // }
-
-  // console.log(selected);
-    
   
   return (
     <Box

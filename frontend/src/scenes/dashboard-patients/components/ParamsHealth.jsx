@@ -1,7 +1,10 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { useState } from "react";
-import { tokens } from "../../theme";
+import { tokens } from "../../../theme";
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
+import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { FaCapsules } from "react-icons/fa6";
 
 
 
@@ -12,7 +15,15 @@ const paramsHealth = [
         averageData: '27',
         realData: '26.8',
         unite: '° C',
-        icon: <FolderSharedOutlinedIcon />
+        icon: <DeviceThermostatOutlinedIcon 
+                sx={{ 
+                    backgroundColor: '#cceaef', 
+                    color: '#0096b0', 
+                    padding: '4px',
+                    fontSize: '30px',
+                    borderRadius: '50%',
+                }} 
+            />
     },
     {
         name: 'Pression artérielle',
@@ -20,7 +31,15 @@ const paramsHealth = [
         averageData: '120/80',
         realData: '118/78',
         unite: 'mmHg',
-        icon: <FolderSharedOutlinedIcon />
+        icon: <FavoriteBorderOutlinedIcon 
+                sx={{ 
+                    backgroundColor: '#cceaef', 
+                    color: '#0096b0', 
+                    padding: '4px',
+                    fontSize: '30px',
+                    borderRadius: '50%',
+                }} 
+            />
     },
     {
         name: 'Taux de sucre',
@@ -28,7 +47,7 @@ const paramsHealth = [
         averageData: '70-140',
         realData: '98',
         unite: 'mg/dL',
-        icon: <FolderSharedOutlinedIcon />
+        icon: <FaCapsules className="text-[#0096b0] text-4xl bg-[#0096b0]/10 p-1.5 rounded-full" />
     },
 ]
 
@@ -36,18 +55,18 @@ const paramsHealth = [
 const ParamsHealth = () => {
 
     const theme = useTheme()
-    const colors = tokens(theme.palette.mode);
+    const colors = tokens(theme.palette.mode);    
     
 
     return(
         <Box
-            className={`rounded-lg md:overflow-x-scroll overflow-x-auto p-4`} 
+            className={`rounded-lg md:overflow-x-scroll lg:w-[60%] md:w-1/2 w-full overflow-x-auto p-4`} 
             sx={{ 
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 display: 'flex',
                 boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
                 flexDirection: 'column',
-                gap: '12px',
+                gap: '10px',
             }}
         >
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -69,7 +88,7 @@ const ParamsHealth = () => {
                         color: theme.palette.mode === 'dark' ? colors.blackAccent[100] : colors.blackAccent[600],
                     }}
                 >
-                    Résumé de vos paramètres de santé prises
+                    Résumé de vos paramètres de santé pris dernièrement
                 </Typography>
             </Box>
             {/* Cas où le patients n'a pas fait des test de ses données santé */}
@@ -83,7 +102,7 @@ const ParamsHealth = () => {
             >
                 Pas de données enregistrées pour l'instant
             </Typography> */}
-            <Box className="rounded-lg flex flex-col gap-2 w-full">
+            <Box className="rounded-lg flex flex-col gap-3 w-full">
                 {paramsHealth.map((paramHealth, index) => (
                     <Box 
                         key={index}
@@ -103,10 +122,7 @@ const ParamsHealth = () => {
                             >
                                 <span 
                                     className="font-semibold"
-                                    style={{ 
-                                        fontSize: '15px', 
-                                        color: theme.palette.mode === 'dark' ? colors.secondary[800] : colors.blackAccent[600]
-                                    }} 
+                                    style={{ fontSize: '15px', }} 
                                 >
                                     {paramHealth.name}
                                 </span>

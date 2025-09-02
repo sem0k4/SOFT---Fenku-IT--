@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Avatar, Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
+import { tokens } from "../../../theme";
 
 const consultations = [
     {
@@ -44,7 +44,7 @@ export default function RecentsConsultations() {
 
     return (
         <Box
-            className={`rounded-lg md:overflow-x-scroll overflow-x-auto mb-8 p-4`} 
+            className={`rounded-lg md:overflow-x-scroll lg:w-[40%] md:w-1/2 w-full overflow-x-auto mb-8 p-4`} 
             sx={{ 
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 display: 'flex',
@@ -90,12 +90,12 @@ export default function RecentsConsultations() {
                     >
                         <Box className="flex flex-row gap-2">
                             <Avatar
-                                className="text-black shadow-sm font-semibold bg-transparent border border-black"
+                                className="text-black relative z-0 shadow-sm font-semibold bg-transparent border border-black"
                                 alt="Dr Mbengue"
                                 src="/images/exemple_docteur.webp"
                             />
                             <Typography
-                                variant="p"
+                                variant="h4"
                                 className="flex flex-col text-left gap-0"
                                 fontSize="12px"
                             >

@@ -100,7 +100,7 @@ const Login = () => {
       await AuthService.login(username, password);
       
       // Rediriger vers la page d'accueil après connexion
-      navigate('/patient-dashboard'); // Modifié de '/dashboard' à '/patient-dashboard'
+      navigate('/dashboard-patient'); // Modifié de '/dashboard' à '/patient-dashboard'
     } catch (error) {
       console.error('Erreur lors de la connexion:', error);
       setApiError(error.response?.data?.message || 'Nom d\'utilisateur ou mot de passe incorrect.');

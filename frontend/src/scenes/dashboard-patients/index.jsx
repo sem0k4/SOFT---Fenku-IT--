@@ -3,12 +3,10 @@ import { Box, Typography } from "@mui/material";
 import HeaderDashboard from "../../components/shared/HeaderDashboard";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
-import DatasVitals from "./DatasVitals";
-import RecentsConsultations from "./RecentsConsultations";
 import { Link } from "react-router-dom";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import IntroDashboard from "./IntroDashboard";
-import ParamsHealth from "./ParamsHealth";
+import NavSub from "./components/NavSub";
+import IntroDashboard from "./components/IntroDashboard";
 
 
 const DashboardPatient = () => {
@@ -18,7 +16,7 @@ const DashboardPatient = () => {
     
 
     return (
-        <Box>
+        <Box className="flex flex-col">
             <Box 
                 sx={{
                     display: 'flex',
@@ -50,11 +48,7 @@ const DashboardPatient = () => {
                 </Link>
             </Box>
             <IntroDashboard />
-            <Box className="grid grid-cols-1 md:grid-cols-2 items-start gap-y-0 gap-4">
-                <RecentsConsultations />
-                <ParamsHealth />
-            </Box>
-            <DatasVitals />
+            <NavSub />
         </Box>
     )   
 }

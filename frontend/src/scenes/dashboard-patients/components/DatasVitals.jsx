@@ -1,5 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
+import { tokens } from "../../../theme";
 import MonitorWeightTwoToneIcon from '@mui/icons-material/MonitorWeightTwoTone';
 import HeightOutlinedIcon from '@mui/icons-material/HeightOutlined';
 import BloodtypeOutlinedIcon from '@mui/icons-material/BloodtypeOutlined';
@@ -16,7 +16,7 @@ export default function DatasVitals() {
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
             }} 
-            className="mb-6 p-4 rounded-lg flex flex-col gap-3"
+            className="p-4 mb-4 rounded-lg flex flex-col gap-3"
         >
             <Typography
                 variant="h5"

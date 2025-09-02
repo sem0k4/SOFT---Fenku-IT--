@@ -4,15 +4,13 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
 import ScheduleOutlinedIcon from '@mui/icons-material/ScheduleOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined'
-import { tokens } from "../../theme";
-import timerRDV from "./TimerRDV";
+import { tokens } from "../../../theme";
 import { Link } from "react-router-dom";
 
 const IntroDashboard = () => {
 
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-    const { dateRDV, formattedDate } = timerRDV()
 
     // console.log(formattedDate);
     
@@ -20,11 +18,12 @@ const IntroDashboard = () => {
 
 
     return (
-        <Box className="mt-6 mb-4 gap-3 grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1">
+        <Box className="mt-6 mb-4 gap-3 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
             <Box 
                 className="flex flex-col gap-2 p-3 rounded-lg justify-start items-start"
                 sx={{
                     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
+                    borderRadius: '0.5rem',
                     boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
                 }}    
             >
