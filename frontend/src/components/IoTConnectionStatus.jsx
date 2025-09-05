@@ -35,17 +35,17 @@ const IoTConnectionStatus = ({
             case 'OPEN':
                 return {
                     icon: <WifiIcon />,
-                    color: colors.greenAccent[500],
+                    color: colors.secondary[500],
                     text: 'Connecté',
-                    bgColor: colors.greenAccent[200]
+                    bgColor: colors.secondary[200]
                 };
             case 'CLOSED':
             case 'CLOSING':
                 return {
                     icon: <WifiOffIcon />,
-                    color: colors.redAccent[500],
+                    color: colors.primary[500],
                     text: 'Déconnecté',
-                    bgColor: colors.redAccent[200]
+                    bgColor: colors.primary[200]
                 };
             case 'CONNECTING':
                 return {
@@ -57,9 +57,9 @@ const IoTConnectionStatus = ({
             default:
                 return {
                     icon: <WifiOffIcon />,
-                    color: colors.grey[500],
+                    color: colors.blackAccent[500],
                     text: 'Inconnu',
-                    bgColor: colors.grey[200]
+                    bgColor: colors.blackAccent[200]
                 };
         }
     };
@@ -85,7 +85,7 @@ const IoTConnectionStatus = ({
                     />
                     
                     {lastUpdate && connectionStatus === 'OPEN' && (
-                        <Typography variant="caption" sx={{ color: colors.grey[400] }}>
+                        <Typography variant="caption" sx={{ color: colors.blackAccent[400] }}>
                             Dernière mise à jour: {lastUpdate}
                         </Typography>
                     )}
@@ -145,7 +145,7 @@ const IoTConnectionStatus = ({
                             {alert.message || alert.description}
                         </Typography>
                         {alert.timestamp && (
-                            <Typography variant="caption" sx={{ color: colors.grey[400] }}>
+                            <Typography variant="caption" sx={{ color: colors.blackAccent[400] }}>
                                 {new Date(alert.timestamp).toLocaleString()}
                             </Typography>
                         )}

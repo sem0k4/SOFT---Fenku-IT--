@@ -83,12 +83,12 @@ const IoTDataCard = ({
     const getTrendIcon = () => {
         switch (trend || currentTrend) {
             case 'up':
-                return <TrendingUpIcon sx={{ color: colors.greenAccent[500], fontSize: 20 }} />;
+                return <TrendingUpIcon sx={{ color: colors.secondary[500], fontSize: 20 }} />;
             case 'down':
-                return <TrendingDownIcon sx={{ color: colors.redAccent[500], fontSize: 20 }} />;
+                return <TrendingDownIcon sx={{ color: colors.primary[500], fontSize: 20 }} />;
             case 'stable':
             default:
-                return <TrendingFlatIcon sx={{ color: colors.grey[400], fontSize: 20 }} />;
+                return <TrendingFlatIcon sx={{ color: colors.blackAccent[400], fontSize: 20 }} />;
         }
     };
 
@@ -99,7 +99,7 @@ const IoTDataCard = ({
     const cardStyle = {
         backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc',
         boxShadow: `0px 0px 15px ${theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.05)'}`,
-        border: `1px solid ${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.grey[200]}`,
+        border: `1px solid ${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[200]}`,
         borderRadius: '12px',
         transition: 'all 0.3s ease',
         position: 'relative',
@@ -138,9 +138,9 @@ const IoTDataCard = ({
     };
 
     const statusColors = {
-        normal: { bg: colors.greenAccent[200], text: colors.greenAccent[800] },
-        abnormal: { bg: colors.redAccent[200], text: colors.redAccent[800] },
-        unknown: { bg: colors.grey[200], text: colors.grey[800] }
+        normal: { bg: colors.secondary[200], text: colors.secondary[800] },
+        abnormal: { bg: colors.primary[200], text: colors.primary[800] },
+        unknown: { bg: colors.blackAccent[200], text: colors.blackAccent[800] }
     };
 
     return (
@@ -153,7 +153,7 @@ const IoTDataCard = ({
                 <Box 
                     className="absolute top-2 right-2 w-3 h-3 rounded-full"
                     sx={{
-                        backgroundColor: colors.greenAccent[500],
+                        backgroundColor: colors.secondary[500],
                         animation: 'pulse 2s infinite'
                     }}
                 />
@@ -181,7 +181,7 @@ const IoTDataCard = ({
             </Box>
             
             {/* Titre */}
-            <Typography variant="h6" className="font-bold mb-2" sx={{ color: colors.grey[100] }}>
+            <Typography variant="h6" className="font-bold mb-2" sx={{ color: colors.blackAccent[100] }}>
                 {title}
             </Typography>
             
@@ -213,7 +213,7 @@ const IoTDataCard = ({
                     sx={{
                         height: 8,
                         borderRadius: 4,
-                        backgroundColor: colors.grey[300],
+                        backgroundColor: colors.blackAccent[300],
                         '& .MuiLinearProgress-bar': {
                             backgroundColor: color,
                             borderRadius: 4,
@@ -230,13 +230,13 @@ const IoTDataCard = ({
             
             {/* Plage normale avec info */}
             <Box className="flex items-center justify-between">
-                <Typography variant="caption" sx={{ color: colors.grey[400] }}>
+                <Typography variant="caption" sx={{ color: colors.blackAccent[400] }}>
                     Plage normale: {normalRange}
                 </Typography>
                 
                 <Tooltip title={`Valeur actuelle: ${value}${unit}. Plage normale: ${normalRange}`}>
                     <IconButton size="small">
-                        <InfoIcon sx={{ fontSize: 16, color: colors.grey[400] }} />
+                        <InfoIcon sx={{ fontSize: 16, color: colors.blackAccent[400] }} />
                     </IconButton>
                 </Tooltip>
             </Box>

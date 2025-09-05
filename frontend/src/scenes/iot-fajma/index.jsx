@@ -72,7 +72,7 @@ const IotFAJMA = () => {
             subtitle: "Battements par minute",
             unit: "bpm",
             icon: FavoriteBorderOutlinedIcon,
-            color: colors.redAccent[500],
+            color: colors.blackAccent[500],
             normalRange: "60-100 bpm",
             minValue: 40,
             maxValue: 120,
@@ -109,7 +109,7 @@ const IotFAJMA = () => {
                 />
                 <Box className="flex justify-center items-center" sx={{ height: '400px' }}>
                     <CircularProgress size={60} />
-                    <Typography variant="h6" sx={{ ml: 2, color: colors.grey[100] }}>
+                    <Typography variant="h6" sx={{ ml: 2, color: colors.blackAccent[100] }}>
                         Établissement de la connexion WebSocket...
                     </Typography>
                 </Box>
