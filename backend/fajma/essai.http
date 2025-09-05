@@ -1,20 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> fc99c8a (debut conception dashboard patient)
 
 
 POST http://localhost:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
-<<<<<<< HEAD
-=======
-
-
-POST http://localhost:8000/api/token/ HTTP/1.1
-Content-Type: application/json
-
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
-=======
->>>>>>> fc99c8a (debut conception dashboard patient)
 {"username": "Didi", "password": "Didi"}  // Format JSON compacté (optionnel)

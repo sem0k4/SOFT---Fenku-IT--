@@ -1,24 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-"""
-ASGI config for core project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
-"""
-
-import os
-
-from django.core.asgi import get_asgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
-
-application = get_asgi_application()
-=======
-=======
->>>>>>> fc99c8a (debut conception dashboard patient)
 """
 ASGI config for core project.
 
@@ -51,25 +30,3 @@ application = ProtocolTypeRouter({
         )
     ),
 })
-<<<<<<< HEAD
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
-=======
-=======
-"""
-ASGI config for core project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
-"""
-
-import os
-
-from django.core.asgi import get_asgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
-
-application = get_asgi_application()
->>>>>>> 692b537 (debut conception dashboard patient)
->>>>>>> fc99c8a (debut conception dashboard patient)

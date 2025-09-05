@@ -14,29 +14,8 @@ const CalendarRDV = () => {
     const colors = tokens(theme.palette.mode);
     const [ currentEvents, setCurrentEvents ] = useState([]);
 
-<<<<<<< HEAD
     const handleDateClick = (selected) => {
         const title = prompt("Entrer un nouveau evenement");
-=======
-
-    const targetDate = new Date('2025-08-05T10:00:00').getTime(); // Définir la date cible ici
-
-    const formattedDate = new Date(targetDate).toLocaleString('fr-FR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    });
-    // console.log(targetDate);
-    
-    // console.log(formattedDate);
-
-
-
-    const handleDateClick = (selected) => {
-        const title = prompt("Please enter a new title for your event");
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
         const calendarApi = selected.view.calendar;
         calendarApi.unselect()
 
@@ -61,50 +40,11 @@ const CalendarRDV = () => {
 
     return (
         <Box m="20px">
-<<<<<<< HEAD
             <Box 
                 display='flex' 
                 flexDirection='column' 
                 gap='30px'
             >
-=======
-            <Box display='flex' justifyContent='space-between'>
-                <Box 
-                    flex='1 1 20%' 
-                    backgroundColor= {theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc'}
-                    boxShadow= {`0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `}
-                    padding='15px' 
-                    borderRadius='4px'
-                >
-                    <Typography variant="h5">Events</Typography>
-                    <List>
-                        {currentEvents.map((event) => (
-                            <ListItem
-                                key={event.id}
-                                sx={{
-                                    backgroundColor: colors.blackAccent[500],
-                                    margin: '10px 0',
-                                    borderRadius: '2px',
-                                }}
-                            >
-                                <ListItemText 
-                                    primary={event.title}
-                                    secondary={
-                                        <Typography>
-                                            {formatDate(event.start, {
-                                                year: 'numeric', 
-                                                month: 'short', 
-                                                day: 'numeric',
-                                            })}
-                                        </Typography>
-                                    }
-                                />
-                            </ListItem>
-                        ))}
-                    </List>
-                </Box>
-
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
                 {/* CALENDAR */}
                 <Box 
                     sx={{
@@ -113,11 +53,7 @@ const CalendarRDV = () => {
                     }}
                 >
                     <FullCalendar
-<<<<<<< HEAD
                         // height='75vh'
-=======
-                        height='75vh'
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
                         plugins={[
                             dayGridPlugin,
                             timeGridPlugin,
@@ -143,7 +79,6 @@ const CalendarRDV = () => {
                         ]}
                     />
                 </Box>
-<<<<<<< HEAD
                 <Box 
                     flex='1 1 20%' 
                     backgroundColor= {theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc'}
@@ -179,8 +114,6 @@ const CalendarRDV = () => {
                     </List>
                 </Box>
 
-=======
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
             </Box>
         </Box>
     )

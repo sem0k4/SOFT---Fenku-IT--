@@ -18,27 +18,9 @@ export default function Chatbot() {
   return (
     <div>
       <Box 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 hover:opacity-75 duration-300 shadow`}
         sx={{
             backgroundColor: '#fcfcfc', 
-=======
-        className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 duration-300 shadow`}
-        sx={{
-            backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[300] : '#fcfcfc', 
->>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
-=======
-        className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 duration-300 shadow`}
-        sx={{
-            backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[300] : '#fcfcfc', 
->>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)
-=======
-        className={`fixed z-20 bottom-4 right-8 rounded-full hover:-translate-y-2 hover:opacity-75 duration-300 shadow`}
-        sx={{
-            backgroundColor: '#fcfcfc', 
->>>>>>> e8f7f40 (changement de quelques elements du dashboard patient)
         }}
         onClick={handleOpen}
       >
@@ -76,12 +58,4 @@ export default function Chatbot() {
       </Modal>
     </div>
   );
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ad81247 (ajout de l'icone du chatbot et quelque modif dans le dashboard patient)
-=======
-}
->>>>>>> 8e642a7 (changement de quelques elements du dashboard patient)

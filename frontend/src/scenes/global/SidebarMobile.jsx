@@ -1,20 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { useState } from 'react';
-=======
-import * as React from 'react';
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
-=======
-import { useState } from 'react';
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -22,7 +10,6 @@ import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import MedicalInformationOutlinedIcon from '@mui/icons-material/MedicalInformationOutlined';
 import VideoCameraFrontOutlinedIcon from '@mui/icons-material/VideoCameraFrontOutlined';
 import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
-<<<<<<< HEAD
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
 import VaccinesOutlinedIcon from '@mui/icons-material/VaccinesOutlined';
@@ -70,67 +57,6 @@ export default function SidebarMobile() {
   const colors = tokens(theme.palette.mode);
   const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
-=======
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-=======
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined';
-import VaccinesOutlinedIcon from '@mui/icons-material/VaccinesOutlined';
-import { useTheme } from '@emotion/react';
-import { tokens } from '../../theme';
-import { Link } from 'react-router-dom';
-import Logo1FAJMA from "../../assets/logo-fajma.png";
-
-
-
-const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
-  
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
-  return (
-    <Link 
-      className={`flex flex-row w-full py-2.5 px-2 rounded-l-xl ${isToggle ? 'gap-14' : 'gap-6'} duration-300 hover:bg-[#0096b0] ${selected === title && 'bg-[#0096b0]'} group font-semibold`}
-      to={to}
-      onClick={() => setSelected(title)}
-      style={{ 
-        color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[500]}`,
-        textDecoration: "none",
-        fontSize: "13px",
-      }}
-    >
-      {icon}
-      <span 
-        className={`group-hover:text-white ${selected === title && 'text-white'}  ${isToggle ? '-translate-x-2' : 'translate-x-2'}`}
-        style={{
-          display: `${isToggle ? 'none' : 'block'}`
-        }}
-      >
-        {title}
-      </span>
-    </Link>
-  )
-}
-
-
-export default function SidebarMobile() {
-  const [open, setOpen] = useState(false);
-
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-<<<<<<< HEAD
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
-=======
-  const [ isToggle, setIsToggle ] = useState(false)
-  const [ selected, setSelected ] = useState("Dashboard")
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -138,25 +64,13 @@ export default function SidebarMobile() {
 
   const DrawerList = (
     <Box 
-<<<<<<< HEAD
-<<<<<<< HEAD
       className="pl-4"
-=======
-      className=""
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
-=======
-      className="pl-4"
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
       sx={{ 
         width: 250,
       }} 
       role="presentation" 
       onClick={toggleDrawer(false)}
     >
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
       <List 
         sx={{ 
           marginTop: 2, 
@@ -170,7 +84,6 @@ export default function SidebarMobile() {
               src={Logo1FAJMA}
               alt="E-FAJMA votre partenaire de sante"
             />
-<<<<<<< HEAD
         </Link>
       </List>
       <List>
@@ -244,111 +157,6 @@ export default function SidebarMobile() {
           selected={selected}
           setSelected={setSelected}
         />
-=======
-      <List>
-        <Link 
-            className={`flex flex-row items-center gap-3 w-full p-3 rounded-l-xl duration-300 hover:bg-[#0096b0]  group font-semibold`}
-            to='/dashboard-patient'
-            // onClick={() => setSelected(title)}
-            style={{ 
-                color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.primary[600]}`,
-                textDecoration: "none",
-                fontSize: "14px",
-            }}
-        >
-            <AddAPhotoIcon />
-            <span className={`group-hover:text-white `}>
-                Dashboard
-            </span>
-=======
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
-        </Link>
-      </List>
-      <List>
-<<<<<<< HEAD
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
-=======
-        <Item
-          title="Dashboard"
-          to="/dashboard-patient"
-          icon={<HomeOutlinedIcon className={`group-hover:text-white ${selected === 'Dashboard' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      </List>
-      <List>
-        <Item
-          title="Téléconsultation"
-          to="/dashboard-patient/teleconsultation"
-          icon={<VideoCameraFrontOutlinedIcon className={`group-hover:text-white ${selected === 'Téléconsultation' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      </List>
-      <List>
-        <Item
-          title="Consultation"
-          to="/dashboard-patient/consultation"
-          icon={<ContactsOutlinedIcon className={`group-hover:text-white ${selected === 'Consultation' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      </List>
-      <List>
-        <Item
-          title="Prendre RDV"
-          to="/dashboard-patient/rdv"
-          icon={<EditCalendarOutlinedIcon className={`group-hover:text-white ${selected === 'Prendre RDV' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      </List>
-      <List>
-        <Item
-          title="Messagerie"
-          to="/dashboard-patient/messagerie"
-          icon={<ForumOutlinedIcon className={`group-hover:text-white ${selected === 'Messagerie' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      </List>
-      <List>
-        <Item
-          title="Vaccination"
-          to="/dashboard-patient/vaccination"
-          icon={<VaccinesOutlinedIcon className={`group-hover:text-white ${selected === 'Vaccination' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      </List>
-      <List>
-        <Item
-          title="Documents"
-          to="/dashboard-patient/documents"
-          icon={<FolderSharedOutlinedIcon className={`group-hover:text-white ${selected === 'Documents' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      </List>
-      <List>
-        <Item
-          title="FAJMA +"
-          to="/dashboard-patient/iot-fajma"
-          icon={<MedicalInformationOutlinedIcon className={`group-hover:text-white ${selected === 'FAJMA +' && 'text-white'}`} />}
-          selected={selected}
-          setSelected={setSelected}
-        />
->>>>>>> fc740fa (accueil du dashboard patient en se referant sur le prototype figma)
       </List>
     </Box>
   );

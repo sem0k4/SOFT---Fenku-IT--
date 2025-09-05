@@ -1,16 +1,4 @@
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-const IotFAJMA = () => {
-    return (
-        <div>
-            <h1>IoT FAJMA</h1>
-        </div>
-    )
-}
-=======
-=======
->>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
 import { useState, useEffect } from "react";
 import { Box, Typography, useTheme, CircularProgress, Alert, Button, Grid } from "@mui/material";
 import HeaderDashboard from "../../components/shared/HeaderDashboard";
@@ -179,18 +167,5 @@ const IotFAJMA = () => {
         </Box>
     );
 };
-<<<<<<< HEAD
->>>>>>> f575271 (Initial commit: FAJMA IoT Healthcare System with ESP32 integration)
-=======
-=======
-const IotFAJMA = () => {
-    return (
-        <div>
-            <h1>IoT FAJMA</h1>
-        </div>
-    )
-}
->>>>>>> a5eee99 (retouch configuration sidebar dashboard patient)
->>>>>>> 073ac72 (retouch configuration sidebar dashboard patient)
 
 export default IotFAJMA;
