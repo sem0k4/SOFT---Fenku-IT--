@@ -1,4 +1,24 @@
 
+-- Schéma de base de données pour FAJMA (Système de gestion hospitalière)
+-- Version: 1.2
+-- Date de création: 2024
+-- Dernière mise à jour: Janvier 2025
+-- 
+-- CHANGELOG v1.2:
+-- - Optimisation pour Django
+--   * Suppression des tables Django standard du schéma (gérées automatiquement)
+--   * Suppression des tables de liaison ManyToMany (créées par Django)
+--   * Le schéma ne contient plus que les tables métier personnalisées
+--   * Les tables Django (auth_*, django_*, authtoken_*, token_blacklist_*) sont créées par les migrations
+-- 
+-- CHANGELOG v1.1:
+-- - Correction des noms de tables et colonnes pour conformité Django (minuscules)
+-- - Suppression des types ENUM remplacés par des contraintes CHECK
+-- - Ajout des tables Django standard (auth_group, auth_permission, etc.)
+-- - Ajout des tables de liaison ManyToMany pour utilisateur
+-- - Correction des index pour correspondre aux nouveaux noms
+-- - Ajout des tables pour token_blacklist et authtoken
+
 CREATE EXTENSION IF NOT EXISTS citext;
 -- Table pour normaliser les types d'antécédents
 CREATE TABLE types_antecedents (
@@ -18,8 +38,8 @@ CREATE TABLE hopital (
   rue varchar(100) NOT NULL,
   ville varchar(100) NOT NULL,
   code_postal varchar(10),
-  Telephone varchar(15) NOT NULL CHECK (Telephone ~ '^\+?[1-9]\d{1,14}$'),
-  Email citext NOT NULL CHECK (Email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+  telephone varchar(15) NOT NULL CHECK (telephone ~ '^\+?[1-9]\d{1,14}$'),
+  email varchar(255) NOT NULL CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
   capacite integer NOT NULL CHECK (capacite >= 0)
 );
 -- Table de jointure pour les services des hôpitaux
@@ -33,28 +53,37 @@ CREATE TABLE hopital_services (
 
 
 
--- Table pour les utilisateurs
+-- Table pour les utilisateurs (hérite d'AbstractUser Django)
 
 CREATE TABLE utilisateur (
   user_id SERIAL PRIMARY KEY,
-  login varchar(50) NOT NULL UNIQUE,
+  username varchar(50) NOT NULL UNIQUE,
   email varchar(255) NOT NULL UNIQUE,
   password varchar(255) NOT NULL,
   role varchar(20) NOT NULL CHECK (role IN ('patient', 'medecin', 'admin')),
   first_name varchar(50),
   last_name varchar(50),
-  date_joined timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Remplace date_creation
+  date_joined timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   email_verifie boolean DEFAULT false,
+  token_confirmation_email varchar(100),
+  date_expiration_token timestamp,
+  reset_password_code varchar(6),
+  reset_password_expiry timestamp,
   is_active boolean DEFAULT true,
+  is_staff boolean DEFAULT false,
+  is_superuser boolean DEFAULT false,
   last_login timestamp
 );
+
+-- Note: Les tables de liaison ManyToMany (utilisateur_groups, utilisateur_user_permissions)
+-- sont automatiquement créées par Django pour les relations du modèle Utilisateur.
 -- Table pour les médecins
 CREATE TABLE medecin (
   medecin_id SERIAL PRIMARY KEY,
   prenom varchar(100) NOT NULL,
   nom varchar(100) NOT NULL,
-  Telephone varchar(15) NOT NULL CHECK (Telephone ~ '^\+?[1-9]\d{1,14}$'),
-  Email citext NOT NULL CHECK (Email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+  telephone varchar(15) NOT NULL CHECK (telephone ~ '^\+?[1-9]\d{1,14}$'),
+  email varchar(255) NOT NULL CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
   hopital_id int NOT NULL,
   user_id int DEFAULT null,
   specialite varchar(50) NOT NULL,
@@ -67,28 +96,25 @@ CREATE TABLE patient (
   patient_id SERIAL PRIMARY KEY,
   prenom varchar(100) NOT NULL,
   nom varchar(100) NOT NULL,
-  Date_Naissance date NOT NULL,
-  sexe varchar(10) CHECK (sexe IN ('M', 'F', 'Autre')),
+  date_naissance date NOT NULL,
+  sexe varchar(10) CHECK (sexe IN ('M', 'F')),
   numero_identification_national varchar(50),
   rue varchar(100) NOT NULL,
   ville varchar(100) NOT NULL,
   code_postal varchar(10),
-  Telephone varchar(15) NOT NULL CHECK (Telephone ~ '^\+?[1-9]\d{1,14}$'),
-  Email citext NOT NULL CHECK (Email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
+  telephone varchar(15) NOT NULL CHECK (telephone ~ '^\+?[1-9]\d{1,14}$'),
+  email varchar(255) NOT NULL CHECK (email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
   user_id int DEFAULT null,
   FOREIGN KEY (user_id) REFERENCES utilisateur(user_id) ON DELETE SET NULL
 );
-
--- Type ENUM pour le statut des capteurs
-CREATE TYPE capteur_statut AS ENUM ('actif', 'inactif', 'en panne');
 
 -- Table pour les capteurs IoT
 CREATE TABLE capteuriot (
   capteur_id SERIAL PRIMARY KEY,
   patient_id int NOT NULL,
   type varchar(50) NOT NULL,
-  DateInstallation date NOT NULL,
-  Statut capteur_statut NOT NULL,
+  dateinstallation date NOT NULL,
+  statut varchar(20) NOT NULL CHECK (statut IN ('actif', 'inactif', 'en panne')),
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE
 );
 
@@ -103,13 +129,13 @@ CREATE TABLE consultation (
   consultation_id SERIAL PRIMARY KEY,
   patient_id int NOT NULL,
   capteur_id int NOT NULL,
-  valeur numeric NOT NULL,
+  valeur numeric(10,2) NOT NULL,
   medecin_id int NOT NULL,
-  Date_Consultation timestamp NOT NULL,
+  date_consultation timestamp NOT NULL,
   session_video_id varchar(100),
-  Prescription text,
+  prescription text,
   diagnostic text,
-  Notes text,
+  notes text,
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE,
   FOREIGN KEY (capteur_id) REFERENCES capteuriot(capteur_id) ON DELETE RESTRICT,
   FOREIGN KEY (medecin_id) REFERENCES medecin(medecin_id) ON DELETE RESTRICT
@@ -121,7 +147,7 @@ CREATE TABLE ordonnance (
   patient_id int NOT NULL,
   medecin_id int NOT NULL,
   consultation_id int NOT NULL,
-  Date_Ordonnance date NOT NULL,
+  date_ordonnance date NOT NULL,
   notes text,
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE,
   FOREIGN KEY (medecin_id) REFERENCES medecin(medecin_id) ON DELETE RESTRICT,
@@ -140,7 +166,7 @@ CREATE TABLE LigneOrdonnance (
 );
 
 -- Table pour les analyses médicales
-CREATE TABLE Analyses (
+CREATE TABLE analyses (
   analyse_id SERIAL PRIMARY KEY,
   patient_id int NOT NULL,
   type_analyse varchar(50) NOT NULL,
@@ -150,7 +176,7 @@ CREATE TABLE Analyses (
 );
 
 -- Table pour les radiographies et échographies
-CREATE TABLE RadiographieEchographie (
+CREATE TABLE radiographieechographie (
   image_id SERIAL PRIMARY KEY,
   patient_id int NOT NULL,
   type varchar(50) NOT NULL CHECK (type IN ('radiographie', 'echographie', 'autre')),
@@ -160,22 +186,22 @@ CREATE TABLE RadiographieEchographie (
 );
 
 -- Table pour les antécédents médicaux
-CREATE TABLE Antecedent (
-  Antecedent_id SERIAL PRIMARY KEY,
+CREATE TABLE antecedent (
+  antecedent_id SERIAL PRIMARY KEY,
   patient_id int NOT NULL,
-  Description text NOT NULL,
+  description text NOT NULL,
   type_id int NOT NULL,
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE,
   FOREIGN KEY (type_id) REFERENCES types_antecedents(type_id) ON DELETE RESTRICT
 );
 
 -- Table pour les données biométriques
-CREATE TABLE Biometrie (
+CREATE TABLE biometrie (
   biometrie_id SERIAL PRIMARY KEY,
   patient_id int NOT NULL,
-  GroupeSanguin varchar(10) NOT NULL CHECK (GroupeSanguin IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')),
-  Poids numeric(5,2) NOT NULL CHECK (Poids > 0),
-  Taille numeric(5,2) NOT NULL CHECK (Taille > 0),
+  groupesanguin varchar(10) NOT NULL CHECK (groupesanguin IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')),
+  poids numeric(5,2) NOT NULL CHECK (poids > 0),
+  taille numeric(5,2) NOT NULL CHECK (taille > 0),
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE
 );
 
@@ -199,16 +225,13 @@ CREATE TABLE facture (
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE
 );
 
--- Type ENUM pour le statut des rendez-vous
-CREATE TYPE rdv_statut AS ENUM ('planifie', 'annule', 'termine');
-
 -- Table pour les rendez-vous
 CREATE TABLE rendezvous (
   rdv_id SERIAL PRIMARY KEY,
   patient_id int NOT NULL,
   medecin_id int NOT NULL,
   date timestamp NOT NULL,
-  statut rdv_statut DEFAULT 'planifie',
+  statut varchar(20) DEFAULT 'planifie' CHECK (statut IN ('planifie', 'annule', 'termine')),
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE,
   FOREIGN KEY (medecin_id) REFERENCES medecin(medecin_id) ON DELETE RESTRICT
 );
@@ -301,14 +324,110 @@ CREATE TABLE documents_medicaux (
   FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE
 );
 
+-- Table pour les allergies
+CREATE TABLE allergie (
+  allergie_id SERIAL PRIMARY KEY,
+  patient_id int NOT NULL,
+  nom varchar(100) NOT NULL,
+  description text,
+  severite varchar(20) CHECK (severite IN ('legere', 'moderee', 'severe', 'critique')),
+  date_detection date,
+  FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE
+);
+
+-- Table pour les habitudes de vie
+CREATE TABLE habitudes_vie (
+  habitude_id SERIAL PRIMARY KEY,
+  patient_id int NOT NULL,
+  type varchar(50) NOT NULL,
+  description text,
+  frequence varchar(50),
+  date_debut date,
+  date_fin date,
+  FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE
+);
+
+-- Table pour les dispositifs IoT
+CREATE TABLE dispositives_iot (
+  dispositif_id SERIAL PRIMARY KEY,
+  patient_id int NOT NULL,
+  nom varchar(100) NOT NULL,
+  type_dispositif varchar(50) NOT NULL,
+  adresse_mac varchar(17) UNIQUE,
+  statut varchar(20) DEFAULT 'actif' CHECK (statut IN ('actif', 'inactif', 'en_panne', 'maintenance')),
+  date_installation timestamp DEFAULT CURRENT_TIMESTAMP,
+  derniere_communication timestamp,
+  version_firmware varchar(20),
+  localisation varchar(100),
+  FOREIGN KEY (patient_id) REFERENCES patient(patient_id) ON DELETE CASCADE
+);
+
+-- Table pour les données des capteurs IoT
+CREATE TABLE donnees_capteurs_iot (
+  donnee_id SERIAL PRIMARY KEY,
+  dispositif_id int NOT NULL,
+  type_capteur varchar(50) NOT NULL CHECK (type_capteur IN ('temperature', 'humidite', 'pression_arterielle', 'frequence_cardiaque', 'oxygene_sang', 'glucose', 'poids', 'mouvement', 'autre')),
+  valeur numeric(10,3) NOT NULL,
+  unite varchar(20) NOT NULL,
+  timestamp timestamp DEFAULT CURRENT_TIMESTAMP,
+  qualite_signal int DEFAULT 100 CHECK (qualite_signal >= 0 AND qualite_signal <= 100),
+  FOREIGN KEY (dispositif_id) REFERENCES dispositives_iot(dispositif_id) ON DELETE CASCADE
+);
+
+-- Table pour les alertes IoT
+CREATE TABLE alertes_iot (
+  alerte_id SERIAL PRIMARY KEY,
+  dispositif_id int NOT NULL,
+  donnee_id int,
+  niveau varchar(20) NOT NULL CHECK (niveau IN ('info', 'warning', 'critical', 'emergency')),
+  titre varchar(200) NOT NULL,
+  message text NOT NULL,
+  statut varchar(20) DEFAULT 'active' CHECK (statut IN ('active', 'resolue', 'ignoree')),
+  timestamp timestamp DEFAULT CURRENT_TIMESTAMP,
+  resolu_par int,
+  date_resolution timestamp,
+  FOREIGN KEY (dispositif_id) REFERENCES dispositives_iot(dispositif_id) ON DELETE CASCADE,
+  FOREIGN KEY (donnee_id) REFERENCES donnees_capteurs_iot(donnee_id) ON DELETE CASCADE,
+  FOREIGN KEY (resolu_par) REFERENCES utilisateur(user_id) ON DELETE SET NULL
+);
+
+-- Table pour les sessions WebSocket
+CREATE TABLE sessions_websocket (
+  session_id varchar(100) PRIMARY KEY,
+  user_id int NOT NULL,
+  channel_name varchar(200) NOT NULL,
+  date_connexion timestamp DEFAULT CURRENT_TIMESTAMP,
+  derniere_activite timestamp DEFAULT CURRENT_TIMESTAMP,
+  statut varchar(20) DEFAULT 'active' CHECK (statut IN ('active', 'fermee', 'expiree')),
+  adresse_ip inet NOT NULL,
+  user_agent text,
+  FOREIGN KEY (user_id) REFERENCES utilisateur(user_id) ON DELETE CASCADE
+);
+
 -- Index pour optimiser les performances
 CREATE INDEX idx_patient_nom ON patient(nom);
-CREATE INDEX idx_consultation_date ON consultation(Date_Consultation);
+CREATE INDEX idx_consultation_date ON consultation(date_consultation);
 CREATE INDEX idx_rendezvous_date ON rendezvous(date);
 CREATE INDEX idx_logs_created_at ON logs(created_at);
-CREATE INDEX idx_analyses_date ON Analyses(date);
-CREATE INDEX idx_radiographie_date ON RadiographieEchographie(date);
+CREATE INDEX idx_analyses_date ON analyses(date);
+CREATE INDEX idx_radiographie_date ON radiographieechographie(date);
 CREATE INDEX idx_carnetconsultation_date ON carnetconsultation(date);
 CREATE INDEX idx_facture_date_emission ON facture(date_emission);
 CREATE INDEX idx_declarations_naissance_date ON declarations_naissance(date_declaration);
-CREATE INDEX idx_conseils_sante_date ON conseils_sante(date_publication);ut
+CREATE INDEX idx_conseils_sante_date ON conseils_sante(date_publication);
+
+-- Index pour les nouvelles tables
+CREATE INDEX idx_allergie_patient ON allergie(patient_id);
+CREATE INDEX idx_habitudes_vie_patient ON habitudes_vie(patient_id);
+CREATE INDEX idx_dispositif_mac ON dispositives_iot(adresse_mac);
+CREATE INDEX idx_dispositif_patient ON dispositives_iot(patient_id);
+CREATE INDEX idx_donnees_timestamp ON donnees_capteurs_iot(timestamp);
+CREATE INDEX idx_donnees_dispositif_type ON donnees_capteurs_iot(dispositif_id, type_capteur);
+CREATE INDEX idx_alertes_timestamp ON alertes_iot(timestamp);
+CREATE INDEX idx_alertes_niveau_statut ON alertes_iot(niveau, statut);
+CREATE INDEX idx_sessions_utilisateur ON sessions_websocket(user_id);
+CREATE INDEX idx_sessions_statut ON sessions_websocket(statut);
+
+-- Note: Les tables Django standard (auth_group, auth_permission, django_content_type, 
+-- django_migrations, django_session, authtoken_token, token_blacklist_*) sont 
+-- automatiquement créées et gérées par Django lors des migrations.

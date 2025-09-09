@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Fajma',
+        'NAME': 'debug_semoka',
         'USER': 'postgres',
         'PASSWORD': 'Enus814',
         'HOST': 'localhost',
