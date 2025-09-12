@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fajma',
+        'NAME': 'Fajma',
         'USER': 'postgres',
         'PASSWORD': 'Enus814',
         'HOST': 'localhost',
@@ -183,4 +183,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'efajma.contact@fenku-it.com'  # Votre App Mail
 EMAIL_HOST_PASSWORD = 'cM6-bjYZEwKgxBW'  # Votre mot de passe d'application Mail
+
 
