@@ -119,9 +119,8 @@ const SidebarDesktop = () => {
             </div>
           }
         </div>
-        <IconButton>
+        <IconButton onClick={() => setIsToggle(!isToggle)}>
           <MenuOutlinedIcon 
-            onClick={() => setIsToggle(!isToggle)}
             sx={{ 
               cursor: 'pointer',
               color: `${theme.palette.mode === 'dark' ? colors.primary[100] : colors.blackAccent[100]}`,

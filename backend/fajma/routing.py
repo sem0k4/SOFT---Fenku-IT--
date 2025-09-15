@@ -2,8 +2,10 @@ from django.urls import re_path
 from . import consumers
 
 websocket_urlpatterns = [
-    re_path(r'ws/iot/(?P<patient_id>\w+)/$', consumers.IoTConsumer.as_asgi()),
-    re_path(r'ws/monitoring/(?P<room_name>\w+)/$', consumers.MonitoringConsumer.as_asgi()),
-    re_path(r'ws/alerts/$', consumers.AlertConsumer.as_asgi()),
-    re_path(r'ws/chat/(?P<room_name>\w+)/$', consumers.ChatConsumer.as_asgi()),
+    # Routes pour les consultations
+    re_path(r'ws/consultation/(?P<consultation_id>\w+)/$', consumers.ConsultationConsumer.as_asgi()),
+    
+    # Note: Communication MQTT se fait directement entre ESP32 et Frontend React
+    # Le backend Django ne gère que les consultations via WebSocket
+    # Architecture IoT: ESP32 → MQTT Broker (EMQX Cloud) → Frontend React (direct)
 ]

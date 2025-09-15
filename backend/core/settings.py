@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-jmn_ekc_%z^+9$6iw4*+63@pkk_%%_+9ou$v#2#+ef609iofux
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "10.2.5.204", "*"]
 
 # Autoriser les requêtes CORS depuis le frontend
 CORS_ALLOWED_ORIGINS = [
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'fajma',
+    'iot',
 ]
 
 MIDDLEWARE = [
@@ -185,17 +186,90 @@ EMAIL_HOST_PASSWORD = 'cM6-bjYZEwKgxBW'  # Votre mot de passe d'application Mail
 # Configuration Django Channels
 ASGI_APPLICATION = 'core.asgi.application'
 
-# Configuration Redis pour Channels
+# Configuration des channels (WebSocket) - Utilisation en mémoire pour éviter Redis
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }
+
+# Configuration Redis (commentée temporairement)
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('127.0.0.1', 6379)],
+#         },
+#     },
+# }
 
 # Configuration WebSocket
 WEBSOCKET_URL = '/ws/'
 WEBSOCKET_HEARTBEAT_INTERVAL = 30  # secondes
 WEBSOCKET_TIMEOUT = 300  # 5 minutes
+
+
+# Configuration CORS pour développement
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Configuration WebSocket
+WEBSOCKET_ACCEPT_ALL = True
+
+# Configuration du cache Redis pour les données IoT
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+# ================================
+# Configuration MQTT IoT
+# ================================
+
+# Chargement des variables d'environnement MQTT
+MQTT_BROKER_HOST = os.getenv('MQTT_BROKER_HOST', 'broker.hivemq.com')
+MQTT_BROKER_PORT = int(os.getenv('MQTT_BROKER_PORT', 8883))
+MQTT_USERNAME = os.getenv('MQTT_USERNAME', 'FenkuIT_Brocker')
+MQTT_PASSWORD = os.getenv('MQTT_PASSWORD', 'FenkuIT@2024')
+MQTT_USE_TLS = os.getenv('MQTT_USE_TLS', 'True').lower() == 'true'
+
+# Configuration automatique selon l'environnement
+if MQTT_USERNAME and MQTT_PASSWORD:
+    # Mode production avec authentification
+    MQTT_USE_TLS = True
+    if MQTT_BROKER_PORT == 1883:  # Passer au port sécurisé
+        MQTT_BROKER_PORT = 8883
+else:
+    # Mode développement avec broker public
+    MQTT_BROKER_HOST = 'broker.hivemq.com'
+    MQTT_BROKER_PORT = 1883
+    MQTT_USE_TLS = False
+
+# Topics MQTT (avec variables d'environnement)
+MQTT_TOPIC_SENSORS = os.getenv('MQTT_TOPIC_SENSORS', 'fenkuit/sensors')
+MQTT_TOPIC_COMMANDS = os.getenv('MQTT_TOPIC_COMMANDS', 'fenkuit/devices')
+MQTT_TOPIC_STATUS = os.getenv('MQTT_TOPIC_STATUS', 'fenkuit/devices')
+
+MQTT_TOPICS = {
+    'SENSOR_DATA': f'{MQTT_TOPIC_SENSORS}/+/data',
+    'DEVICE_STATUS': f'{MQTT_TOPIC_SENSORS}/+/status',
+    'DEVICE_CONFIG': f'{MQTT_TOPIC_SENSORS}/+/config',
+    'COMMANDS': f'{MQTT_TOPIC_COMMANDS}/+/control'
+}
+
+# Configuration du client MQTT (avec variables d'environnement)
+MQTT_CLIENT_ID = os.getenv('MQTT_CLIENT_ID', 'django_fajma_client')
+MQTT_KEEPALIVE = int(os.getenv('MQTT_KEEPALIVE', 60))  # secondes
+MQTT_QOS = int(os.getenv('MQTT_QOS', 1))  # Quality of Service (0, 1, ou 2)
+MQTT_RETAIN = False  # Messages retained
+
+# Paramètres de reconnexion
+MQTT_RECONNECT_DELAY = int(os.getenv('MQTT_RECONNECT_DELAY', 5))
+MQTT_MAX_RECONNECT_ATTEMPTS = int(os.getenv('MQTT_MAX_RECONNECT_ATTEMPTS', 10))
+
+# Auto-démarrage du client MQTT
+MQTT_AUTO_START = True
+
+# Logging MQTT
+MQTT_LOG_LEVEL = 'INFO'  # DEBUG, INFO, WARNING, ERROR

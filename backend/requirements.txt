@@ -11,11 +11,11 @@ django-channels-presence==1.0.1       # Présence utilisateur temps réel
 aiortc==1.6.0                         # WebRTC pour Python
 websockets==12.0                      # WebSocket client/server
 
-# IoT et MQTT
-paho-mqtt==1.6.1                     # Client MQTT
-mqtt-client==1.0.0                    # Client MQTT avancé
-pyserial==3.5                         # Communication série (ESP32)
-bleak==0.21.1                         # Bluetooth Low Energy
+# IoT et MQTT - Supprimé car fonctionnalité IoT retirée
+# paho-mqtt==1.6.1                     # Client MQTT
+# mqtt-client==1.0.0                    # Client MQTT avancé
+# pyserial==3.5                         # Communication série (ESP32)
+# bleak==0.21.1                         # Bluetooth Low Energy
 
 # Sécurité IoT
 cryptography==41.0.8                  # Chiffrement avancé

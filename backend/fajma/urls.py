@@ -10,7 +10,7 @@ TokenRefreshView.permission_classes = [AllowAny]
 from .views import (
     TypesAntecedentsViewSet, ServicesViewSet, HopitalViewSet,
     HopitalServicesViewSet, UtilisateurViewSet, MedecinViewSet,
-    PatientViewSet, CapteurIoTViewSet, ConsultationViewSet,
+    PatientViewSet, ConsultationViewSet,
     OrdonnanceViewSet, MedicamentsViewSet, LigneOrdonnanceViewSet,
     AnalysesViewSet, RadiographieEchographieViewSet, AntecedentViewSet,
     BiometrieViewSet, CarnetConsultationViewSet, FactureViewSet,
@@ -34,7 +34,7 @@ router.register(r'hopital-services', HopitalServicesViewSet)
 router.register(r'utilisateurs', UtilisateurViewSet)
 router.register(r'medecins', MedecinViewSet)
 router.register(r'patients', PatientViewSet)
-router.register(r'capteurs', CapteurIoTViewSet)
+
 router.register(r'consultations', ConsultationViewSet)
 router.register(r'ordonnances', OrdonnanceViewSet)
 router.register(r'medicaments', MedicamentsViewSet)
@@ -59,8 +59,7 @@ router.register(r'documents', DocumentsMedicauxViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     
-    # URLs IoT
-    path('', include('fajma.urls_iot')),
+
     
     # URLs d'authentification
     path('auth/register/', RegisterView.as_view(), name='register'),

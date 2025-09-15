@@ -6,7 +6,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .permissions import IsOwnerOrMedecin, IsMedecin, IsValidToken
 from .models import (
     TypesAntecedents, Services, Hopital, HopitalServices, Utilisateur, Medecin,
-    Patient, CapteurIoT, Consultation, Ordonnance, Medicaments, LigneOrdonnance,
+    Patient, Consultation, Ordonnance, Medicaments, LigneOrdonnance,
     Analyses, RadiographieEchographie, Antecedent, Biometrie, CarnetConsultation,
     Facture, RendezVous, Logs, Salle, Lit, Hospitalisation, Ambulance,
     ServiceAccueil, ConseilsSante, DeclarationsNaissance, DocumentsMedicaux,
@@ -15,7 +15,7 @@ from .models import (
 from .serializers import (
     TypesAntecedentsSerializer, ServicesSerializer, HopitalSerializer,
     HopitalServicesSerializer, UtilisateurSerializer, MedecinSerializer,
-    PatientSerializer, CapteurIoTSerializer, ConsultationDetailSerializer,
+    PatientSerializer, ConsultationDetailSerializer,
     OrdonnanceSerializer, MedicamentsSerializer, LigneOrdonnanceSerializer,
     AnalysesSerializer, RadiographieEchographieSerializer, AntecedentSerializer,
     BiometrieSerializer, CarnetConsultationSerializer, FactureSerializer,
@@ -172,18 +172,7 @@ class DocumentsMedicauxViewSet(viewsets.ModelViewSet):
             return DocumentsMedicaux.objects.filter(patient__user=user)  # Patients voient leurs documents
         return DocumentsMedicaux.objects.none()
 
-class CapteurIoTViewSet(viewsets.ModelViewSet):
-    queryset = CapteurIoT.objects.all()
-    serializer_class = CapteurIoTSerializer
-    permission_classes = [IsAuthenticated, IsOwnerOrMedecin]
 
-    def get_queryset(self):
-        user = self.request.user
-        if user.role == 'medecin':
-            return CapteurIoT.objects.all()  # Médecins voient toutes les données IoT
-        elif user.role == 'patient':
-            return CapteurIoT.objects.filter(patient__user=user)  # Patients voient leurs données IoT
-        return CapteurIoT.objects.none()
 
 class OrdonnanceViewSet(viewsets.ModelViewSet):
     queryset = Ordonnance.objects.all()

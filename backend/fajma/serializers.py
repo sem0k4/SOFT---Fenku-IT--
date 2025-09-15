@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import (
     TypesAntecedents, Services, Hopital, HopitalServices, Utilisateur, Medecin,
-    Patient, CapteurIoT, Consultation, Ordonnance, Medicaments, LigneOrdonnance,
+    Patient, Consultation, Ordonnance, Medicaments, LigneOrdonnance,
     Analyses, RadiographieEchographie, Antecedent, Biometrie, CarnetConsultation,
     Facture, RendezVous, Logs, Salle, Lit, Hospitalisation, Ambulance,
     ServiceAccueil, ConseilsSante, DeclarationsNaissance, DocumentsMedicaux,
@@ -56,10 +56,7 @@ class PatientSerializer(serializers.ModelSerializer):
         fields = ['patient_id', 'prenom', 'nom', 'date_naissance', 'sexe', 
                  'numero_identification_national', 'telephone', 'email']
 
-class CapteurIoTSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CapteurIoT
-        fields = '__all__'
+
 
 class SignesVitauxSerializer(serializers.Serializer):
     spo2 = serializers.IntegerField(min_value=0, max_value=100)

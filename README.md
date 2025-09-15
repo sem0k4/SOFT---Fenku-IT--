@@ -5,7 +5,7 @@
 [![Django](https://img.shields.io/badge/Django-4.2+-green.svg)](https://www.djangoproject.com/)
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6.svg)](https://www.typescriptlang.org/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
+
 [![WebSocket](https://img.shields.io/badge/WebSocket-Real--time-FF6B6B.svg)](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 
 > **Système de santé IoT en temps réel** - Une plateforme complète pour la surveillance des patients avec des capteurs ESP32, communication temps réel, et interface web moderne.
@@ -16,7 +16,7 @@
 - [✨ Fonctionnalités](#-fonctionnalités)
 - [🏗️ Architecture](#️-architecture)
 - [🚀 Installation Rapide](#-installation-rapide)
-- [🐳 Déploiement Docker](#-déploiement-docker)
+
 - [📱 Utilisation](#-utilisation)
 - [🔧 Configuration](#-configuration)
 - [📊 Monitoring IoT](#-monitoring-iot)
@@ -34,7 +34,7 @@ FAJMA IoT Healthcare System est une plateforme de surveillance médicale en temp
 - **Backend Django** avec API REST et WebSocket
 - **Frontend React/TypeScript** avec interface moderne
 - **Communication temps réel** pour le monitoring continu
-- **Architecture microservices** avec Docker
+- **Architecture modulaire** pour le développement
 - **Sécurité avancée** et chiffrement des données
 
 ### 🎯 Objectifs du Projet
@@ -44,6 +44,26 @@ FAJMA IoT Healthcare System est une plateforme de surveillance médicale en temp
 - Interface intuitive pour le personnel médical
 - Intégration facile avec les systèmes hospitaliers existants
 - Évolutivité et haute disponibilité
+
+### ⚠️ État Actuel du Développement
+
+**Capteurs IoT :**
+- ✅ **MLX90614** : Capteur de température infrarouge fonctionnel
+- ⚠️ **SpO2 & Fréquence cardiaque** : Actuellement simulés (semoka)
+- 🔄 **Intégration** : Les données proviennent temporairement de sources différentes
+- 🎯 **Objectif** : Unifier toutes les mesures sur le dispositif FAJMA unique
+
+**Architecture Actuelle :**
+- **Communication IoT** : ESP32 ↔ MQTT Broker (EMQX Cloud) ↔ Frontend React (connexion directe)
+- **Backend Django** : Gestion des utilisateurs, consultations, et stockage en base de données
+- **Frontend React** : Interface utilisateur avec monitoring IoT temps réel via MQTT direct
+- **Base de données** : PostgreSQL pour le stockage des données patients et consultations
+- **⚠️ Note importante** : Le backend Django **n'intervient pas** dans la communication MQTT pour l'instant
+
+**Flux de Communication :**
+- **IoT Data** : ESP32 → MQTT Broker → React (direct, sans backend)
+- **Consultations** : React ↔ Django WebSocket ↔ Base de données
+- **Authentification** : React ↔ Django API ↔ PostgreSQL
 
 ## ✨ Fonctionnalités
 
@@ -56,9 +76,100 @@ FAJMA IoT Healthcare System est une plateforme de surveillance médicale en temp
 
 ### 💬 Communication Temps Réel
 - **WebSocket** - Données IoT en temps réel
+- **MQTT** - Communication avec les capteurs ESP32
 - **Chat médical** - Communication entre équipes
 - **Notifications push** - Alertes instantanées
 - **Appels vidéo** - Téléconsultation (WebRTC)
+
+#### 🔌 Architecture MQTT Directe
+
+⚠️ **Note importante** : La communication MQTT se fait directement entre le broker MQTT et le frontend React, **sans passer par le backend Django** pour l'instant.
+
+##### Configuration MQTT dans le frontend
+```javascript
+// Configuration MQTT directe
+const mqttConfig = {
+  host: 'b1d7df11.ala.eu-central-1.emqxsl.com',
+  port: 8084,
+  protocol: 'wss',
+  path: '/mqtt',
+  username: 'Fenku_IT',
+  password: 'Enus814@001',
+  clientId: `react-client-${Math.random().toString(16).substr(2, 8)}`
+};
+
+const topics = {
+  main: 'mqx/esp32',
+  commands: 'mqx/esp32/commands'
+};
+```
+
+##### Hook React pour connexion MQTT directe
+```jsx
+// hooks/useMQTTDirect.js
+import { useEffect, useState } from 'react';
+import mqtt from 'mqtt';
+
+export const useMQTTDirect = () => {
+    const [client, setClient] = useState(null);
+    const [isConnected, setIsConnected] = useState(false);
+    const [temperatureData, setTemperatureData] = useState({});
+    
+    const connect = () => {
+        const mqttUrl = `${mqttConfig.protocol}://${mqttConfig.host}:${mqttConfig.port}${mqttConfig.path}`;
+        const mqttClient = mqtt.connect(mqttUrl, mqttConfig);
+        
+        mqttClient.on('connect', () => {
+            setIsConnected(true);
+            mqttClient.subscribe(topics.main);
+        });
+        
+        mqttClient.on('message', (topic, message) => {
+            const data = JSON.parse(message.toString());
+            setTemperatureData(data);
+        });
+        
+        setClient(mqttClient);
+    };
+    
+    return { isConnected, temperatureData, connect };
+};
+
+// components/IotFAJMA.jsx
+const IotFAJMA = () => {
+    const { isConnected, temperatureData } = useMQTTDirect();
+    
+    return (
+        <div className="sensor-grid">
+            <div>Statut: {isConnected ? 'Connecté' : 'Déconnecté'}</div>
+            <SensorCard 
+                title="Température" 
+                value={temperatureData.object_temperature} 
+                unit="°C"
+                source="MLX90614 (Réel)"
+            />
+            <SensorCard 
+                title="SpO2" 
+                value={temperatureData.spo2} 
+                unit="%"
+                source="Simulé (semoko)"
+            />
+            <SensorCard 
+                title="Fréquence Cardiaque" 
+                value={temperatureData.heart_rate} 
+                unit="bpm"
+                source="Simulé (semoko)"
+            />
+        </div>
+    );
+};
+```
+
+##### Flux de Données Actuel
+1. **ESP32** → Capteur MLX90614 → **MQTT Broker (EMQX Cloud)**
+2. **Simulation** → Valeurs SpO2/FC → **MQTT Broker (EMQX Cloud)**
+3. **Frontend React** → Connexion MQTT directe → **Interface temps réel**
+4. **Backend Django** → Stockage des données → **Base PostgreSQL** (séparément)
 
 ### 🔐 Sécurité & Conformité
 - **Authentification JWT** - Sécurité des sessions
@@ -134,7 +245,7 @@ graph TB
 - **Socket.io Client** - WebSocket client
 
 #### Infrastructure
-- **Docker & Docker Compose** - Conteneurisation
+
 - **Nginx** - Reverse proxy et load balancer
 - **Let's Encrypt** - Certificats SSL automatiques
 - **Prometheus & Grafana** - Monitoring
@@ -142,39 +253,117 @@ graph TB
 
 #### IoT & Capteurs
 - **ESP32** - Microcontrôleur principal
-- **MAX30102** - Capteur SpO2 et fréquence cardiaque
-- **DS18B20** - Capteur de température
+- **MLX90614** - Capteur de température infrarouge (✅ **FONCTIONNEL**)
+- **MAX30102** - Capteur SpO2 et fréquence cardiaque (⚠️ **SIMULÉ**)
 - **WiFi/MQTT** - Communication sans fil
 - **JSON** - Format d'échange de données
+
+##### 🚨 État actuel des capteurs
+- **MLX90614** : Seul capteur physiquement connecté et opérationnel
+- **SpO2 et Fréquence cardiaque** : Valeurs générées par simulation (semoko)
+- **Dispositif FAJMA** : En développement - les données proviennent actuellement de deux sources différentes mais devraient idéalement provenir du même dispositif FAJMA
 
 ## 🚀 Installation Rapide
 
 ### Prérequis
 
-- **Docker** 20.10+
-- **Docker Compose** 2.0+
-- **Node.js** 18+ (pour le développement)
-- **Python** 3.9+ (pour le développement)
+- **PostgreSQL** 12+ (base de données principale)
+- **Node.js** 18+ (pour le développement frontend)
+- **Python** 3.9+ (pour le développement backend)
 - **Git** 2.30+
 
-### 🐳 Installation avec Docker (Recommandé)
+### 📋 Étapes d'installation
+
+#### 1. 🗄️ Configuration de la base de données PostgreSQL
+
+**IMPORTANT** : Une base de données PostgreSQL doit être créée au préalable en suivant le schéma défini dans le dossier `Ressources/schema`.
 
 ```bash
-# Cloner le repository
-git clone https://github.com/votre-org/fajma-iot-healthcare.git
-cd fajma-iot-healthcare
+# Se connecter à PostgreSQL
+psql -U postgres
 
-# Copier les fichiers d'environnement
-cp .env.example .env
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env
+# Créer la base de données
+CREATE DATABASE fajma_db;
 
-# Démarrer tous les services
-make dev-up
+# Créer un utilisateur dédié
+CREATE USER fajma_user WITH PASSWORD 'fajma_password';
 
-# Ou manuellement
-docker-compose -f docker-compose.dev.yml up -d
+# Accorder les privilèges
+GRANT ALL PRIVILEGES ON DATABASE fajma_db TO fajma_user;
+
+# Se connecter à la base créée
+\c fajma_db
+
+# Exécuter le schéma de base de données
+# Référez-vous au fichier Ressources/schema pour la structure complète des tables
+# Le fichier contient toutes les tables nécessaires pour le système hospitalier :
+# - Tables utilisateurs (utilisateur, medecin, patient)
+# - Tables médicales (consultation, ordonnance, analyses, etc.)
+# - Tables hospitalières (hopital, services, salles, lits, etc.)
+# - Tables de gestion (facture, rendezvous, logs, etc.)
 ```
+
+#### 2. 🚀 Installation du projet
+
+```bash
+# Cloner le projet
+git clone https://github.com/votre-username/fajma.git
+cd fajma
+
+# Copier le fichier d'environnement
+cp .env.example .env
+
+# Configurer les variables d'environnement (voir section Configuration)
+# Notamment la connexion à la base PostgreSQL créée précédemment
+```
+
+#### 3. 🐍 Installation du backend
+
+```bash
+cd backend
+
+# Créer un environnement virtuel
+python -m venv venv
+source venv/bin/activate  # Sur Windows: venv\Scripts\activate
+
+# Installer les dépendances
+pip install -r requirements.txt
+
+# Appliquer les migrations Django (sur la base PostgreSQL créée)
+python manage.py migrate
+
+# Créer un superutilisateur
+python manage.py createsuperuser
+
+# Démarrer le serveur de développement
+python manage.py runserver
+```
+
+#### 4. ⚛️ Installation du frontend
+
+```bash
+# Dans un nouveau terminal
+cd frontend
+
+# Installer les dépendances
+npm install
+
+# Démarrer le serveur de développement
+npm run dev
+```
+
+#### 5. 🎯 Accès à l'application
+
+L'application sera accessible sur :
+- **Frontend** : http://localhost:5173
+- **Backend API** : http://localhost:8000
+- **Admin Django** : http://localhost:8000/admin
+
+### ⚠️ Notes importantes
+
+- **Base de données** : Le schéma PostgreSQL dans `Ressources/schema` contient 25+ tables pour un système hospitalier complet
+- **Modèles Django** : Le fichier `backend/fajma/models.py` contient tous les modèles correspondant au schéma
+- **Données de test** : Consultez `Ressources/utilisateur` et `Ressources/hospitale` pour des données d'exemple
 
 ### 🛠️ Installation pour le Développement
 
@@ -224,27 +413,46 @@ DJANGO_SECRET_KEY=your-super-secret-key-here
 DJANGO_DEBUG=True
 DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
 
-# Database
+# Database PostgreSQL (OBLIGATOIRE)
+# Utilisez les mêmes informations que lors de la création de la base
 DATABASE_URL=postgresql://fajma_user:fajma_password@localhost:5432/fajma_db
+# Ou configurez séparément :
+# DB_NAME=fajma_db
+# DB_USER=fajma_user
+# DB_PASSWORD=fajma_password
+# DB_HOST=localhost
+# DB_PORT=5432
 
-# Redis
+# Redis (optionnel pour le cache)
 REDIS_URL=redis://localhost:6379/0
-
-# MQTT
-MQTT_BROKER_HOST=localhost
-MQTT_BROKER_PORT=1883
-MQTT_USERNAME=fajma_mqtt
-MQTT_PASSWORD=mqtt_password
 
 # Security
 JWT_SECRET_KEY=your-jwt-secret-key
 ENCRYPTION_KEY=your-32-byte-encryption-key
 
-# Email
+# Email (optionnel)
 EMAIL_HOST=smtp.gmail.com
 EMAIL_PORT=587
+EMAIL_USE_TLS=True
 EMAIL_HOST_USER=your-email@gmail.com
 EMAIL_HOST_PASSWORD=your-app-password
+```
+
+#### ⚠️ Configuration importante de la base de données
+
+Assurez-vous que :
+1. **PostgreSQL est installé et démarré** sur votre système
+2. **La base de données `fajma_db` existe** (créée selon les étapes précédentes)
+3. **L'utilisateur `fajma_user` a les privilèges** sur cette base
+4. **Le schéma des tables est appliqué** depuis `Ressources/schema`
+
+Pour vérifier la connexion :
+```bash
+# Tester la connexion PostgreSQL
+psql -U fajma_user -d fajma_db -h localhost
+
+# Dans Django, tester la connexion
+python manage.py dbshell
 ```
 
 #### Frontend (.env)
@@ -262,54 +470,6 @@ VITE_ENABLE_IOT_MONITORING=true
 VITE_SENTRY_DSN=your-sentry-dsn
 VITE_ANALYTICS_ID=your-analytics-id
 ```
-
-## 🐳 Déploiement Docker
-
-### Développement
-
-```bash
-# Démarrer l'environnement de développement
-make dev-up
-
-# Voir les logs
-make dev-logs
-
-# Arrêter les services
-make dev-down
-
-# Rebuild et restart
-make dev-restart
-```
-
-### Production
-
-```bash
-# Build des images de production
-make prod-build
-
-# Déployer en production
-make prod-deploy
-
-# Monitoring
-make prod-status
-
-# Backup de la base de données
-make db-backup
-```
-
-### Services Disponibles
-
-| Service | URL | Description |
-|---------|-----|-------------|
-| Frontend | http://localhost:3000 | Interface React |
-| Backend API | http://localhost:8000/api | API REST Django |
-| Admin Django | http://localhost:8000/admin | Interface d'administration |
-| WebSocket | ws://localhost:8000/ws | Communication temps réel |
-| PostgreSQL | localhost:5432 | Base de données |
-| Redis | localhost:6379 | Cache et sessions |
-| Nginx | http://localhost:80 | Reverse proxy |
-| Grafana | http://localhost:3001 | Monitoring |
-| Prometheus | http://localhost:9090 | Métriques |
 
 ## 📱 Utilisation
 
