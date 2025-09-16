@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'fajma',
-    'iot',
 ]
 
 MIDDLEWARE = [

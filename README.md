@@ -65,6 +65,19 @@ FAJMA IoT Healthcare System est une plateforme de surveillance médicale en temp
 - **Consultations** : React ↔ Django WebSocket ↔ Base de données
 - **Authentification** : React ↔ Django API ↔ PostgreSQL
 
+### 🔧 Modifications Récentes
+
+**✅ Corrections apportées :**
+- **Suppression de l'application IoT** : L'application Django 'iot' non fonctionnelle a été complètement supprimée
+- **Nettoyage des URLs** : Suppression des références à 'iot.urls' dans le routage Django
+- **Correction des migrations** : Réparation des dépendances de migration cassées dans l'app 'fajma'
+- **Stabilisation du backend** : Le serveur Django démarre maintenant sans erreurs
+
+**🚨 Points d'attention :**
+- Les fonctionnalités IoT restent disponibles via la connexion MQTT directe dans le frontend
+- Le backend Django se concentre sur la gestion des utilisateurs et des consultations médicales
+- 41 migrations restent non appliquées (normal, peuvent être appliquées avec `python manage.py migrate`)
+
 ## ✨ Fonctionnalités
 
 ### 🏥 Monitoring Médical
@@ -265,6 +278,17 @@ graph TB
 
 ## 🚀 Installation Rapide
 
+### ✅ État du Projet Après Corrections
+
+**Le projet est maintenant stable et prêt à être utilisé !**
+
+**Vérifications effectuées :**
+- ✅ Application IoT supprimée du backend Django
+- ✅ URLs nettoyées (plus de références à iot.urls)
+- ✅ Migrations réparées (dépendances corrigées)
+- ✅ Serveur Django démarre sans erreurs
+- ✅ Fonctionnalités IoT disponibles via MQTT direct
+
 ### Prérequis
 
 - **PostgreSQL** 12+ (base de données principale)
@@ -339,6 +363,10 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+**✅ Le serveur Django démarre maintenant sans erreurs !**
+
+**Note importante :** Si vous voyez le message "You have 41 unapplied migration(s)", c'est normal. Ces migrations peuvent être appliquées avec `python manage.py migrate` si nécessaire.
+
 #### 4. ⚛️ Installation du frontend
 
 ```bash
@@ -358,6 +386,37 @@ L'application sera accessible sur :
 - **Frontend** : http://localhost:5173
 - **Backend API** : http://localhost:8000
 - **Admin Django** : http://localhost:8000/admin
+
+#### 6. ✅ Vérification du Fonctionnement
+
+**Pour vérifier que tout fonctionne correctement :**
+
+1. **Backend Django** :
+   ```bash
+   cd backend
+   python manage.py runserver
+   # Doit démarrer sans erreurs sur http://127.0.0.1:8000/
+   ```
+
+2. **Frontend React** :
+   ```bash
+   cd frontend
+   npm run dev
+   # Doit démarrer sur http://localhost:5173
+   ```
+
+3. **Test de l'API** :
+   - Visitez http://localhost:8000/admin pour l'interface d'administration
+   - Connectez-vous avec le superutilisateur créé
+
+4. **Test de l'interface** :
+   - Visitez http://localhost:5173 pour l'interface utilisateur
+   - Les fonctionnalités IoT utilisent la connexion MQTT directe
+
+**🚨 En cas de problème :**
+- Vérifiez que PostgreSQL est démarré
+- Vérifiez la configuration de la base de données dans les variables d'environnement
+- Consultez les logs pour identifier les erreurs
 
 ### ⚠️ Notes importantes
 

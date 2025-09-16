@@ -20,5 +20,4 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('fajma.urls')),
-    path('api/iot/', include('iot.urls')),
 ]

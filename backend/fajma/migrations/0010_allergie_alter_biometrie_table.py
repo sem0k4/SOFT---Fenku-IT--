@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('fajma', '0009_alter_capteuriot_options_alter_consultation_options'),
+        ('fajma', '0005_alter_utilisateur_options'),
     ]
 
     operations = [
