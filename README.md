@@ -301,6 +301,13 @@ GRANT ALL PRIVILEGES ON DATABASE fajma_db TO fajma_user;
 # - Tables médicales (consultation, ordonnance, analyses, etc.)
 # - Tables hospitalières (hopital, services, salles, lits, etc.)
 # - Tables de gestion (facture, rendezvous, logs, etc.)
+
+# En cas d'erreur lors de la création de la base de données
+# Vérifiez les points suivants :
+# 1. Assurez-vous que PostgreSQL est correctement installé et en cours d'exécution
+# 2. Vérifiez que l'utilisateur a les droits suffisants
+# 3. Si une table existe déjà, vous pouvez la supprimer avec DROP TABLE nom_table CASCADE;
+# 4. Pour réinitialiser complètement la base : DROP DATABASE fajma_db; puis recréez-la
 ```
 
 #### 2. 🚀 Installation du projet
@@ -331,6 +338,22 @@ pip install -r requirements.txt
 
 # Appliquer les migrations Django (sur la base PostgreSQL créée)
 python manage.py migrate
+
+# En cas d'erreur lors des migrations
+# Vous pouvez créer les migrations manuellement pour chaque application
+python manage.py makemigrations fajma
+python manage.py makemigrations iot
+
+# Puis appliquer les migrations spécifiques
+python manage.py migrate fajma
+python manage.py migrate iot
+
+# Si vous rencontrez des erreurs de dépendance entre modèles
+# Vous pouvez utiliser l'option --fake-initial pour ignorer les migrations initiales
+python manage.py migrate fajma --fake-initial
+
+# Pour vérifier l'état des migrations
+python manage.py showmigrations
 
 # Créer un superutilisateur
 python manage.py createsuperuser
