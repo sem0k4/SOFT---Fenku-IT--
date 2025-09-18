@@ -6,14 +6,15 @@ import {
   faCog, faQuestionCircle, faSignOutAlt 
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 
 const TopNavbar = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
+  const { logout } = useAuth();
   
   const handleLogout = () => {
-    AuthService.logout();
+    logout();
     navigate('/login');
   };
 

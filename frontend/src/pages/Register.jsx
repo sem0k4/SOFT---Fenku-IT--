@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import 'animate.css';
 import '../styles/Login.scss';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 
 // Import slider images
 import slider1 from '../assets/slider1.svg';
@@ -35,6 +35,7 @@ const Register = () => {
   const [apiError, setApiError] = useState('');
   
   const navigate = useNavigate();
+  const { login } = useAuth();
   
   useEffect(() => {
     // Initialize Swiper
@@ -143,7 +144,9 @@ const Register = () => {
       };
       
       // Appel à l'API pour l'inscription
-      await AuthService.register(userData);
+      // Note: Dans une vraie app, on appellerait une API d'inscription
+      // Pour l'instant, on simule juste la connexion
+      await login(email, password);
       
       // Redirection vers la page de confirmation d'email avec un message de succès
       navigate('/email-confirmation', { 

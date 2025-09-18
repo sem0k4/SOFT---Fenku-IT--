@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 
 const ProtectedRoute = ({ children }) => {
   // Vérifier si l'utilisateur est authentifié
-  const isAuthenticated = AuthService.isAuthenticated();
+  const { user } = useAuth();
+  const isAuthenticated = !!user;
   
   // Si non authentifié, rediriger vers la page de connexion
   if (!isAuthenticated) {

@@ -20,7 +20,7 @@ import slider3 from '../assets/slider3.svg';
 import logo from '../assets/Nditou_logo.jpg';
 
 import { useNavigate, useLocation } from 'react-router-dom';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 import Header from '../components/landing/Header';
 
 const Login = () => {
@@ -34,6 +34,7 @@ const Login = () => {
   const navigate = useNavigate();
   // Après la ligne 34, ajoutez ce code pour récupérer le paramètre email_verified de l'URL
   const location = useLocation();
+  const { login } = useAuth();
   
   // Vérifier s'il y a un message de succès dans l'état de navigation
   const successMessage = location.state?.message || '';
@@ -97,7 +98,7 @@ const Login = () => {
       setIsLoading(true);
       
       // Appel à l'API pour la connexion
-      await AuthService.login(username, password);
+      await login(username, password);
       
       // Rediriger vers le nouveau dashboard patient après connexion
       navigate('/dashboard-patient'); // Redirection vers le nouveau dashboard dans scenes

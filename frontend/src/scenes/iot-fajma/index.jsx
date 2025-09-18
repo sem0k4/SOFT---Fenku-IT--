@@ -10,11 +10,12 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import SensorsIcon from '@mui/icons-material/Sensors';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import useMQTTDirect from "../../hooks/useMQTTDirect";
-import AuthService from "../../services/auth";
+import { useAuth } from "../../services/auth";
 
 const IotFAJMA = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const { user } = useAuth();
     
     // Utiliser le hook MQTT direct pour les données MLX90614
     const {
@@ -78,7 +79,7 @@ const IotFAJMA = () => {
 
     // Récupérer les informations du patient connecté au chargement du composant
     useEffect(() => {
-        const userInfo = AuthService.getUserInfo();
+        const userInfo = user;
         if (userInfo) {
             setPatientInfo({
                 salutation: "IoT FAJMA",

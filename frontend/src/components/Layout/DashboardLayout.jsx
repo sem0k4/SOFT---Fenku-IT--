@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom"; 
 import SidebarDesktop from "../../scenes/global/SidebarDesktop";
 import Topbar from "../../scenes/global/Topbar";
-import Chatbot from "../landing/Home/Chatbot";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
 
@@ -25,7 +24,6 @@ const DashboardLayout = () => {
                     <Outlet />
                 </main>
             </div>
-            {/* <Chatbot /> */}
         </div>
     )   
 }

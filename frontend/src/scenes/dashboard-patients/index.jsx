@@ -1,80 +1,8 @@
-import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
-import HeaderDashboard from "../../components/shared/HeaderDashboard";
-import { tokens } from "../../theme";
-import { useTheme } from "@emotion/react";
-import DatasVitals from "./DatasVitals";
-import RecentsConsultations from "./RecentsConsultations";
+import React from 'react';
+import DashboardPatient from './DashboardPatient';
 
-import TimerRDV from "./TimerRDV";
-// import Card3 from "./ObjectFAJMA";
-import { Link } from "react-router-dom";
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import AuthService from "../../services/auth";
+const DashboardPatientPage = () => {
+  return <DashboardPatient />;
+};
 
-
-const DashboardPatient = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    
-    // État pour stocker les informations du patient
-    const [patientInfo, setPatientInfo] = useState({
-        salutation: "Bienvenue",
-        nom: "Patient"
-    });
-    
-    // Récupérer les informations du patient connecté au chargement du composant
-    useEffect(() => {
-        const userInfo = AuthService.getUserInfo();
-        if (userInfo) {
-            setPatientInfo({
-                salutation: "Bienvenue", // Salutation fixe
-                nom: userInfo.prenom || "Patient" // Utiliser le prénom de l'utilisateur ou "Patient" par défaut
-            });
-        }
-    }, []);
-    
-
-    return (
-        <Box>
-            <Box 
-                sx={{
-                    display: 'flex',
-                    flexDirection: {sm: 'row', xs: 'column'},
-                    gap: '20px',
-                    justifyContent: {sm: 'space-between', xs: 'center'},
-                    alignItems: 'center',
-                    marginTop: '0px',
-                    marginBottom: '0px'
-                }}
-            >
-                <HeaderDashboard
-                    title={patientInfo.salutation}
-                    span={patientInfo.nom}
-                    subtitle=""
-                />
-                <Link 
-                    className="font-semibold p-2 rounded-lg md:w-1/3 xs:w-1/2 w-full flex items-center justify-center"
-                    to="rdv"
-                    style={{
-                        textDecoration: 'none',
-                        padding: 0,
-                        color: theme.palette.mode === 'dark' ? colors.blackAccent[800] : '#fcfcfc',
-                        backgroundColor: colors.secondary[500], 
-                    }}
-                >
-                    <AddOutlinedIcon />
-                    <span>Prendre un rendez-vous</span>
-                </Link>
-            </Box>
-            <Box className="grid grid-cols-1 md:grid-cols-2 items-center gap-y-0 gap-6">
-                <RecentsConsultations />
-            </Box>
-            
-            {/* Données vitales */}
-            <DatasVitals />
-        </Box>
-    )   
-}
-
-export default DashboardPatient;
+export default DashboardPatientPage;

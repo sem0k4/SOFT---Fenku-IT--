@@ -5,7 +5,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { authService } from '../services/api';
+import { useAuth } from '../services/auth';
 import '../styles/Login.scss'; // Réutilisation du même style
 import Header from '../components/landing/Header';
 
@@ -16,6 +16,7 @@ const CodeConfirmation = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   // Fonction pour gérer le changement dans les champs de code
   const handleCodeChange = (index, value) => {
@@ -82,7 +83,8 @@ const CodeConfirmation = () => {
       }
       
       // Appel à l'API pour vérifier le code
-      const response = await authService.verifyResetCode(email, fullCode);
+      // Simuler la vérification du code de réinitialisation
+      console.log('Vérification du code pour:', email, fullCode);
       
       // Stocker le code vérifié pour l'étape suivante
       localStorage.setItem('resetCode', fullCode);
@@ -112,7 +114,8 @@ const CodeConfirmation = () => {
       }
       
       // Appel à l'API pour renvoyer le code
-      await authService.requestPasswordReset(email);
+      // Simuler le renvoi de la demande de réinitialisation
+      console.log('Renvoi de la demande de réinitialisation pour:', email);
       alert('Un nouveau code a été envoyé à votre adresse email.');
     } catch (error) {
       console.error('Erreur lors de l\'envoi du code:', error);

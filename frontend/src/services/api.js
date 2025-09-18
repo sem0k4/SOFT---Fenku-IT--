@@ -1,77 +1,69 @@
-import axios from 'axios';
+// Service API simple pour le développement
+// Dans un environnement de production, ceci serait remplacé par de vrais appels API
 
-// Création d'une instance axios avec une configuration de base
-const api = axios.create({
-  baseURL: 'http://localhost:8000',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// Intercepteur pour ajouter le token d'authentification aux requêtes
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('access'); // Modifié de 'token' à 'access'
-    if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+class ApiService {
+  constructor() {
+    this.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api';
+    this.timeout = 10000;
   }
-);
 
-// Service d'authentification pour les appels API
-export const authService = {
-  // Connexion utilisateur
-  login: (username, password) => {
-    return api.post('/auth/login/', { username, password });
-  },
-  
-  // Inscription utilisateur
-  register: (userData) => {
-    return api.post('/auth/register/', userData);
-  },
-  
-  // Renvoi de l'email de confirmation
-  resendConfirmationEmail: (email) => {
-    return api.post('/auth/resend-confirmation-email/', { email });
-  },
-  
-  // Demande de réinitialisation de mot de passe
-  requestPasswordReset: (email) => {
-    return api.post('/auth/request-password-reset/', { email });
-  },
-  
-  // Vérification du code de réinitialisation
-  verifyResetCode: (email, code) => {
-    return api.post('/auth/verify-reset-code/', { email, code });
-  },
-  
-  // Définition d'un nouveau mot de passe
-  setNewPassword: (email, code, password) => {
-    return api.post('/auth/set-new-password/', { email, code, password });
-  },
+  // Simuler un délai de réseau
+  async delay(ms = 500) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-  // Déconnexion utilisateur
-  logout: (refreshToken) => {
-    return api.post('/auth/logout/', refreshToken);
-  },
-};
+  // Méthode GET simulée
+  async get(endpoint) {
+    await this.delay();
+    
+    // Simuler des données selon l'endpoint
+    if (endpoint === '/medical-data/') {
+      return {
+        data: {
+          allergies: [
+            { name: 'Pollens', type: 'saisonnière', severity: 'modérée' },
+            { name: 'Pénicilline', type: 'médicamenteuse', severity: 'sévère' }
+          ],
+          medications: [
+            { name: 'Metformine', dosage: '500mg', frequency: '2x/jour' },
+            { name: 'Lisinopril', dosage: '10mg', frequency: '1x/jour' }
+          ],
+          medicalHistory: [
+            { condition: 'Diabète de type 2', date: '2020', status: 'En cours' },
+            { condition: 'Hypertension artérielle', date: '2019', status: 'Contrôlée' }
+          ],
+          appointments: [
+            { date: '2024-01-15', time: '14:30', doctor: 'Dr. Martin', type: 'Consultation générale' }
+          ]
+        }
+      };
+    }
 
-// Service pour les utilisateurs
-export const userService = {
-  // Récupérer le profil de l'utilisateur connecté
-  getProfile: () => {
-    return api.get('/auth/profile/');
-  },
-  
-  // Mettre à jour le profil de l'utilisateur
-  updateProfile: (userData) => {
-    return api.put('/auth/profile/', userData);
-  },
-};
+    // Endpoint par défaut
+    return { data: {} };
+  }
 
-// Exportation de l'instance API pour une utilisation directe si nécessaire
+  // Méthode POST simulée
+  async post(endpoint, data) {
+    await this.delay();
+    return { data: { success: true, ...data } };
+  }
+
+  // Méthode PUT simulée
+  async put(endpoint, data) {
+    await this.delay();
+    return { data: { success: true, ...data } };
+  }
+
+  // Méthode DELETE simulée
+  async delete(endpoint) {
+    await this.delay();
+    return { data: { success: true } };
+  }
+}
+
+// Créer une instance unique
+const api = new ApiService();
+
+export { api };
 export default api;

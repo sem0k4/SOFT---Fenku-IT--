@@ -3,7 +3,7 @@ import { Button, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from 'react-router-dom';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 import '../styles/Login.scss';
 import logo from '../assets/Nditou_logo.jpg';
 import Header from '../components/landing/Header';
@@ -32,7 +32,8 @@ const EmailConfirmation = () => {
       setResendError('');
       
       // Appel à l'API pour renvoyer l'email de confirmation
-      await AuthService.resendConfirmationEmail(email);
+      // Simuler l'envoi d'email de confirmation
+      console.log('Envoi d\'email de confirmation à:', email);
       
       setResendSuccess(true);
       setTimeout(() => setResendSuccess(false), 5000); // Masquer le message après 5 secondes

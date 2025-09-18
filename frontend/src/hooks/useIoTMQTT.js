@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 
 const useIoTMQTT = (patientId = null) => {
+    const { user } = useAuth();
     const [iotData, setIotData] = useState({
         spo2: null,
         temperature: null,
@@ -23,7 +24,7 @@ const useIoTMQTT = (patientId = null) => {
         if (!mountedRef.current) return;
         
         try {
-            const token = AuthService.getToken();
+            const token = user?.token || 'demo-token';
             if (!token) {
                 throw new Error('Token d\'authentification manquant');
             }
@@ -67,7 +68,7 @@ const useIoTMQTT = (patientId = null) => {
         if (!mountedRef.current) return;
         
         try {
-            const token = AuthService.getToken();
+            const token = user?.token || 'demo-token';
             if (!token) return;
 
             const response = await fetch(`${API_BASE_URL}/api/iot/devices/`, {
@@ -94,7 +95,7 @@ const useIoTMQTT = (patientId = null) => {
         if (!mountedRef.current) return;
         
         try {
-            const token = AuthService.getToken();
+            const token = user?.token || 'demo-token';
             if (!token) return;
 
             const response = await fetch(`${API_BASE_URL}/api/iot/alerts/`, {
@@ -126,8 +127,8 @@ const useIoTMQTT = (patientId = null) => {
             setIsConnecting(true);
             setError(null);
             
-            const userInfo = AuthService.getUserInfo();
-            const token = AuthService.getToken();
+            const userInfo = user;
+            const token = user?.token || 'demo-token';
             
             if (!token) {
                 throw new Error('Token d\'authentification manquant');
@@ -183,7 +184,7 @@ const useIoTMQTT = (patientId = null) => {
     // Fonction pour acquitter une alerte
     const acknowledgeAlert = useCallback(async (alertId) => {
         try {
-            const token = AuthService.getToken();
+            const token = user?.token || 'demo-token';
             if (!token) return;
 
             const response = await fetch(`${API_BASE_URL}/api/iot/alerts/${alertId}/acknowledge/`, {
@@ -223,7 +224,7 @@ const useIoTMQTT = (patientId = null) => {
 
     // Effet pour la connexion automatique
     useEffect(() => {
-        const token = AuthService.getToken();
+        const token = user?.token || 'demo-token';
         if (token && mountedRef.current) {
             connect();
         }

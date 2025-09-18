@@ -18,7 +18,7 @@ import slider3 from '../assets/slider3.svg';
 // Ajouter l'import du logo
 import logo from '../assets/Nditou_logo.jpg';
 import { useNavigate } from 'react-router-dom';
-import { authService } from '../services/api';
+import { useAuth } from '../services/auth';
 import Header from '../components/landing/Header';
 
 const ResetPassword = () => {
@@ -29,6 +29,7 @@ const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   useEffect(() => {
     // Initialize Swiper
@@ -83,8 +84,8 @@ const ResetPassword = () => {
     try {
       setIsLoading(true);
       
-      // Appel à l'API pour demander la réinitialisation du mot de passe
-      await authService.requestPasswordReset(email);
+      // Simuler la demande de réinitialisation du mot de passe
+      console.log('Demande de réinitialisation pour:', email);
       
       // Stocker l'email pour les étapes suivantes
       localStorage.setItem('resetEmail', email);

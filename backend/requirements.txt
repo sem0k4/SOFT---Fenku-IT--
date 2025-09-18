@@ -7,7 +7,7 @@ django-cors-headers==4.3.1
 # Communication Temps Réel
 channels==4.0.0                       # WebSocket support pour Django
 channels-redis==4.1.0                 # Redis backend pour Channels
-django-channels-presence==1.0.1       # Présence utilisateur temps réel
+django-channels-presence==1.0.0       # Présence utilisateur temps réel
 aiortc==1.6.0                         # WebRTC pour Python
 websockets==12.0                      # WebSocket client/server
 

@@ -16,7 +16,7 @@ import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
 import { useState } from "react";
 import { Box, IconButton } from "@mui/material";
-import AuthService from "../../services/auth";
+import { useAuth } from "../../services/auth";
 
 
 
@@ -62,10 +62,12 @@ const SidebarDesktop = () => {
   const [ selected, setSelected ] = useState("Dashboard")
   const navigate = useNavigate();
   
+  const { logout } = useAuth();
+  
   const handleLogout = async () => {
     if (window.confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
       try {
-        await AuthService.logout();
+        logout();
         navigate('/login');
       } catch (error) {
         console.error('Erreur lors de la déconnexion:', error);
@@ -84,8 +86,9 @@ const SidebarDesktop = () => {
   
   return (
     <Box
-      className={`sticky border-r lg:block hidden top-0 z-10 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3 flex flex-col`}
+      className={`sticky border-r lg:block hidden top-0 h-screen duration-300 ${isToggle ? 'w-20' : 'w-76'} dark:bg-cyan-950 bg-[#fcfcfc] overflow-hidden py-3 flex flex-col`}
       sx={{ 
+        zIndex: 999999,
         backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc',
         borderColor: `${theme.palette.mode === 'dark' ? colors.blackAccent[500] : colors.blackAccent[900]}`,
       }} 

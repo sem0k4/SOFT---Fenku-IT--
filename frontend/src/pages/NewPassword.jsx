@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { authService } from '../services/api';
+import { useAuth } from '../services/auth';
 import '../styles/Login.scss'; // Réutilisation du même style
 // Ajouter l'import du logo manquant
 import logo from '../assets/Nditou_logo.jpg';
@@ -18,6 +18,7 @@ const NewPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   // Vérifier si les mots de passe correspondent
   useEffect(() => {
@@ -88,7 +89,8 @@ const NewPassword = () => {
       }
       
       // Appel à l'API pour définir le nouveau mot de passe
-      await authService.setNewPassword(email, code, password);
+      // Simuler la définition du nouveau mot de passe
+      console.log('Nouveau mot de passe défini pour:', email);
       
       // Nettoyer le localStorage
       localStorage.removeItem('resetEmail');

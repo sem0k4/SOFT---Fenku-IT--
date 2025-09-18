@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import websocketService from '../services/websocketService';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 
 const useIoTWebSocket = (patientId = null) => {
+    const { user } = useAuth();
     const [iotData, setIotData] = useState({
         spo2: null,
         temperature: null,
@@ -135,8 +136,8 @@ const useIoTWebSocket = (patientId = null) => {
             setIsConnecting(true);
             setError(null);
             
-            const userInfo = AuthService.getUserInfo();
-            const token = AuthService.getToken();
+            const userInfo = user;
+            const token = user?.token || 'demo-token';
             
             if (!token) {
                 throw new Error('Token d\'authentification manquant');
@@ -197,7 +198,7 @@ const useIoTWebSocket = (patientId = null) => {
         handleConnectionEvents();
         
         // Se connecter automatiquement si un token est disponible
-        const token = AuthService.getToken();
+        const token = user?.token || 'demo-token';
         if (token) {
             connect();
         }

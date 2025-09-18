@@ -6,13 +6,14 @@ import {
   faFileMedical, faEnvelope, faSignOutAlt 
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import AuthService from '../services/auth';
+import { useAuth } from '../services/auth';
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleLogout = () => {
-    AuthService.logout();
+    logout();
     navigate('/login');
   };
 

@@ -8,6 +8,7 @@ import NewPassword from './pages/NewPassword';
 
 import LandingPage from './pages/LandingPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './services/auth';
 import './App.css';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -31,14 +32,16 @@ function App() {
   const [ isSidebar, setIsSidebar ] = useState(true);
 
   return (
-    // Fournir le contexte de mode de couleur à l'ensemble de l'application
-    <ColorModeContext.Provider value={colorMode}>
-      {/* Le ThemeProvider applique le thème MUI à l'application */}
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {/* Utilisation du Router pour gérer les routes de l'application */}
-        {/* Routes définies pour l'application */}
-        <Router>
+    // Fournir le contexte d'authentification à l'ensemble de l'application
+    <AuthProvider>
+      {/* Fournir le contexte de mode de couleur à l'ensemble de l'application */}
+      <ColorModeContext.Provider value={colorMode}>
+        {/* Le ThemeProvider applique le thème MUI à l'application */}
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {/* Utilisation du Router pour gérer les routes de l'application */}
+          {/* Routes définies pour l'application */}
+          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <Routes>
             <Route path="/" element={<LandingPage />} /> {/* Page d'accueil */}
             <Route path="/login" element={<Login />} />
@@ -64,8 +67,9 @@ function App() {
               
           </Routes>
         </Router>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
+    </AuthProvider>
   );
 }
 
