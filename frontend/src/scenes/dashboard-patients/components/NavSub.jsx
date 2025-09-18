@@ -10,6 +10,7 @@ import RecentsConsultations from './RecentsConsultations';
 import DatasVitals from './DatasVitals';
 import ReminderMedication from './ReminderMedication';
 import AdvicesMedications from './AdvicesMedications';
+import { getAllRendezVous } from '../services/consultations&RDV';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -40,12 +41,20 @@ function a11yProps(index) {
   };
 }
 
+
 export default function NavSub() {
   const [value, setValue] = React.useState(0);
 
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
+  const { allRendezVous } = getAllRendezVous();
+  
+  // lastRDV pour recuperer les trois dernieres rdv 
+  // que nous devons trier d'abord en fonction de la date de consultation
+  const lastRDV = allRendezVous.slice(-3)
+  
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -62,37 +71,71 @@ export default function NavSub() {
       >
         <Tabs 
           className='px-3'
-          value={value} 
+          value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          sx={{
+            padding: '0'
+          }}
         >
           <Tab 
             label="Résumé" 
             {...a11yProps(0)} 
-            sx={{ fontWeight: 600 }}
+            sx={{ 
+              fontWeight: 600,
+              '&.Mui-selected':{ 
+                backgroundColor: colors.blackAccent[900],
+                borderRadius: '4px',
+                margin: '0',
+               },
+               '& .MuiTabs-indicator':{
+                color: 'red'
+               }
+            }}
           />
           <Tab 
             label="Vitales" 
             {...a11yProps(1)} 
-            sx={{ fontWeight: 600 }} 
+            sx={{ 
+              fontWeight: 600,
+              '&.Mui-selected':{ 
+                backgroundColor: colors.blackAccent[900],
+                borderRadius: '4px',
+                margin: '0',
+               }
+             }} 
 
           />
           <Tab 
             label="Prescriptions" 
             {...a11yProps(2)} 
-            sx={{ fontWeight: 600 }} 
+            sx={{ 
+              fontWeight: 600,
+              '&.Mui-selected':{ 
+                backgroundColor: colors.blackAccent[900],
+                borderRadius: '4px',
+                margin: '0',
+               }
+             }} 
           />
           <Tab 
             label="Dossiers" 
             {...a11yProps(3)} 
-            sx={{ fontWeight: 600 }} 
+            sx={{ 
+              fontWeight: 600,
+              '&.Mui-selected':{ 
+                backgroundColor: colors.blackAccent[900],
+                borderRadius: '4px',
+                margin: '0',
+               } 
+            }} 
           />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
         <Box className="flex md:flex-row flex-col items-start gap-4">
             <ParamsHealth />
-            <RecentsConsultations />
+            <RecentsConsultations recentsRDV={lastRDV} />
         </Box>
         <DatasVitals />
         <Box className="flex md:flex-row flex-col items-start gap-4">

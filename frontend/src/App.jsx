@@ -59,7 +59,14 @@ function App() {
               />
 
             {/* Route protégée pour le tableau de bord des patients */}
-            <Route path="/dashboard-patient" element={<DashboardLayout />}>
+            <Route 
+              path="/dashboard-patient" 
+              element={
+                <ProtectedRoute>
+                  <DashboardLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Dashboard />} />
               <Route path="/dashboard-patient/teleconsultation" element={<Teleconsultation />} />
               <Route path="/dashboard-patient/documents" element={<Documents />} />

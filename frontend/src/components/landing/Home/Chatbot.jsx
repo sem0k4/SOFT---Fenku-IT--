@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useTheme } from '@emotion/react';
 import { tokens } from '../../../theme';
-
+// import Home from '../../../../../../chatbot-assistant-ui/app/page'
 
 export default function Chatbot() {
   const theme = useTheme()
@@ -54,6 +54,7 @@ export default function Chatbot() {
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Nous nous excusons de la rupture de cette service
           </Typography>
+          {/* <Home /> */}
         </Box>
       </Modal>
     </div>

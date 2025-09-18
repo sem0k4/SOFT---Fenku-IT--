@@ -58,10 +58,11 @@ const ReminderMedication = () => {
 
     const theme = useTheme()
     const colors = tokens(theme.palette.mode);
+    
 
     return(
         <Box
-            className={`rounded-lg md:overflow-x-scroll md:w-[40%] overflow-x-auto p-4`} 
+            className={`rounded-lg md:overflow-x-scroll lg:w-[40%] md:w-1/2 w-full overflow-x-auto p-4`} 
             sx={{ 
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 display: 'flex',
@@ -95,7 +96,7 @@ const ReminderMedication = () => {
             {/* Cas où le patients n'a pas fait des test de ses données santé */}
             {/* <Typography
                 variant="h6"
-                className="py-10"
+                className="py-20"
                 sx={{
                     fontWeight: 500,
                     color: colors.blackAccent[100]
@@ -110,7 +111,7 @@ const ReminderMedication = () => {
                         className="flex flex-row w-full gap-3 rounded-lg items-center p-3 duration-300"
                         sx={{
                             border: '1px solid',
-                            borderColor: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800],
+                            borderColor: theme.palette.mode === 'dark' ? colors.blackAccent[400] : colors.blackAccent[900],
                         }}
                     >
                         {/* <Box className="flex flex-row gap-2"> */}
@@ -140,18 +141,12 @@ const ReminderMedication = () => {
                     </Box>
                 ))}
                 <Link
-                    className="font-semibold p-2 px-4 rounded-md"
+                    className="font-semibold p-2 px-4 rounded-md hover:opacity-70 active:opacity-70 duration-200"
                     style={{
                         textDecoration: 'none',
                         width: '100%',
-                        color: theme.palette.mode === 'dark' ? colors.blackAccent[800] : '#fcfcfc',
+                        color: '#fcfcfc',
                         backgroundColor: colors.secondary[500], 
-                        // "&:hover": {
-                        //     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[900],
-                        // }
-                        '&:hover': {
-                            backgroundColor: theme.palette.mode === 'dark' ? colors.secondary[800] : '#e4e4e490',
-                        },
                     }}
                     to='/dashboard-patient/documents'
                 >Voir les prescriptions</Link>

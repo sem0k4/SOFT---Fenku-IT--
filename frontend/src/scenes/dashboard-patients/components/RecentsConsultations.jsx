@@ -1,50 +1,44 @@
 import { Link } from "react-router-dom";
 import { Avatar, Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../../theme";
+import { format, compareDesc }  from 'date-fns';
+import { fr } from 'date-fns/locale';
 
-const consultations = [
-    {
-        date: '13/06/2025',
-        hour: '09:30',
-        doctor: 'Dr Mbengue',
-        type: 'presentielle',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
-    },
-    {
-        date: '01/09/2025',
-        hour: '12:00',
-        doctor: 'Dr Ngom',
-        type: 'presentielle',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
-    },
-    {
-        date: '01/12/2025',
-        hour: '08:00',
-        doctor: 'Dr Ngom',
-        type: 'en ligne',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
-    },
-    {
-        date: '01/10/2025',
-        hour: '10:30',
-        doctor: 'Dr Ngom',
-        type: 'presentielle',
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem suscipit, iure neque explicabo velit perferendis repellendus iste dolores eum praesentium.'
-    },
-]
 
-export default function RecentsConsultations() {
-
-    // recentsConsultations pour recuperer les trois dernieres consultations 
-    // que nous devons trier d'abord en fonction de la date de consultation
-    const recentsConsultations = consultations.slice(-3)
-
+export default function RecentsConsultations({ recentsRDV }) {
+    
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
+    const filterRDV = recentsRDV.sort(compareDesc);
+    
+    const danger = {
+        fontWeight: 500,
+        color: 'red',
+        fontSize: '0.7rem',
+        backgroundColor: '#F5492735',
+    }
+    const success = {
+        fontWeight: 500,
+        color: 'green',
+        fontSize: '0.7rem',
+        backgroundColor: '#33EB5E35',
+    }
+    
+    const waiting = {
+        fontWeight: 500,
+        color: '#2292FC',
+        fontSize: '0.7rem',
+        backgroundColor: '#32D0EC30',
+    }
+
+    console.log(filterRDV);
+
+    
+ 
     return (
         <Box
-            className={`rounded-lg md:overflow-x-scroll lg:w-[40%] md:w-1/2 w-full overflow-x-auto mb-8 p-4`} 
+            className={`rounded-lg md:overflow-x-scroll lg:w-[40%] md:w-1/2 w-full overflow-x-auto p-4`} 
             sx={{ 
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 display: 'flex',
@@ -65,24 +59,25 @@ export default function RecentsConsultations() {
                 Rendez-vous à venir
             </Typography>
             {/* Cas où le patients n'a pas de rendez-vous à venir */}
-            {/* <Typography
-                variant="h6"
-                className="py-10"
+            {recentsRDV.length === 0 && 
+            <Typography
+                variant="h5"
+                className="py-28"
                 sx={{
                     fontWeight: 500,
                     color: colors.blackAccent[100]
                 }}
             >
                 Aucune rendez-vous pour le moment
-            </Typography> */}
+            </Typography>}
             <Box className="rounded-lg flex flex-col gap-2 w-full">
-                {recentsConsultations.map((consultation, index) => (
+                {recentsRDV.map((recentRDV, index) => (
                     <Box 
                         key={index}
                         className="flex flex-row w-full justify-between rounded-lg items-center p-3 xs:gap-8 gap-2 duration-300"
                         sx={{
                             border: '1px solid',
-                            borderColor: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800],
+                            borderColor: theme.palette.mode === 'dark' ? colors.blackAccent[400] : colors.blackAccent[900],
                             '&:hover': {
                                 backgroundColor: theme.palette.mode === 'dark' ? colors.secondary[800] : '#e4e4e490',
                             },
@@ -91,7 +86,7 @@ export default function RecentsConsultations() {
                         <Box className="flex flex-row gap-2">
                             <Avatar
                                 className="text-black relative z-0 shadow-sm font-semibold bg-transparent border border-black"
-                                alt="Dr Mbengue"
+                                alt={`${recentRDV.medecin.prenom} ${recentRDV.medecin.nom}`}
                                 src="/images/exemple_docteur.webp"
                             />
                             <Typography
@@ -99,46 +94,44 @@ export default function RecentsConsultations() {
                                 className="flex flex-col text-left gap-0"
                                 fontSize="12px"
                             >
-                                <span style={{ fontSize: '14px' }} className="font-semibold md:text-lg">{consultation.doctor}</span>
+                                <span style={{ fontSize: '14px' }} className="font-semibold md:text-lg">{recentRDV.medecin.prenom} {recentRDV.medecin.nom}</span>
                                 <span 
-                                    className="font-semibold" 
                                     style={{ 
                                         color: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[700],
                                     }}
-                                >{consultation.date} - {consultation.hour}</span>
+                                >
+                                    {format(recentRDV.date, "dd MMMM yyyy '-' HH:mm", { locale: fr})}
+                                </span>
                             </Typography>
                         </Box>
                         <Typography 
-                            sx={{
-                                fontWeight: 500,
-                                color: theme.palette.mode === 'dark' ? colors.secondary[400] : colors.secondary[500],
-                                fontSize: '0.7rem',
-                                backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[500] : '#e4e4e470',
-                            }}
+                            sx={
+                                recentRDV.statut === 'termine' && success || 
+                                recentRDV.statut === 'annule' && danger || 
+                                recentRDV.statut === 'planifie' && waiting
+                            }
                             className="p-2 h-fit w-20 rounded-lg"
                         >
-                            {consultation.type}
+                            {recentRDV.statut}
                         </Typography>
                     </Box>
                 ))}
             </Box>
             <Box className="flex">
+                {recentsRDV.length !== 0 && 
                 <Link
-                    className="font-semibold p-2 px-4 rounded-md"
+                    className="font-semibold p-2 px-4 rounded-md hover:opacity-70 active:opacity-70 duration-200"
                     style={{
                         textDecoration: 'none',
                         width: '100%',
-                        color: theme.palette.mode === 'dark' ? colors.blackAccent[800] : '#fcfcfc',
+                        color: '#fcfcfc',
                         backgroundColor: colors.secondary[500], 
-                        // "&:hover": {
-                        //     backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[900],
-                        // }
                         '&:hover': {
                             backgroundColor: theme.palette.mode === 'dark' ? colors.secondary[800] : '#e4e4e490',
                         },
                     }}
                     to='/dashboard-patient/consultation'
-                >Voir plus de détail</Link>
+                >Voir plus de détail</Link>}
             </Box>
         </Box>
     );

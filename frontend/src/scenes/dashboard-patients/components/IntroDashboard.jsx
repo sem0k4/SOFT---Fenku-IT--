@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 
 const IntroDashboard = () => {
 
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
 
     // console.log(formattedDate);
     
@@ -54,7 +54,7 @@ const IntroDashboard = () => {
                </Box>
                <Box>
                     <Typography 
-                        variant="h2" 
+                        variant="h3" 
                         sx={{ 
                             fontWeight: 'bold', 
                             textAlign: 'left', 
@@ -118,7 +118,7 @@ const IntroDashboard = () => {
                </Box>
                <Box>
                     <Typography 
-                        variant="h2" 
+                        variant="h3" 
                         sx={{ 
                             fontWeight: 'bold', 
                             textAlign: 'left', 
@@ -182,7 +182,7 @@ const IntroDashboard = () => {
                </Box>
                <Box>
                     <Typography 
-                        variant="h2" 
+                        variant="h3"
                         sx={{ 
                             fontWeight: 'bold', 
                             textAlign: 'left', 
@@ -246,7 +246,7 @@ const IntroDashboard = () => {
                </Box>
                <Box>
                     <Typography 
-                        variant="h2" 
+                        variant="h3" 
                         sx={{ 
                             fontWeight: 'bold', 
                             textAlign: 'left', 

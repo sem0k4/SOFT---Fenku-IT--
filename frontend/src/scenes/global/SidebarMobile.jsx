@@ -6,7 +6,6 @@ import List from '@mui/material/List';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-// import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import MedicalInformationOutlinedIcon from '@mui/icons-material/MedicalInformationOutlined';
 import VideoCameraFrontOutlinedIcon from '@mui/icons-material/VideoCameraFrontOutlined';
 import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
@@ -55,8 +54,8 @@ export default function SidebarMobile() {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
+
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);

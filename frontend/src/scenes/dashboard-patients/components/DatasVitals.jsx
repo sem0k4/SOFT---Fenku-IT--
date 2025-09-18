@@ -16,7 +16,7 @@ export default function DatasVitals() {
                 backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
                 boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
             }} 
-            className="p-4 mb-4 rounded-lg flex flex-col gap-3"
+            className="p-4 my-4 rounded-lg flex flex-col gap-3"
         >
             <Typography
                 variant="h5"
@@ -30,7 +30,7 @@ export default function DatasVitals() {
             >
                 Données vitales
             </Typography>
-            <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-3">
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3">
                 <div 
                     className="flex flex-row gap-2 p-2 rounded-lg"
                     style={{
@@ -169,17 +169,16 @@ export default function DatasVitals() {
                                 fontWeight: 400, 
                             }} 
                             variant="h5"
-                        >Groupe sanguin</Typography>
+                        >Handicap</Typography>
                         <Typography 
                             sx={{ 
                                 fontWeight: 600,
                                 textAlign: 'left',
-                                fontSize: '15px',
                                 color: theme.palette.mode === 'dark' ? colors.blackAccent[100] : colors.blackAccent[100],
                             }} 
                             variant="p"
                         >
-                            O -
+                            Non
                         </Typography>
                     </div>
                 </div>

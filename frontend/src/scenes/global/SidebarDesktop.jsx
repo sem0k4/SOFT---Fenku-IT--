@@ -4,7 +4,6 @@ import Logo2FAJMA from "../../assets/mini-logo-fajma.png";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-// import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import MedicalInformationOutlinedIcon from '@mui/icons-material/MedicalInformationOutlined';
 import VideoCameraFrontOutlinedIcon from '@mui/icons-material/VideoCameraFrontOutlined';
 import EditCalendarOutlinedIcon from '@mui/icons-material/EditCalendarOutlined';
@@ -53,14 +52,11 @@ const Item = ({ title, to, icon, selected, setSelected , isToggle}) => {
 
 const SidebarDesktop = () => {
 
-
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [ isToggle, setIsToggle ] = useState(false)
   const [ selected, setSelected ] = useState("Dashboard")
-  
-  // window.location.href.endsWith('consultation') && setSelected('consultation')
-  
+
   
   return (
     <Box

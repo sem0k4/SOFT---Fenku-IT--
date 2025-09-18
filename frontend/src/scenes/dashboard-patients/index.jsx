@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import HeaderDashboard from "../../components/shared/HeaderDashboard";
 import { tokens } from "../../theme";
 import { useTheme } from "@emotion/react";
@@ -7,12 +6,14 @@ import { Link } from "react-router-dom";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import NavSub from "./components/NavSub";
 import IntroDashboard from "./components/IntroDashboard";
+import dataPatient from "./services/infosPatient";
 
 
 const DashboardPatient = () => {
-
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+
+    const { datasPatient, getDatasSuccess } = dataPatient();
     
 
     return (
@@ -21,25 +22,25 @@ const DashboardPatient = () => {
                 sx={{
                     display: 'flex',
                     flexDirection: {sm: 'row', xs: 'column'},
-                    gap: '20px',
+                    gap: '10px',
                     justifyContent: {sm: 'space-between', xs: 'center'},
-                    alignItems: 'center',
                     marginTop: '0px',
                     marginBottom: '0px'
                 }}
             >
                 <HeaderDashboard
-                    title="Dalal ak Jamm"
-                    span="Fallou"
-                    subtitle=""
+                    title={getDatasSuccess ? "Dalal ak Jamm " : "Completer votre profil patient"}
+                    span={getDatasSuccess && datasPatient.prenom}
+                    subtitle={!getDatasSuccess && "Il faut avoir un profil patient avant de pouvoir utiliser les services de FAJMA"}
+                    alert={!getDatasSuccess && true}
                 />
                 <Link 
-                    className="font-semibold p-2 rounded-lg md:w-1/3 xs:w-1/2 w-full flex items-center justify-center"
+                    className="font-semibold p-2 rounded-lg md:w-1/3 xs:w-1/2 w-full flex items-center justify-center hover:opacity-70 active:opacity-70 duration-200"
                     to="rdv"
                     style={{
                         textDecoration: 'none',
                         padding: 0,
-                        color: theme.palette.mode === 'dark' ? colors.blackAccent[800] : '#fcfcfc',
+                        color: '#fcfcfc',
                         backgroundColor: colors.secondary[500], 
                     }}
                 >
@@ -47,7 +48,7 @@ const DashboardPatient = () => {
                     <span >Prendre un rendez-vous</span>
                 </Link>
             </Box>
-            <IntroDashboard />
+            <IntroDashboard  />
             <NavSub />
         </Box>
     )   

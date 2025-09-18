@@ -109,7 +109,7 @@ const ParamsHealth = () => {
                         className="flex flex-row w-full gap-2 justify-between rounded-lg items-center p-3 duration-300"
                         sx={{
                             border: '1px solid',
-                            borderColor: theme.palette.mode === 'dark' ? colors.blackAccent[200] : colors.blackAccent[800],
+                            borderColor: theme.palette.mode === 'dark' ? colors.blackAccent[400] : colors.blackAccent[900],
                         }}
                     >
                         <Box className="flex flex-row gap-2">
