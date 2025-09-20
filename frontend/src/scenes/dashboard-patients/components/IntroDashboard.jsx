@@ -13,8 +13,6 @@ const IntroDashboard = () => {
     const colors = tokens(theme.palette.mode);
 
     // console.log(formattedDate);
-    
-
 
 
     return (

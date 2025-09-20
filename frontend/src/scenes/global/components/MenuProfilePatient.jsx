@@ -45,7 +45,7 @@ export default function MenuProfilePatient({ prenom, nom }) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-         <Avatar
+        <Avatar
             className="text-black shadow-sm font-semibold bg-transparent border border-black"
             alt={`${prenom} ${nom}`}
             src="/images/exemple_profile.webp"

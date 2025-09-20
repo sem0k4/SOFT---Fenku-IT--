@@ -5,12 +5,8 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material';
 import { tokens } from '../../../theme';
-import ParamsHealth from './ParamsHealth';
-import RecentsConsultations from './RecentsConsultations';
-import DatasVitals from './DatasVitals';
-import ReminderMedication from './ReminderMedication';
-import AdvicesMedications from './AdvicesMedications';
-import { getAllRendezVous } from '../services/consultations&RDV';
+import Message from './Message';
+import { messagesFictifs } from '../datasFictifs';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -23,7 +19,7 @@ function CustomTabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ marginTop: '30px' }}>{children}</Box>}
+      {value === index && <Box sx={{ marginTop: '15px' }}>{children}</Box>}
     </div>
   );
 }
@@ -42,44 +38,44 @@ function a11yProps(index) {
 }
 
 
-export default function NavSub() {
+export default function TabChat() {
   const [value, setValue] = React.useState(0);
 
-  const theme = useTheme()
-  const colors = tokens(theme.palette.mode)
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode)  ;
 
-  const { allRendezVous } = getAllRendezVous();
+
+  const allMessages = messagesFictifs;
   
-  // lastRDV pour recuperer les trois dernieres rdv 
-  // que nous devons trier d'abord en fonction de la date de consultation
-  const lastRDV = allRendezVous.slice(-3)
-  
+
   
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <div className="w-fit">
       <Box 
         className="rounded-md"
         sx={{ 
           width: 'fit-content',
-          backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[600] : '#fcfcfc', 
+          backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[500] : '#fcfcfc', 
           boxShadow: `0px 0px 10px ${theme.palette.mode === 'light' && 'rgba(0, 0, 0, 0.1)'} `,
+          margin: '0 1rem',
         }}
       >
         <Tabs 
-          className='px-3'
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
+          centered={true}
           sx={{
-            padding: '0'
+            padding: '0',
+            height: 'fit-content',
           }}
         >
           <Tab 
-            label="Résumé" 
+            label="Tous" 
             {...a11yProps(0)} 
             sx={{ 
               fontWeight: 600,
@@ -90,13 +86,10 @@ export default function NavSub() {
                 outline: 0,
                 margin: '0',
                },
-               '& .MuiTabs-indicator':{
-                color: 'red'
-               }
             }}
           />
           <Tab 
-            label="Vitales" 
+            label="Non lus" 
             {...a11yProps(1)} 
             sx={{ 
               fontWeight: 600,
@@ -111,7 +104,7 @@ export default function NavSub() {
 
           />
           <Tab 
-            label="Prescriptions" 
+            label="Favoris" 
             {...a11yProps(2)} 
             sx={{ 
               fontWeight: 600,
@@ -124,42 +117,26 @@ export default function NavSub() {
                },
              }} 
           />
-          <Tab 
-            label="Dossiers" 
-            {...a11yProps(3)} 
-            sx={{ 
-              fontWeight: 600,
-              '&.Mui-selected':{ 
-                backgroundColor: theme.palette.mode === 'dark' ? colors.blackAccent[300] : colors.blackAccent[900],
-                color: theme.palette.mode === 'dark' ? 'white' : 'black',
-                borderRadius: '4px',
-                outline: 0,
-                margin: '0',
-              },   
-            }} 
-          />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        <Box className="flex md:flex-row flex-col items-start gap-4">
-            <ParamsHealth />
-            <RecentsConsultations recentsRDV={lastRDV} />
-        </Box>
-        <DatasVitals />
-        <Box className="flex md:flex-row flex-col items-start gap-4">
-            <ReminderMedication />
-            <AdvicesMedications />
-        </Box>
+        {/* Tous les messages */}
+        {allMessages.map((dataMessage) => (
+            <Message
+                id={dataMessage.id}
+                name={dataMessage.sender.name}
+                urlAvatar={dataMessage.sender.avatar}
+                content={dataMessage.content}
+                date={dataMessage.date}
+            />
+        ))}
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Donnees vitales
+        Messages non lus
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Prescriptions
+        Messages mis en favoris
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        Dossiers
-      </CustomTabPanel>
-    </Box>
+    </div>
   );
 }
